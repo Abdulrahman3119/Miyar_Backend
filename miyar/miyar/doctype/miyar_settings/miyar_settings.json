@@ -25,6 +25,11 @@
   "invoice_due_days",
   "tab_engine",
   "engine_policy",
+  "engine_base_url",
+  "openrouter_api_key",
+  "openrouter_model",
+  "cloud_input_mode",
+  "cloud_fast",
   "engine_cloud_cost_ref",
   "sec_",
   "rating_dimensions",
@@ -164,6 +169,37 @@
    "fieldtype": "Link",
    "label": "سياسة مسار المحرك",
    "options": "Engine Policy"
+  },
+  {
+   "fieldname": "engine_base_url",
+   "fieldtype": "Data",
+   "label": "عنوان محرك خارجي (اختياري/قديم)",
+   "description": "لم يعد مطلوباً — المحرك مدمج داخل تطبيق معيار"
+  },
+  {
+   "fieldname": "openrouter_api_key",
+   "fieldtype": "Password",
+   "label": "مفتاح OpenRouter",
+   "description": "يُخزَّن في إعدادات معيار — لا حاجة لخدمة ido_dual_ai منفصلة"
+  },
+  {
+   "fieldname": "openrouter_model",
+   "fieldtype": "Data",
+   "label": "نموذج السحابة",
+   "default": "openai/gpt-5.6-sol"
+  },
+  {
+   "fieldname": "cloud_input_mode",
+   "fieldtype": "Select",
+   "label": "مدخل السحابة",
+   "options": "auto\ntext\npdf",
+   "default": "auto"
+  },
+  {
+   "fieldname": "cloud_fast",
+   "fieldtype": "Check",
+   "label": "وضع سريع",
+   "default": 1
   },
   {
    "fieldname": "engine_cloud_cost_ref",

@@ -1,0 +1,273 @@
+{
+  "registry_id": "MEYAR-SBC303-CR18-CORE",
+  "version": "1.0-draft",
+  "source": {
+    "title": "Saudi Building Code for Soils and Foundations",
+    "code": "SBC 303-CR-18",
+    "edition_year": 2018,
+    "source_file": "sbc-code-303-soil.pdf",
+    "status": "USER_SUPPLIED_REFERENCE",
+    "copyright_handling": "Clause IDs, derived rules, facts and numeric thresholds only; do not reproduce long code text."
+  },
+  "project_version_control": {
+    "brd_references_code_as": "SBC 303",
+    "brd_explicit_edition_found": false,
+    "production_status": "PENDING_EDITION_CONFIRMATION",
+    "rule": "Do not label SBC303-CR-18 as the current project edition until Product/Engineering confirms the governing edition."
+  },
+  "rules": [
+    {
+      "rule_id": "SBC303-2.1.1",
+      "category": "GOVERNANCE",
+      "summary_ar": "عند الحاجة إلى اختبارات موقعية أو معملية أو حسابات هندسية ضمن الدراسة الجيوتقنية، يجب أن تنفذ الدراسة بواسطة مختص تصميم مسجل.",
+      "engine_effect": "HUMAN_PROFESSIONAL_REQUIRED",
+      "status": "CANDIDATE_FOR_EXPERT_APPROVAL"
+    },
+    {
+      "rule_id": "SBC303-2.2.1",
+      "category": "EXPLORATION_SCOPE",
+      "summary_ar": "تحديد نطاق الاستكشاف، بما في ذلك عدد/أنواع الجسات أو الاختبارات وبرنامج الاختبارات، مسؤولية مختص تصميم مسجل.",
+      "engine_effect": "AI_PROPOSAL_ONLY_NOT_FINAL",
+      "status": "CANDIDATE_FOR_EXPERT_APPROVAL"
+    },
+    {
+      "rule_id": "SBC303-2.2.3.1",
+      "category": "SOIL_CLASSIFICATION",
+      "summary_ar": "تصنيف التربة عند انطباق الشرط يرتبط بـ ASTM D2487.",
+      "references": [
+        "ASTM D2487"
+      ],
+      "status": "CANDIDATE_FOR_EXPERT_APPROVAL"
+    },
+    {
+      "rule_id": "SBC303-2.2.3.3",
+      "category": "PROBLEMATIC_SOILS",
+      "summary_ar": "في المناطق المرجح وجود تربة انتفاخية أو انهيارية أو سبخة فيها، يجب إجراء تحقيق جيوتقني لتحديد وجودها.",
+      "engine_effect": "REQUIRE_TARGETED_INVESTIGATION",
+      "status": "CANDIDATE_FOR_EXPERT_APPROVAL"
+    },
+    {
+      "rule_id": "SBC303-2.2.3.4",
+      "category": "GROUNDWATER",
+      "summary_ar": "يجب التحقق مما إذا كان منسوب المياه الجوفية يقع داخل منطقة تأثير الأساس.",
+      "engine_effect": "REQUIRE_GROUNDWATER_ASSESSMENT",
+      "status": "CANDIDATE_FOR_EXPERT_APPROVAL"
+    },
+    {
+      "rule_id": "SBC303-2.3.3",
+      "category": "EXPANSIVE_SOIL_CLASSIFICATION",
+      "logic": {
+        "mode": "ALL_OF_1_2_3_OR_ITEM_4",
+        "criteria": [
+          {
+            "field": "plasticity_index",
+            "operator": ">=",
+            "value": 15,
+            "reference": "ASTM D4318"
+          },
+          {
+            "field": "percent_passing_no_200",
+            "operator": ">",
+            "value": 10,
+            "unit": "%",
+            "reference": "ASTM D422"
+          },
+          {
+            "field": "percent_particles_below_5_micrometers",
+            "operator": ">",
+            "value": 10,
+            "unit": "%",
+            "reference": "ASTM D422"
+          },
+          {
+            "field": "expansion_index",
+            "operator": ">",
+            "value": 20,
+            "reference": "ASTM D4829",
+            "alternative_sufficient_test": true
+          }
+        ]
+      },
+      "output": "EXPANSIVE_SOIL",
+      "status": "CANDIDATE_FOR_EXPERT_APPROVAL"
+    },
+    {
+      "rule_id": "SBC303-2.3.4",
+      "category": "COLLAPSIBLE_SOIL_CLASSIFICATION",
+      "logic": {
+        "mode": "ALL_OF_1_2_3_4_WITH_CODE_EXCEPTION_NOTE",
+        "criteria": [
+          {
+            "field": "soil_origin",
+            "operator": "==",
+            "value": "Desiccated Alluvial (Wadi)"
+          },
+          {
+            "field": "dry_field_density",
+            "operator": "<",
+            "value": 17,
+            "unit": "kN/m3",
+            "reference": "ASTM D1556"
+          },
+          {
+            "field": "clay_content",
+            "operator": "between",
+            "min": 10,
+            "max": 30,
+            "unit": "%",
+            "reference": "ASTM D422"
+          },
+          {
+            "field": "collapse_index",
+            "operator": ">",
+            "value": 1,
+            "unit": "%",
+            "reference": "ASTM D5333",
+            "alternative_sufficient_test": true
+          }
+        ],
+        "note": "The code states Items 1-3 need not be satisfied when Item 4 test is conducted."
+      },
+      "output": "COLLAPSIBLE_SOIL",
+      "status": "CANDIDATE_FOR_EXPERT_APPROVAL"
+    },
+    {
+      "rule_id": "SBC303-2.3.5",
+      "category": "SABKHA_SUSPICION",
+      "logic": {
+        "mode": "INDICATOR_SET_NOT_SINGLE_BINARY_THRESHOLD",
+        "indicators": [
+          {
+            "field": "SPT_N",
+            "range": [
+              0,
+              8
+            ],
+            "reference": "ASTM D1586"
+          },
+          {
+            "field": "precipitated_salts_present",
+            "type": "boolean"
+          },
+          {
+            "field": "high_soluble_salt_content",
+            "type": "boolean"
+          },
+          {
+            "field": "chemical_composition_variability",
+            "type": "qualitative"
+          },
+          {
+            "field": "sediment_vertical_lateral_variability",
+            "type": "qualitative"
+          },
+          {
+            "field": "impassible_upon_wetting",
+            "type": "boolean"
+          }
+        ]
+      },
+      "output": "SABKHA_SUSPECTED",
+      "status": "CANDIDATE_FOR_EXPERT_APPROVAL"
+    },
+    {
+      "rule_id": "SBC303-2.4.3-2.4.4-TABLE2-1",
+      "category": "BOREHOLE_PLAN",
+      "table": [
+        {
+          "stories": "2_or_less",
+          "built_area_m2": "<600",
+          "boreholes": 3,
+          "depth_two_thirds_m": 4,
+          "depth_one_third_m": 6
+        },
+        {
+          "stories": "2_or_less",
+          "built_area_m2": "600_to_5000",
+          "boreholes": "3_to_10_by_registered_professional",
+          "depth_two_thirds_m": 5,
+          "depth_one_third_m": 8
+        },
+        {
+          "stories": "2_or_less",
+          "built_area_m2": ">5000",
+          "action": "SPECIAL_INVESTIGATION"
+        },
+        {
+          "stories": "3_to_4",
+          "built_area_m2": "<600",
+          "boreholes": 3,
+          "depth_two_thirds_m": null,
+          "depth_one_third_m": null,
+          "note": "Depth cells are blank in the supplied 2018 table; do not infer values."
+        },
+        {
+          "stories": "3_to_4",
+          "built_area_m2": "600_to_5000",
+          "boreholes": "3_to_10_by_registered_professional",
+          "depth_two_thirds_m": "6_to_8",
+          "depth_one_third_m": "9_to_12"
+        },
+        {
+          "stories": "3_to_4",
+          "built_area_m2": ">5000",
+          "action": "SPECIAL_INVESTIGATION"
+        },
+        {
+          "stories": "5_or_higher",
+          "built_area_m2": "ANY",
+          "action": "SPECIAL_INVESTIGATION"
+        }
+      ],
+      "provisions": [
+        "SPT should be performed at all sites if possible.",
+        "If questionable soils exist, at least one borehole must penetrate all layers containing that soil.",
+        "Seasonal groundwater changes and degree of saturation must be considered.",
+        "A registered design professional may use different number/depth values if sufficient data is available.",
+        "For pole/tower foundations, at least one sufficiently deep boring is located at the foundation center.",
+        "Depth is measured from foundation-bottom level.",
+        "Where a 3-to-10 range is given, borehole count is selected by a registered design professional based on site variation."
+      ],
+      "status": "CANDIDATE_FOR_EXPERT_APPROVAL"
+    },
+    {
+      "rule_id": "SBC303-2.5.4",
+      "category": "SABKHA_CHEMICAL_ANALYSIS",
+      "summary_ar": "عند الاشتباه في تربة سبخة، تتطلب الدراسة تحليلاً كيميائياً كاملاً للتربة والمياه الجوفية لتحديد متوسط ومدى المركبات العدوانية وتغيرها مع العمق.",
+      "engine_effect": "REQUIRE_SOIL_AND_GROUNDWATER_CHEMICAL_ANALYSIS_WHEN_SABKHA_LIKELY",
+      "status": "CANDIDATE_FOR_EXPERT_APPROVAL"
+    },
+    {
+      "rule_id": "SBC303-2.6.1",
+      "category": "REPORT_COMPLETENESS",
+      "required_report_fields": [
+        "location_map_and_surroundings",
+        "relevant_climate_if_applicable",
+        "site_topography_and_geology",
+        "boring_or_test_pit_location_plot",
+        "soil_sample_record",
+        "borehole_logs_with_SPT_or_RQD_TCR_as_applicable",
+        "soil_profile",
+        "groundwater_elevation_and_dewatering_if_needed",
+        "field_and_lab_test_methods_and_summary",
+        "foundation_type_and_design_recommendations_based_on_report_facts",
+        "expected_total_and_differential_settlement",
+        "deep_foundation_information_if_applicable",
+        "combined_foundation_mat_information_if_applicable",
+        "problematic_soil_special_provisions_if_applicable",
+        "compacted_fill_properties_and_testing_if_applicable",
+        "CLSM_properties_and_testing_if_applicable",
+        "waste_disposal_sites_recommendation",
+        "excavated_material_reuse_suitability"
+      ],
+      "hard_rule": "Foundation recommendations must be based on borehole records and test data, not conjecture.",
+      "status": "CANDIDATE_FOR_EXPERT_APPROVAL"
+    }
+  ],
+  "known_gaps": [
+    "The supplied SBC303-CR-18 does not by itself establish a single general numeric chemical acceptance table for all soil/groundwater chemical tests used by Meyar BR-205.",
+    "Chemical limits may depend on other referenced codes/standards and Product Management rules; do not invent them.",
+    "The 3-4 storey / built area <600 m2 row in Table 2-1 has blank minimum-depth cells in the supplied document; expert interpretation or governing edition confirmation is required.",
+    "Project BRD does not explicitly identify SBC 303 edition year in the retrieved requirements."
+  ]
+}

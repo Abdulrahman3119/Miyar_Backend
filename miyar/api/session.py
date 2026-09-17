@@ -231,6 +231,31 @@ def get_boot():
 	}
 
 
+@frappe.whitelist(methods=["GET", "POST"])
+def poll():
+	"""Lightweight keepalive for the SPA — notifications + badges only.
+
+	Do not call get_boot on an interval; that payload rebuilds the whole workspace and
+	saturates MariaDB under concurrent desk users.
+	"""
+	require_login()
+	front = session_user()
+	org = get_user_org()
+	badges = {}
+	if org:
+		badges["requests"] = frappe.db.count("Test Request", {"lab": org, "status": "STS11"})
+		consultant_reqs = frappe.get_all("Test Request", filters={"consultant": org}, pluck="name") or ["__none__"]
+		badges["approvals"] = frappe.db.count("Test Line", {"status": "STS19", "test_request": ["in", consultant_reqs]})
+	return {
+		"ok": True,
+		"at": frappe.utils.now_datetime().isoformat(),
+		"user": front["id"] if front else frappe.session.user,
+		"badges": badges,
+		"notifications": list_notifications(),
+		"pendingRegistrations": _pending_registrations() if front and front.get("role") in ("admin", "support") else [],
+	}
+
+
 @frappe.whitelist()
 def save_preferences(calendar=None, density=None, home=None, sms=None, email=None, push=None, digest=None):
 	require_login()

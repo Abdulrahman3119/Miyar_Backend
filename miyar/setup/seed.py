@@ -816,6 +816,8 @@ def seed_settings():
 	}
 	if frappe.db.exists("Engine Policy", "screen-then-cloud"):
 		defaults["engine_policy"] = "screen-then-cloud"
+	if doc.meta.has_field("engine_base_url") and not doc.engine_base_url:
+		defaults["engine_base_url"] = "http://127.0.0.1:8000"
 	doc.update(defaults)
 	if not doc.rating_dimensions:
 		for key, label, w in (("quality", "الجودة", 0.4), ("punctuality", "الالتزام بالموعد", 0.4), ("communication", "التواصل", 0.2)):
@@ -981,8 +983,9 @@ def seed_help_and_integrations():
 		("zatca", "ZATCA"),
 		("sms", "SMS"),
 		("geo-maps", "خرائط المساحة"),
+		("ido-dual-ai", "المحرك الذكي ido_dual_ai"),
 	):
-		_upsert("Integration Endpoint", code, {"code": code, "title": title, "status": "يعمل"})
+		_upsert("Integration Endpoint", code, {"code": code, "title": title, "status": "يعمل", "status_note": "http://127.0.0.1:8000" if code == "ido-dual-ai" else None})
 
 
 def seed_report_template_and_retention():

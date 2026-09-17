@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "I DO Engineering Evaluation",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "document": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {"type": "string"},
+        "discipline": {"type": "string"},
+        "project_or_site": {"type": "string"},
+        "scope_match": {"type": "boolean"},
+        "scope_reason": {"type": "string"}
+      },
+      "required": ["type", "discipline", "project_or_site", "scope_match", "scope_reason"]
+    },
+    "overall_status": {
+      "type": "string",
+      "enum": ["COMPLIANT", "NON_COMPLIANT", "PARTIALLY_COMPLIANT", "NOT_EVALUABLE", "NOT_APPLICABLE"]
+    },
+    "executive_summary": {"type": "string"},
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "evidence_type": {"type": "string"},
+          "identifier": {"type": "string"},
+          "value": {"type": "string"},
+          "unit": {"type": "string"},
+          "location_or_depth": {"type": "string"},
+          "source_page_or_section": {"type": "string"},
+          "report_conclusion": {"type": "string"}
+        },
+        "required": ["evidence_type", "identifier", "value", "unit", "location_or_depth", "source_page_or_section", "report_conclusion"]
+      }
+    },
+    "assessments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "requirement_id": {"type": "string"},
+          "requirement_text": {"type": "string"},
+          "evidence": {"type": "string"},
+          "source_location": {"type": "string"},
+          "measured_value": {"type": "string"},
+          "measured_unit": {"type": "string"},
+          "required_condition_or_limit": {"type": "string"},
+          "technical_reference": {"type": "string"},
+          "knowledge_rule_id": {"type": "string"},
+          "knowledge_version": {"type": "string"},
+          "status": {
+            "type": "string",
+            "enum": ["COMPLIANT", "NON_COMPLIANT", "PARTIALLY_COMPLIANT", "NOT_EVALUABLE", "NOT_APPLICABLE"]
+          },
+          "reasoning_summary": {"type": "string"}
+        },
+        "required": ["requirement_id", "requirement_text", "evidence", "source_location", "measured_value", "measured_unit", "required_condition_or_limit", "technical_reference", "knowledge_rule_id", "knowledge_version", "status", "reasoning_summary"]
+      }
+    },
+    "analytical_findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "finding": {"type": "string"},
+          "basis": {"type": "string"},
+          "reference": {"type": "string"},
+          "result_type": {"type": "string", "enum": ["MEASURED_DATA", "CALCULATED_DATA", "ANALYTICAL_FINDING", "RECOMMENDATION"]}
+        },
+        "required": ["finding", "basis", "reference", "result_type"]
+      }
+    },
+    "missing_information": {"type": "array", "items": {"type": "string"}},
+    "conflicts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "description": {"type": "string"},
+          "source_a": {"type": "string"},
+          "source_b": {"type": "string"},
+          "action_required": {"type": "string"}
+        },
+        "required": ["description", "source_a", "source_b", "action_required"]
+      }
+    },
+    "engineering_recommendations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "recommendation": {"type": "string"},
+          "basis": {"type": "string"},
+          "reference": {"type": "string"},
+          "human_review_required": {"type": "boolean"}
+        },
+        "required": ["recommendation", "basis", "reference", "human_review_required"]
+      }
+    },
+    "human_engineering_review_required": {"type": "boolean"},
+    "overall_conclusion": {"type": "string"}
+  },
+  "required": ["document", "overall_status", "executive_summary", "evidence", "assessments", "analytical_findings", "missing_information", "conflicts", "engineering_recommendations", "human_engineering_review_required", "overall_conclusion"]
+}

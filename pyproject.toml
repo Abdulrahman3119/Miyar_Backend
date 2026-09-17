@@ -7,7 +7,11 @@ description = "Backend for Miyar — Saudi Building Code testing and geotechnica
 requires-python = ">=3.10"
 readme = "README.md"
 dynamic = ["version"]
-dependencies = []
+dependencies = [
+  "httpx",
+  "jsonschema",
+  "pymupdf",
+]
 
 [build-system]
 requires = ["flit_core >=3.4,<4"]

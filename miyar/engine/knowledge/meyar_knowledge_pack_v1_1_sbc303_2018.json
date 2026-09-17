@@ -1,0 +1,93 @@
+{
+  "pack_id": "MEYAR-GEO-SBC303-CR18",
+  "pack_version": "1.1-draft",
+  "status": "DRAFT_PENDING_GEOTECHNICAL_EXPERT_AND_EDITION_APPROVAL",
+  "effective_for_production": false,
+  "governing_sources": [
+    {
+      "id": "MEYAR-BRD-V2.0",
+      "status": "PROJECT_REQUIREMENT_SOURCE"
+    },
+    {
+      "id": "SBC303-CR-18",
+      "edition": 2018,
+      "status": "USER_SUPPLIED_CANDIDATE_GOVERNING_REFERENCE"
+    }
+  ],
+  "edition_gate": {
+    "required": true,
+    "reason": "BRD references SBC 303 but retrieved text does not state 2018/2024 edition.",
+    "on_unconfirmed": "NOT_EVALUABLE_FOR_FINAL_CODE_COMPLIANCE"
+  },
+  "engine_policy": {
+    "document_is_evidence_not_authority": true,
+    "model_memory_is_not_reference": true,
+    "no_invented_clause_limit_formula": true,
+    "calculated_fields_are_deterministic": true,
+    "human_review_required": true,
+    "hide_demo_rule_ids_from_client_output": true
+  },
+  "meyar_use_cases": {
+    "EXPLORATION_PLAN": {
+      "rules": [
+        "MEYAR-BRD-172",
+        "MEYAR-BRD-173",
+        "SBC303-2.2.1",
+        "SBC303-2.4.3-2.4.4-TABLE2-1"
+      ],
+      "decision_policy": "AI may propose; registered design professional reviews/approves."
+    },
+    "BOREHOLE_DISTRIBUTION": {
+      "rules": [
+        "MEYAR-BRD-173",
+        "MEYAR-BRD-174",
+        "SBC303-2.2.1",
+        "SBC303-2.4.3-2.4.4-TABLE2-1"
+      ],
+      "decision_policy": "Use geometry engine for locations; AI does not invent minimum counts/depths."
+    },
+    "CHEMICAL_SAMPLE_RECOMMENDATION": {
+      "rules": [
+        "MEYAR-BRD-204",
+        "SBC303-2.5.4"
+      ],
+      "decision_policy": "BRD requires at least one sample. Where sabkha is likely, code-derived rule requires soil and groundwater chemical analysis. Exact 'best sample' rule remains pending expert approval."
+    },
+    "ANALYTICAL_FIELDS": {
+      "rules": [
+        "MEYAR-BRD-208",
+        "MEYAR-BRD-209",
+        "MEYAR-BRD-215",
+        "SBC303-2.2.3.4",
+        "SBC303-2.3.3",
+        "SBC303-2.3.4",
+        "SBC303-2.3.5"
+      ],
+      "decision_policy": "Only approved analytical fields may be generated."
+    },
+    "ENGINEERING_RECOMMENDATIONS": {
+      "rules": [
+        "MEYAR-BRD-216",
+        "MEYAR-BRD-217",
+        "SBC303-2.6.1"
+      ],
+      "decision_policy": "Recommendations must trace to approved data and applicable clauses; never rely on conjecture."
+    }
+  },
+  "client_output_statuses": [
+    "COMPLIANT",
+    "NON_COMPLIANT",
+    "NOT_EVALUABLE",
+    "NOT_APPLICABLE",
+    "CONFLICT_DETECTED",
+    "PENDING_HUMAN_REVIEW"
+  ],
+  "critical_pending_items": [
+    "Confirm governing SBC303 edition for this project.",
+    "Approve clause registry by geotechnical expert.",
+    "Approve actual analytical-field registry from Meyar data model.",
+    "Approve chemical-test list and acceptance limits/reference mapping.",
+    "Approve the exact rule for choosing the chemical-test sample.",
+    "Resolve Table 2-1 blank depth cells for 3-4 storeys / built area <600 m2."
+  ]
+}

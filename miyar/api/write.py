@@ -643,6 +643,8 @@ def set_rules(payload=None):
 		"geofenceMeters": "geofence_meters",
 		"vat": "vat_rate",
 		"enginePolicy": "engine_policy",
+		"engineBaseUrl": "engine_base_url",
+		"engineCost": "engine_cloud_cost_ref",
 		"quoteValidityDays": "quote_validity_days",
 		"invoiceDueDays": "invoice_due_days",
 		"sessionIdleMinutes": "session_idle_minutes",
@@ -650,7 +652,10 @@ def set_rules(payload=None):
 	}
 	for key, field in mapping.items():
 		if key in data and data[key] is not None:
-			doc.set(field, data[key])
+			val = data[key]
+			if key == "engineCost" and isinstance(val, (dict, list)):
+				val = json.dumps(val, ensure_ascii=False)
+			doc.set(field, val)
 	if "labTimeoutAction" in data:
 		doc.lab_timeout_action = "Expire" if data["labTimeoutAction"] == "expire" else "None"
 	doc.save()

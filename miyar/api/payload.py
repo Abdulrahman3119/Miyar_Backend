@@ -489,6 +489,7 @@ def settings_payload() -> dict:
 		"vat": float(s.vat_rate or 15),
 		"labTimeoutAction": "expire" if (s.lab_timeout_action or "Expire") == "Expire" else "none",
 		"enginePolicy": s.engine_policy or "screen-then-cloud",
+		"engineBaseUrl": (getattr(s, "engine_base_url", None) or frappe.conf.get("miyar_engine_url") or "http://127.0.0.1:8000"),
 		"autoApproveConsultant": bool(s.auto_approve_consultant),
 		"quoteValidityDays": int(s.quote_validity_days or 14),
 		"invoiceDueDays": int(s.invoice_due_days or 30),

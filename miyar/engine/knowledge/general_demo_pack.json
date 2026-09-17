@@ -1,0 +1,19 @@
+{
+  "pack_id": "IDO-GENERAL-DEMO-001",
+  "knowledge_version": "General-Demo-v0.1",
+  "status": "DEMO_ONLY",
+  "warning": "حزمة عرض عامة لاستخدامات الاستعراض فقط. لا يجوز إصدار مطابقة هندسية نهائية دون متطلبات ومراجع فنية معتمدة خاصة بالمشروع.",
+  "use_cases": [
+    "GENERAL_ENGINEERING_REPORT"
+  ],
+  "project_requirements": [],
+  "knowledge_rules": [
+    {
+      "rule_id": "GEN-001",
+      "name": "Evidence extraction",
+      "logic": "Extract explicit engineering evidence and identify missing information without inventing criteria.",
+      "reference": "I DO Master Policy"
+    }
+  ],
+  "technical_references": []
+}
