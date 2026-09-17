@@ -114,3 +114,4 @@ python3 apps/miyar/scripts/generate_doctypes.py
 
 الملفات `*.py` الموجودة لا تُستبدل (المتحكمات تبقى).
 # Miyar_Backend
+# Miyar_Backend
