@@ -13,16 +13,20 @@
 | بوابة معيار (React) | `/miyar` | نفس تطبيق `miyar-app` مضمّناً في Frappe |
 | Frappe Desk | `/desk` + DocTypes | ثيم Desk (`public/css/miyar.css`) + حبوب الحالة (`public/js/miyar.js`) — رابط معيار يفتح `/miyar` |
 
-بناء الفرونت داخل التطبيق:
+بناء الفرونت داخل التطبيق (على الإنتاج والتطوير):
 
 ```bash
-cd Miyar/miyar-app && npm run build
-# يكتب إلى apps/miyar/miyar/public/frontend/
-bench --site site1 clear-cache
-bench build --app miyar   # اختياري إن لزم
+# من جذر تطبيق miyar — وليس من public/frontend (ده مخرجات البناء فقط)
+cd apps/miyar
+npm install --prefix frontend
+npm run build
+# يكتب إلى miyar/public/frontend/
+bench --site <site> clear-cache
 ```
 
-في التطوير المستقل للفرونت يبقى `npm run dev` على المنفذ 5173 كما هو.
+خطأ شائع: تشغيل `npm run build` داخل `miyar/public/frontend` يفشل لأنه لا يوجد `package.json` هناك.
+
+المصدر: `apps/miyar/frontend` (نسخة الإنتاج داخل التطبيق). للتطوير المحلي يمكن أيضاً استخدام `Miyar/miyar-app` إن وُجد بجانب الـ bench.
 
 ## ماذا بُني
 
