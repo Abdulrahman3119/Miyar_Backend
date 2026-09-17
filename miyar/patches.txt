@@ -1,0 +1,4 @@
+[pre_model_sync]
+
+[post_model_sync]
+miyar.patches.v1_0.seed_all_doctypes

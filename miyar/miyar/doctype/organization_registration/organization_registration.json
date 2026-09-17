@@ -1,0 +1,256 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-15 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "cr",
+  "organization_type",
+  "organization_name",
+  "status",
+  "col_reg_2",
+  "wathq_payload",
+  "organization",
+  "activated_at",
+  "sec_",
+  "principal_name",
+  "principal_national_id",
+  "col_pr_2",
+  "principal_mobile",
+  "principal_email",
+  "sec_",
+  "saac_number",
+  "agreed_terms",
+  "reject_reason",
+  "clarification_note",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "cr",
+   "fieldtype": "Data",
+   "label": "السجل التجاري",
+   "reqd": 1,
+   "in_list_view": 1,
+   "length": 10
+  },
+  {
+   "fieldname": "organization_type",
+   "fieldtype": "Link",
+   "label": "النوع",
+   "reqd": 1,
+   "options": "Organization Type",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "organization_name",
+   "fieldtype": "Data",
+   "label": "اسم المنشأة",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "الحالة",
+   "options": "Draft\nSubmitted\nUnder Review\nActivated\nRejected",
+   "default": "Draft",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "col_reg_2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "wathq_payload",
+   "fieldtype": "JSON",
+   "label": "استجابة واثق",
+   "read_only": 1
+  },
+  {
+   "fieldname": "organization",
+   "fieldtype": "Link",
+   "label": "المنشأة الناتجة",
+   "options": "Organization"
+  },
+  {
+   "fieldname": "activated_at",
+   "fieldtype": "Datetime",
+   "label": "وقت التفعيل",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sec_",
+   "fieldtype": "Section Break",
+   "label": "المفوّض الرئيسي"
+  },
+  {
+   "fieldname": "principal_name",
+   "fieldtype": "Data",
+   "label": "اسم المفوّض",
+   "reqd": 1
+  },
+  {
+   "fieldname": "principal_national_id",
+   "fieldtype": "Data",
+   "label": "الهوية",
+   "reqd": 1,
+   "length": 10
+  },
+  {
+   "fieldname": "col_pr_2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "principal_mobile",
+   "fieldtype": "Data",
+   "label": "الجوال",
+   "reqd": 1
+  },
+  {
+   "fieldname": "principal_email",
+   "fieldtype": "Data",
+   "label": "البريد",
+   "reqd": 1
+  },
+  {
+   "fieldname": "sec_",
+   "fieldtype": "Section Break",
+   "label": "اعتماد ومراجعة"
+  },
+  {
+   "fieldname": "saac_number",
+   "fieldtype": "Data",
+   "label": "رقم SAAC"
+  },
+  {
+   "fieldname": "agreed_terms",
+   "fieldtype": "Check",
+   "label": "موافقة الشروط",
+   "reqd": 1
+  },
+  {
+   "fieldname": "reject_reason",
+   "fieldtype": "Small Text",
+   "label": "سبب الرفض"
+  },
+  {
+   "fieldname": "clarification_note",
+   "fieldtype": "Small Text",
+   "label": "طلب مستندات"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "read_only": 1,
+   "hidden": 1,
+   "options": "Organization Registration",
+   "no_copy": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 0,
+ "links": [],
+ "modified": "2026-09-15 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Miyar",
+ "name": "Organization Registration",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1,
+   "select": 1
+  },
+  {
+   "role": "Miyar Admin",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1,
+   "select": 1
+  },
+  {
+   "role": "Miyar Visitor",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Support",
+   "read": 1,
+   "write": 1,
+   "create": 0,
+   "delete": 0,
+   "submit": 1,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Supervisor",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "REG-.YYYY.-.####",
+ "naming_rule": "Expression",
+ "is_submittable": 1,
+ "title_field": "organization_name",
+ "search_fields": "cr,organization_name,principal_name"
+}

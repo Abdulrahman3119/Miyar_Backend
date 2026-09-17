@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg1"
+   width="171.028"
+   height="170.51334"
+   viewBox="0 0 171.028 170.51334"
+   sodipodi:docname="upload_kxesv3bou2ysbhtd2rr2ozabrx.pdf"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1">
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath2">
+      <path
+         d="M 0,127.885 H 128.271 V 0 H 0 Z"
+         transform="translate(-68.921102,-76.259702)"
+         id="path2" />
+    </clipPath>
+  </defs>
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1">
+    <inkscape:page
+       x="0"
+       y="0"
+       inkscape:label="1"
+       id="page1"
+       width="171.028"
+       height="170.51334"
+       margin="4.5730534 4.7133331 6.0813332 6.4556265"
+       bleed="0" />
+  </sodipodi:namedview>
+  <g
+     id="layer-MC0"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1">
+    <path
+       id="path1"
+       d="m 0,0 v -25.192 c 0,-0.766 -0.621,-1.388 -1.388,-1.388 H -6.82 c -0.766,0 -1.387,0.622 -1.387,1.388 V 0 c 0,0.766 0.621,1.388 1.387,1.388 h 5.432 C -0.621,1.388 0,0.766 0,0 m -26.813,-12.659 c 0,-12.514 10.145,-22.658 22.658,-22.658 12.514,0 22.658,10.144 22.658,22.658 0,12.513 -10.144,22.658 -22.658,22.658 -12.513,0 -22.658,-10.145 -22.658,-22.658 m 59.868,46.797 v -47.021 c 0,-20.538 -16.649,-37.187 -37.187,-37.187 -20.538,0 -37.187,16.649 -37.187,37.187 0,20.538 16.649,37.187 37.187,37.187 8.528,0 16.385,-2.87 22.659,-7.698 v 26.028 c -6.991,2.856 -14.641,4.43 -22.659,4.43 -33.108,0 -59.947,-26.839 -59.947,-59.947 0,-33.108 26.839,-59.947 59.947,-59.947 33.108,0 59.947,26.839 59.947,59.947 0,19.06 -8.895,36.041 -22.76,47.021"
+       style="fill:#0b46be;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       transform="matrix(1.3333333,0,0,-1.3333333,91.8948,68.833733)"
+       clip-path="url(#clipPath2)" />
+  </g>
+</svg>

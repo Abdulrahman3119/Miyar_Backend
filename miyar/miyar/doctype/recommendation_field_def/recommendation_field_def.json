@@ -1,0 +1,51 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-15 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "field_key",
+  "label_ar",
+  "logic_notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "field_key",
+   "fieldtype": "Data",
+   "label": "المفتاح",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "label_ar",
+   "fieldtype": "Data",
+   "label": "التسمية",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "logic_notes",
+   "fieldtype": "Small Text",
+   "label": "منطق التوليد",
+   "in_list_view": 1,
+   "columns": 2
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-09-15 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Miyar",
+ "name": "Recommendation Field Def",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 0,
+ "editable_grid": 1
+}

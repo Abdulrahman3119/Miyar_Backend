@@ -1,0 +1,80 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-15 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "reference_test",
+  "test_method",
+  "uom",
+  "base_price",
+  "price",
+  "sla_days"
+ ],
+ "fields": [
+  {
+   "fieldname": "reference_test",
+   "fieldtype": "Link",
+   "label": "الاختبار",
+   "reqd": 1,
+   "options": "Reference Test",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "test_method",
+   "fieldtype": "Link",
+   "label": "الطريقة",
+   "reqd": 1,
+   "options": "Test Method",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "uom",
+   "fieldtype": "Link",
+   "label": "الوحدة",
+   "options": "UOM",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "base_price",
+   "fieldtype": "Currency",
+   "label": "السعر الأساسي",
+   "read_only": 1,
+   "options": "SAR",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "price",
+   "fieldtype": "Currency",
+   "label": "سعر العرض",
+   "reqd": 1,
+   "options": "SAR"
+  },
+  {
+   "fieldname": "sla_days",
+   "fieldtype": "Int",
+   "label": "مدة التنفيذ (يوم)"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-09-15 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Miyar",
+ "name": "Miyar Quote Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 0,
+ "editable_grid": 1
+}

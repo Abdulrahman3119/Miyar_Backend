@@ -1,0 +1,85 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-15 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "chemical_test",
+  "label_ar",
+  "method_code",
+  "limit_text",
+  "uom",
+  "value",
+  "attachment",
+  "compliance"
+ ],
+ "fields": [
+  {
+   "fieldname": "chemical_test",
+   "fieldtype": "Link",
+   "label": "الاختبار",
+   "options": "Chemical Test Def",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "label_ar",
+   "fieldtype": "Data",
+   "label": "التسمية",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "method_code",
+   "fieldtype": "Data",
+   "label": "الطريقة",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "limit_text",
+   "fieldtype": "Data",
+   "label": "الحد",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "uom",
+   "fieldtype": "Data",
+   "label": "الوحدة"
+  },
+  {
+   "fieldname": "value",
+   "fieldtype": "Data",
+   "label": "القيمة"
+  },
+  {
+   "fieldname": "attachment",
+   "fieldtype": "Attach",
+   "label": "مرفق"
+  },
+  {
+   "fieldname": "compliance",
+   "fieldtype": "Select",
+   "label": "المطابقة",
+   "options": "\nok\nfail"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-09-15 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Miyar",
+ "name": "Chemical Result",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 0,
+ "editable_grid": 1
+}

@@ -1,0 +1,410 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-15 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "study",
+  "code",
+  "status",
+  "added_by_lab",
+  "sec_",
+  "approved_n",
+  "approved_e",
+  "operational_n",
+  "operational_e",
+  "col_bh_2",
+  "actual_n",
+  "actual_e",
+  "moved_m",
+  "geo_distance_m",
+  "sec_",
+  "approved_depth",
+  "executed_depth",
+  "not_reached_reason",
+  "added_reason",
+  "tab_head",
+  "borehole_method",
+  "rig",
+  "diameter_mm",
+  "casing_m",
+  "col_head_2",
+  "ground_level",
+  "water_instant",
+  "water_24h",
+  "work_date",
+  "weather",
+  "technician",
+  "sec_",
+  "photos"
+ ],
+ "fields": [
+  {
+   "fieldname": "study",
+   "fieldtype": "Link",
+   "label": "الدراسة",
+   "reqd": 1,
+   "options": "Geotechnical Study",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "code",
+   "fieldtype": "Data",
+   "label": "الرمز",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "الحالة",
+   "options": "Ready\nIn Progress\nDone",
+   "default": "Ready",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "added_by_lab",
+   "fieldtype": "Check",
+   "label": "أضافها المختبر"
+  },
+  {
+   "fieldname": "sec_",
+   "fieldtype": "Section Break",
+   "label": "إحداثيات"
+  },
+  {
+   "fieldname": "approved_n",
+   "fieldtype": "Float",
+   "label": "شمال معتمد"
+  },
+  {
+   "fieldname": "approved_e",
+   "fieldtype": "Float",
+   "label": "شرق معتمد"
+  },
+  {
+   "fieldname": "operational_n",
+   "fieldtype": "Float",
+   "label": "شمال تشغيلي"
+  },
+  {
+   "fieldname": "operational_e",
+   "fieldtype": "Float",
+   "label": "شرق تشغيلي"
+  },
+  {
+   "fieldname": "col_bh_2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "actual_n",
+   "fieldtype": "Float",
+   "label": "شمال GPS"
+  },
+  {
+   "fieldname": "actual_e",
+   "fieldtype": "Float",
+   "label": "شرق GPS"
+  },
+  {
+   "fieldname": "moved_m",
+   "fieldtype": "Float",
+   "label": "النقل (م)"
+  },
+  {
+   "fieldname": "geo_distance_m",
+   "fieldtype": "Float",
+   "label": "بُعد GPS عن التشغيلي"
+  },
+  {
+   "fieldname": "sec_",
+   "fieldtype": "Section Break",
+   "label": "أعماق"
+  },
+  {
+   "fieldname": "approved_depth",
+   "fieldtype": "Float",
+   "label": "العمق المعتمد"
+  },
+  {
+   "fieldname": "executed_depth",
+   "fieldtype": "Float",
+   "label": "المنفَّذ"
+  },
+  {
+   "fieldname": "not_reached_reason",
+   "fieldtype": "Small Text",
+   "label": "سبب عدم بلوغ العمق"
+  },
+  {
+   "fieldname": "added_reason",
+   "fieldtype": "Small Text",
+   "label": "سبب الإضافة"
+  },
+  {
+   "fieldname": "tab_head",
+   "fieldtype": "Tab Break",
+   "label": "رأس الجسة"
+  },
+  {
+   "fieldname": "borehole_method",
+   "fieldtype": "Link",
+   "label": "طريقة الحفر",
+   "options": "Borehole Method"
+  },
+  {
+   "fieldname": "rig",
+   "fieldtype": "Data",
+   "label": "الحفّار"
+  },
+  {
+   "fieldname": "diameter_mm",
+   "fieldtype": "Float",
+   "label": "القطر مم"
+  },
+  {
+   "fieldname": "casing_m",
+   "fieldtype": "Float",
+   "label": "التغليف م"
+  },
+  {
+   "fieldname": "col_head_2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "ground_level",
+   "fieldtype": "Float",
+   "label": "منسوب الأرض"
+  },
+  {
+   "fieldname": "water_instant",
+   "fieldtype": "Float",
+   "label": "مياه لحظي"
+  },
+  {
+   "fieldname": "water_24h",
+   "fieldtype": "Float",
+   "label": "مياه 24س"
+  },
+  {
+   "fieldname": "work_date",
+   "fieldtype": "Date",
+   "label": "تاريخ التنفيذ"
+  },
+  {
+   "fieldname": "weather",
+   "fieldtype": "Link",
+   "label": "الطقس",
+   "options": "Weather Condition"
+  },
+  {
+   "fieldname": "technician",
+   "fieldtype": "Link",
+   "label": "الفني",
+   "options": "User"
+  },
+  {
+   "fieldname": "sec_",
+   "fieldtype": "Section Break",
+   "label": "صور"
+  },
+  {
+   "fieldname": "photos",
+   "fieldtype": "Table",
+   "label": "صور",
+   "options": "Borehole Photo Link"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 0,
+ "links": [
+  {
+   "link_doctype": "Borehole Layer",
+   "link_fieldname": "borehole"
+  },
+  {
+   "link_doctype": "Field Sample",
+   "link_fieldname": "borehole"
+  }
+ ],
+ "modified": "2026-09-15 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Miyar",
+ "name": "Borehole",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1,
+   "select": 1
+  },
+  {
+   "role": "Miyar Admin",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1,
+   "select": 1
+  },
+  {
+   "role": "Miyar Contractor Principal",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Contractor Employee",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Lab Principal",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Lab Employee",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Consultant Principal",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Consultant Employee",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Supervisor",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Support",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "format:{study}-BH-.##",
+ "naming_rule": "Expression",
+ "title_field": "code"
+}

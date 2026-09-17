@@ -1,0 +1,85 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-15 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "test_label",
+  "test_method",
+  "mandatory",
+  "value",
+  "uom",
+  "attachment",
+  "limit_text",
+  "compliance"
+ ],
+ "fields": [
+  {
+   "fieldname": "test_label",
+   "fieldtype": "Data",
+   "label": "الاختبار",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "test_method",
+   "fieldtype": "Link",
+   "label": "الطريقة",
+   "options": "Test Method",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "mandatory",
+   "fieldtype": "Check",
+   "label": "إلزامي",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "value",
+   "fieldtype": "Data",
+   "label": "القيمة",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "uom",
+   "fieldtype": "Data",
+   "label": "الوحدة"
+  },
+  {
+   "fieldname": "attachment",
+   "fieldtype": "Attach",
+   "label": "مرفق"
+  },
+  {
+   "fieldname": "limit_text",
+   "fieldtype": "Data",
+   "label": "الحد"
+  },
+  {
+   "fieldname": "compliance",
+   "fieldtype": "Select",
+   "label": "المطابقة",
+   "options": "\nok\nfail"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-09-15 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Miyar",
+ "name": "Sample Test Row",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 0,
+ "editable_grid": 1
+}

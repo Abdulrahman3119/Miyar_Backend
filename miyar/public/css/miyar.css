@@ -1,0 +1,716 @@
+/* ═══════════════════════════════════════════════════════════════
+   معيار — Desk theme (mirrors Miyar/miyar-app/src/index.css)
+   Light · Arabic RTL · MOMRAH / DGA tokens
+   Loaded after ido_design so Frappe Desk matches the web app.
+   ═══════════════════════════════════════════════════════════════ */
+
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap");
+
+:root,
+[data-theme="light"],
+html {
+	/* Brand — معيار deep green */
+	--miyar-brand-50: #eef5f2;
+	--miyar-brand-100: #d9eae3;
+	--miyar-brand-200: #b3d5c8;
+	--miyar-brand-300: #7fb6a4;
+	--miyar-brand-400: #4e9482;
+	--miyar-brand-500: #2f7a69;
+	--miyar-brand-600: #1e6355;
+	--miyar-brand-700: #165449;
+	--miyar-brand-800: #104840;
+	--miyar-brand-900: #0b332d;
+	--miyar-lime-100: #eaf4d3;
+	--miyar-lime-300: #bfd97a;
+	--miyar-lime-500: #88b925;
+	--miyar-lime-700: #5e8617;
+
+	/* Neutrals — DGA */
+	--miyar-ink-0: #ffffff;
+	--miyar-ink-25: #fcfcfd;
+	--miyar-ink-50: #f9fafb;
+	--miyar-ink-100: #f3f4f6;
+	--miyar-ink-200: #e5e7eb;
+	--miyar-ink-300: #d2d6db;
+	--miyar-ink-400: #9da4ae;
+	--miyar-ink-500: #6c727e;
+	--miyar-ink-600: #4d5761;
+	--miyar-ink-700: #384250;
+	--miyar-ink-800: #1f2a37;
+	--miyar-ink-900: #111927;
+	--miyar-canvas: #eef2f1;
+
+	/* Semantic */
+	--miyar-ok-50: #ecfdf3;
+	--miyar-ok-100: #abefc6;
+	--miyar-ok-500: #069454;
+	--miyar-ok-600: #067647;
+	--miyar-ok-700: #085d3a;
+	--miyar-warn-50: #fffaeb;
+	--miyar-warn-100: #fedf89;
+	--miyar-warn-500: #dc6803;
+	--miyar-warn-600: #b54707;
+	--miyar-warn-700: #93370d;
+	--miyar-danger-50: #fef3f2;
+	--miyar-danger-100: #fecdca;
+	--miyar-danger-500: #d92c20;
+	--miyar-danger-600: #b42318;
+	--miyar-danger-700: #912018;
+	--miyar-info-50: #eff8ff;
+	--miyar-info-100: #b2ddff;
+	--miyar-info-500: #156fee;
+	--miyar-info-600: #175cd3;
+	--miyar-info-700: #1849a9;
+
+	--miyar-radius-xs: 4px;
+	--miyar-radius-sm: 6px;
+	--miyar-radius-md: 8px;
+	--miyar-radius-lg: 12px;
+	--miyar-shadow-card: 0 1px 0 rgb(17 25 39 / 0.04), 0 1px 2px rgb(17 25 39 / 0.05);
+	--miyar-shadow-elev: 0 4px 14px -4px rgb(17 25 39 / 0.14), 0 2px 4px -2px rgb(17 25 39 / 0.06);
+	--miyar-shadow-focus: 0 0 0 3px rgb(30 99 85 / 0.25);
+
+	--font-stack: "IBM Plex Sans Arabic", "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif !important;
+	--font-ui: "IBM Plex Sans Arabic", "IBM Plex Sans", system-ui, sans-serif !important;
+
+	/* Remap Frappe / ido tokens → معيار */
+	--primary: var(--miyar-brand-600) !important;
+	--primary-color: var(--miyar-brand-600) !important;
+	--brand-color: var(--miyar-brand-600) !important;
+	--btn-primary: var(--miyar-brand-600) !important;
+	--bg-color: var(--miyar-canvas) !important;
+	--fg-color: var(--miyar-ink-0) !important;
+	--card-bg: var(--miyar-ink-0) !important;
+	--navbar-bg: var(--miyar-brand-800) !important;
+	--border-color: var(--miyar-ink-200) !important;
+	--dark-border-color: var(--miyar-ink-300) !important;
+	--table-border-color: var(--miyar-ink-200) !important;
+	--text-color: var(--miyar-ink-800) !important;
+	--text-muted: var(--miyar-ink-500) !important;
+	--text-light: var(--miyar-ink-400) !important;
+	--heading-color: var(--miyar-ink-900) !important;
+	--control-bg: var(--miyar-ink-0) !important;
+	--control-bg-on-gray: var(--miyar-ink-100) !important;
+	--disabled-control-bg: var(--miyar-ink-50) !important;
+	--subtle-fg: var(--miyar-ink-100) !important;
+	--subtle-accent: var(--miyar-ink-50) !important;
+	--fg-hover-color: var(--miyar-brand-50) !important;
+	--sidebar-select-color: var(--miyar-brand-100) !important;
+	--highlight-color: var(--miyar-brand-50) !important;
+	--awesomplete-hover-bg: var(--miyar-brand-50) !important;
+	--btn-default-bg: var(--miyar-ink-0) !important;
+	--btn-default-hover-bg: var(--miyar-ink-50) !important;
+	--btn-ghost-hover-bg: var(--miyar-ink-100) !important;
+	--modal-bg: var(--miyar-ink-0) !important;
+	--popover-bg: var(--miyar-ink-0) !important;
+	--navbar-height: 56px;
+	--page-head-height: 52px;
+	--btn-height: 36px;
+	--input-height: 36px;
+	--border-radius: var(--miyar-radius-sm);
+	--border-radius-md: var(--miyar-radius-md);
+	--border-radius-lg: var(--miyar-radius-lg);
+	--border-radius-full: 999px;
+
+	/* ido_design bridge — keep home/desk coherent when both apps load */
+	--ih-brand: var(--miyar-brand-600);
+	--ih-brand-deep: var(--miyar-brand-900);
+	--ih-brand-hero: var(--miyar-brand-400);
+	--ih-brand-tint: var(--miyar-brand-100);
+	--ih-brand-border: var(--miyar-brand-200);
+	--ih-brand-wash: color-mix(in srgb, var(--miyar-brand-600) 12%, transparent);
+	--ih-page-bg: var(--miyar-canvas);
+	--ih-nav-bg: rgba(255, 255, 255, 0.92);
+	--ih-card: var(--miyar-ink-0);
+	--ih-line: var(--miyar-ink-200);
+	--ih-edge: var(--miyar-ink-200);
+	--ih-ink: var(--miyar-ink-900);
+	--ih-body: var(--miyar-ink-700);
+	--ih-dim: var(--miyar-ink-600);
+	--ih-faint: var(--miyar-ink-500);
+	--font-ui: "IBM Plex Sans Arabic", "IBM Plex Sans", sans-serif;
+	--font-stack: "IBM Plex Sans Arabic", "IBM Plex Sans", sans-serif;
+}
+
+/* ── Base ── */
+body.frappe-desk,
+body[data-path],
+.frappe-desk {
+	font-family: var(--font-stack) !important;
+	font-size: 13.5px;
+	line-height: 1.6;
+	color: var(--miyar-ink-800);
+	background: var(--miyar-canvas) !important;
+	-webkit-font-smoothing: antialiased;
+}
+body.frappe-desk * {
+	scrollbar-width: thin;
+	scrollbar-color: var(--miyar-ink-300) transparent;
+}
+::selection {
+	background: var(--miyar-brand-100);
+}
+
+/* ── Top navbar (AppShell header: brand-800) ── */
+.navbar,
+.navbar.navbar-light,
+header.navbar,
+.sticky-top.navbar {
+	background: var(--miyar-brand-800) !important;
+	border-bottom: none !important;
+	box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.08);
+	min-height: var(--navbar-height);
+	color: #fff !important;
+}
+.navbar .navbar-brand,
+.navbar .nav-link,
+.navbar .nav-item,
+.navbar .dropdown-toggle,
+.navbar .es-icon,
+.navbar svg use,
+.navbar .btn,
+.navbar .search-bar,
+.navbar .awesomebar,
+#navbar-breadcrumbs a,
+#navbar-breadcrumbs li,
+.navbar .text-muted {
+	color: rgba(255, 255, 255, 0.88) !important;
+	--icon-stroke: rgba(255, 255, 255, 0.88) !important;
+}
+.navbar .nav-link:hover,
+.navbar .btn:hover,
+.navbar .dropdown-toggle:hover {
+	color: #fff !important;
+	background: rgba(255, 255, 255, 0.1) !important;
+	border-radius: var(--miyar-radius-sm);
+}
+.navbar .awesomebar,
+.navbar input[type="search"],
+.navbar .form-control,
+#navbar-search {
+	background: rgba(255, 255, 255, 0.1) !important;
+	border: 1px solid rgba(255, 255, 255, 0.15) !important;
+	color: #fff !important;
+	border-radius: var(--miyar-radius-sm) !important;
+	height: 36px !important;
+}
+.navbar .awesomebar::placeholder,
+.navbar input::placeholder {
+	color: rgba(255, 255, 255, 0.5) !important;
+}
+.navbar .awesomebar:focus,
+.navbar input:focus {
+	background: rgba(255, 255, 255, 0.15) !important;
+	border-color: rgba(255, 255, 255, 0.4) !important;
+	box-shadow: none !important;
+}
+
+/* Brand mark in apps switcher / navbar */
+.miyar-nav-brand {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	margin-inline-end: 8px;
+	text-decoration: none !important;
+}
+.miyar-nav-brand img {
+	width: 32px;
+	height: 32px;
+	object-fit: contain;
+}
+.miyar-nav-brand .miyar-nav-titles {
+	display: none;
+	line-height: 1.15;
+}
+@media (min-width: 768px) {
+	.miyar-nav-brand .miyar-nav-titles {
+		display: block;
+	}
+}
+.miyar-nav-brand .miyar-nav-titles strong {
+	display: block;
+	font-size: 15px;
+	font-weight: 700;
+	color: #fff;
+}
+.miyar-nav-brand .miyar-nav-titles span {
+	display: block;
+	font-size: 10px;
+	color: rgba(255, 255, 255, 0.65);
+}
+
+/* ── Sidebar ── */
+.body-sidebar,
+.desk-sidebar,
+.layout-side-section,
+.list-sidebar,
+.form-sidebar {
+	background: var(--miyar-ink-0) !important;
+	border-color: var(--miyar-ink-200) !important;
+}
+.body-sidebar .standard-sidebar-item,
+.desk-sidebar .standard-sidebar-item,
+.list-sidebar .sidebar-menu li a,
+.form-sidebar .sidebar-menu a {
+	border-radius: var(--miyar-radius-sm);
+	color: var(--miyar-ink-700) !important;
+	font-weight: 500;
+	font-size: 12.5px;
+}
+.body-sidebar .standard-sidebar-item.selected,
+.body-sidebar .standard-sidebar-item.active,
+.desk-sidebar .standard-sidebar-item.selected,
+.list-sidebar .sidebar-menu li a.active {
+	background: var(--miyar-brand-100) !important;
+	color: var(--miyar-brand-800) !important;
+	font-weight: 600;
+}
+.body-sidebar-item:hover,
+.standard-sidebar-item:hover {
+	background: var(--miyar-ink-50) !important;
+}
+
+/* ── Page chrome ── */
+.main-section,
+#body,
+.page-container {
+	background: var(--miyar-canvas) !important;
+}
+.page-head {
+	background: rgba(255, 255, 255, 0.92) !important;
+	border-bottom: 1px solid var(--miyar-ink-200) !important;
+	backdrop-filter: saturate(1.4) blur(8px);
+}
+.page-title .title-text,
+.page-head h3,
+.page-head .sidebar-toggle-btn {
+	color: var(--miyar-ink-900) !important;
+	font-weight: 700;
+}
+.layout-main-section,
+.form-layout,
+.list-row-container,
+.frappe-card,
+.widget,
+.widget.dashboard-widget-box,
+.codex-editor,
+.form-dashboard-section {
+	background: var(--miyar-ink-0) !important;
+	border: 1px solid var(--miyar-ink-200) !important;
+	border-radius: var(--miyar-radius-md) !important;
+	box-shadow: var(--miyar-shadow-card) !important;
+}
+.layout-main-section-wrapper {
+	padding-top: 12px;
+}
+
+/* Workspace cards / shortcuts like frontend Section */
+.workspace-sidebar,
+.desk-sidebar .item-anchor {
+	font-family: var(--font-stack);
+}
+.widget .widget-head,
+.shortcut-widget-box,
+.links-widget-box .widget-head {
+	border-bottom: 1px solid var(--miyar-ink-200);
+	background: linear-gradient(to bottom, var(--miyar-ink-50), var(--miyar-ink-0));
+	border-radius: var(--miyar-radius-md) var(--miyar-radius-md) 0 0;
+}
+.widget-title,
+.shortcut-widget-box .widget-title {
+	font-weight: 700 !important;
+	color: var(--miyar-ink-900) !important;
+	font-size: 14.5px !important;
+}
+.shortcut-widget-box {
+	border-radius: var(--miyar-radius-md) !important;
+	border: 1px solid var(--miyar-ink-200) !important;
+	box-shadow: var(--miyar-shadow-card) !important;
+	transition: box-shadow 0.15s, transform 0.15s;
+}
+.shortcut-widget-box:hover {
+	box-shadow: var(--miyar-shadow-elev) !important;
+	transform: translateY(-1px);
+}
+
+/* ── Buttons (match primitives.tsx) ── */
+.btn-primary,
+.btn-primary:not(:disabled),
+.primary-action,
+button.btn-primary {
+	background: var(--miyar-brand-600) !important;
+	border-color: transparent !important;
+	color: #fff !important;
+	font-weight: 600 !important;
+	border-radius: var(--miyar-radius-sm) !important;
+	box-shadow: 0 1px 2px rgb(17 25 39 / 0.06);
+	min-height: 36px;
+	padding-inline: 14px;
+}
+.btn-primary:hover,
+.btn-primary:focus {
+	background: var(--miyar-brand-800) !important;
+	color: #fff !important;
+}
+.btn-secondary,
+.btn-default,
+.btn:not(.btn-primary):not(.btn-danger):not(.btn-success):not(.btn-link):not(.btn-xs) {
+	background: var(--miyar-ink-0) !important;
+	border: 1px solid var(--miyar-ink-300) !important;
+	color: var(--miyar-ink-700) !important;
+	font-weight: 600 !important;
+	border-radius: var(--miyar-radius-sm) !important;
+}
+.btn-secondary:hover,
+.btn-default:hover {
+	background: var(--miyar-ink-50) !important;
+}
+.btn-danger {
+	background: var(--miyar-danger-500) !important;
+	border-color: transparent !important;
+	color: #fff !important;
+	border-radius: var(--miyar-radius-sm) !important;
+	font-weight: 600 !important;
+}
+.btn-success {
+	background: var(--miyar-ok-500) !important;
+	border-color: transparent !important;
+	color: #fff !important;
+}
+.btn-link {
+	color: var(--miyar-brand-600) !important;
+	font-weight: 600;
+}
+
+/* ── Form controls ── */
+.form-control,
+.input-with-feedback,
+select.form-control,
+textarea.form-control,
+.frappe-control input,
+.frappe-control select,
+.frappe-control textarea,
+.awesomplete > input {
+	border: 1px solid var(--miyar-ink-300) !important;
+	border-radius: var(--miyar-radius-sm) !important;
+	background: var(--miyar-ink-0) !important;
+	color: var(--miyar-ink-900) !important;
+	font-size: 13px !important;
+	min-height: 36px;
+	box-shadow: none !important;
+}
+.form-control:focus,
+.input-with-feedback:focus,
+.frappe-control input:focus,
+.frappe-control select:focus,
+.frappe-control textarea:focus {
+	border-color: var(--miyar-brand-600) !important;
+	box-shadow: var(--miyar-shadow-focus) !important;
+}
+.control-label,
+.frappe-control .control-label,
+.form-group .clearfix,
+label.control-label {
+	color: var(--miyar-ink-700) !important;
+	font-size: 12px !important;
+	font-weight: 600 !important;
+	margin-bottom: 4px !important;
+}
+
+/* Section break ≈ frontend Section */
+.form-section,
+.form-dashboard-section {
+	overflow: hidden;
+}
+.form-section .section-head,
+.form-section .section-head.collapsed {
+	display: flex !important;
+	align-items: center;
+	gap: 8px;
+	padding: 10px 16px !important;
+	margin: 0 !important;
+	border-bottom: 1px solid var(--miyar-ink-200) !important;
+	background: linear-gradient(to bottom, var(--miyar-ink-50), var(--miyar-ink-0)) !important;
+	font-size: 14.5px !important;
+	font-weight: 700 !important;
+	color: var(--miyar-ink-900) !important;
+	border-radius: 0;
+}
+.form-section .section-head::before {
+	content: "";
+	width: 3px;
+	align-self: stretch;
+	border-radius: 999px;
+	background: var(--miyar-brand-600);
+	margin-inline-end: 4px;
+}
+.form-section .section-body {
+	padding: 16px !important;
+}
+.form-tabs-list,
+.form-tabs {
+	border-bottom: 1px solid var(--miyar-ink-200) !important;
+	background: var(--miyar-ink-0);
+}
+.form-tabs .nav-link {
+	font-weight: 600;
+	color: var(--miyar-ink-600) !important;
+	border-radius: var(--miyar-radius-sm) var(--miyar-radius-sm) 0 0;
+}
+.form-tabs .nav-link.active {
+	color: var(--miyar-brand-700) !important;
+	border-bottom: 2px solid var(--miyar-brand-600) !important;
+}
+
+/* ── List view ── */
+.list-row,
+.list-row-head,
+.result .list-row-container {
+	border-color: var(--miyar-ink-100) !important;
+}
+.list-row-head {
+	background: var(--miyar-ink-50) !important;
+	color: var(--miyar-ink-500) !important;
+	font-size: 11px !important;
+	font-weight: 600 !important;
+	letter-spacing: 0.02em;
+	text-transform: none;
+}
+.list-row:hover,
+.list-row-container:hover .list-row {
+	background: var(--miyar-brand-50) !important;
+}
+.list-row-col a,
+.list-subject a,
+.level-item.ellipsis a {
+	color: var(--miyar-brand-700) !important;
+	font-weight: 600;
+}
+.filter-section,
+.filter-area,
+.sort-selector .btn-group .btn {
+	border-radius: var(--miyar-radius-sm) !important;
+}
+
+/* Status pills (JS adds .miyar-pill) */
+.miyar-pill,
+.indicator-pill,
+.indicator-pill span,
+.list-row-col .indicator-pill {
+	display: inline-flex !important;
+	align-items: center;
+	gap: 6px;
+	padding: 0 8px !important;
+	min-height: 18px;
+	border-radius: 999px !important;
+	border: 1px solid transparent;
+	font-size: 11.5px !important;
+	font-weight: 500 !important;
+	line-height: 18px;
+	white-space: nowrap;
+}
+.miyar-pill::before,
+.indicator-pill.miyar-tone::before {
+	content: "";
+	width: 6px;
+	height: 6px;
+	border-radius: 999px;
+	background: currentColor;
+	opacity: 0.85;
+	flex-shrink: 0;
+}
+.miyar-tone-neutral,
+.indicator-pill.miyar-tone-neutral {
+	background: var(--miyar-ink-100) !important;
+	color: var(--miyar-ink-700) !important;
+	border-color: var(--miyar-ink-200) !important;
+}
+.miyar-tone-info,
+.indicator-pill.miyar-tone-info {
+	background: var(--miyar-info-50) !important;
+	color: var(--miyar-info-700) !important;
+	border-color: var(--miyar-info-100) !important;
+}
+.miyar-tone-accent,
+.indicator-pill.miyar-tone-accent {
+	background: var(--miyar-brand-50) !important;
+	color: var(--miyar-brand-700) !important;
+	border-color: var(--miyar-brand-200) !important;
+}
+.miyar-tone-ok,
+.indicator-pill.miyar-tone-ok,
+.indicator-pill.green {
+	background: var(--miyar-ok-50) !important;
+	color: var(--miyar-ok-700) !important;
+	border-color: var(--miyar-ok-100) !important;
+}
+.miyar-tone-warn,
+.indicator-pill.miyar-tone-warn,
+.indicator-pill.orange,
+.indicator-pill.yellow {
+	background: var(--miyar-warn-50) !important;
+	color: var(--miyar-warn-700) !important;
+	border-color: var(--miyar-warn-100) !important;
+}
+.miyar-tone-danger,
+.indicator-pill.miyar-tone-danger,
+.indicator-pill.red {
+	background: var(--miyar-danger-50) !important;
+	color: var(--miyar-danger-700) !important;
+	border-color: var(--miyar-danger-100) !important;
+}
+.miyar-tone-blue,
+.indicator-pill.blue {
+	background: var(--miyar-info-50) !important;
+	color: var(--miyar-info-700) !important;
+}
+
+/* Code / ID chips like frontend Code */
+.miyar-code,
+.list-row .level-left .ellipsis > span:first-child,
+.frappe-timestamp {
+	font-variant-numeric: tabular-nums;
+}
+.miyar-code {
+	display: inline-flex;
+	padding: 1px 6px;
+	border-radius: var(--miyar-radius-xs);
+	border: 1px solid var(--miyar-brand-100);
+	background: var(--miyar-brand-50);
+	font-family: ui-monospace, Consolas, monospace;
+	font-size: 10.5px;
+	font-weight: 600;
+	color: var(--miyar-brand-700);
+	direction: ltr;
+	unicode-bidi: isolate;
+}
+
+/* Grid / child tables */
+.form-grid,
+.grid-heading-row,
+.grid-body .grid-row {
+	border-color: var(--miyar-ink-200) !important;
+}
+.grid-heading-row {
+	background: var(--miyar-ink-50) !important;
+}
+.grid-row:hover {
+	background: var(--miyar-brand-50) !important;
+}
+
+/* Modals / dialogs */
+.modal-content,
+.msgprint,
+.popover {
+	border-radius: var(--miyar-radius-lg) !important;
+	border: 1px solid var(--miyar-ink-200) !important;
+	box-shadow: 0 12px 32px -8px rgb(17 25 39 / 0.22), 0 0 0 1px rgb(17 25 39 / 0.06) !important;
+}
+.modal-header {
+	border-bottom: 1px solid var(--miyar-ink-200) !important;
+	background: linear-gradient(to bottom, var(--miyar-ink-50), var(--miyar-ink-0));
+}
+.modal-title {
+	font-weight: 700 !important;
+	color: var(--miyar-ink-900) !important;
+}
+
+/* Toasts */
+.alert,
+.toast {
+	border-radius: var(--miyar-radius-md) !important;
+}
+
+/* Tags / filters chips */
+.frappe-tag,
+.filter-tag,
+.btn-group-xs .btn {
+	border-radius: 999px !important;
+}
+
+/* Links */
+a,
+.btn-link-secondary {
+	color: var(--miyar-brand-600);
+}
+a:hover {
+	color: var(--miyar-brand-800);
+}
+
+/* Checkbox / switch accent */
+input[type="checkbox"]:checked,
+.checkbox input:checked + label::before,
+.switch input:checked + .slider {
+	accent-color: var(--miyar-brand-600);
+}
+
+/* Datatable */
+.dt-scrollable,
+.datatable {
+	border-radius: var(--miyar-radius-md);
+	border-color: var(--miyar-ink-200) !important;
+}
+.dt-header,
+.datatable .dt-row-header {
+	background: var(--miyar-ink-50) !important;
+}
+
+/* Apps screen card for معيار */
+.apps-list .app-icon[data-app="miyar"],
+.app-logo[title="معيار"] {
+	border-radius: var(--miyar-radius-md);
+}
+
+/* Portal iframe page */
+.miyar-portal-frame {
+	position: fixed;
+	inset: 0;
+	border: 0;
+	width: 100%;
+	height: 100%;
+	background: var(--miyar-canvas);
+}
+body.miyar-portal-page .navbar,
+body.miyar-portal-page .body-sidebar-container,
+body.miyar-portal-page .main-section > .sticky-top {
+	display: none !important;
+}
+body.miyar-portal-page #body,
+body.miyar-portal-page .main-section {
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+/* On Miyar module routes, tighten page canvas */
+body[data-route^="List/Test Request"],
+body[data-route^="Form/Test Request"],
+body[data-route^="List/Miyar"],
+body[data-route^="Form/Miyar"],
+body[data-route^="Workspaces/Miyar"],
+body.miyar-module {
+	--navbar-bg: var(--miyar-brand-800);
+}
+
+/* KPI-like number cards on workspace */
+.miyar-kpi {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	padding: 14px;
+	border-radius: var(--miyar-radius-md);
+	border: 1px solid var(--miyar-ink-200);
+	background: var(--miyar-ink-0);
+	box-shadow: var(--miyar-shadow-card);
+}
+.miyar-kpi .label {
+	font-size: 11px;
+	font-weight: 600;
+	color: var(--miyar-ink-500);
+}
+.miyar-kpi .value {
+	font-size: 28px;
+	font-weight: 700;
+	color: var(--miyar-ink-900);
+	font-variant-numeric: tabular-nums;
+	line-height: 1;
+}

@@ -1,0 +1,282 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-15 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "borehole",
+  "layer",
+  "sample_code",
+  "lab_status",
+  "col_fs_2",
+  "sample_type",
+  "sample_kind",
+  "depth_from",
+  "depth_to",
+  "field_uscs",
+  "lab_uscs",
+  "sec_",
+  "tests"
+ ],
+ "fields": [
+  {
+   "fieldname": "borehole",
+   "fieldtype": "Link",
+   "label": "الجسة",
+   "reqd": 1,
+   "options": "Borehole",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "layer",
+   "fieldtype": "Link",
+   "label": "الطبقة",
+   "options": "Borehole Layer"
+  },
+  {
+   "fieldname": "sample_code",
+   "fieldtype": "Data",
+   "label": "رمز العينة",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "lab_status",
+   "fieldtype": "Select",
+   "label": "حالة المعمل",
+   "options": "Ready\nIn Progress\nDone",
+   "default": "Ready",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "col_fs_2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "sample_type",
+   "fieldtype": "Link",
+   "label": "نوع العينة",
+   "options": "Sample Type"
+  },
+  {
+   "fieldname": "sample_kind",
+   "fieldtype": "Link",
+   "label": "صنف العينة",
+   "options": "Sample Kind"
+  },
+  {
+   "fieldname": "depth_from",
+   "fieldtype": "Float",
+   "label": "من (م)"
+  },
+  {
+   "fieldname": "depth_to",
+   "fieldtype": "Float",
+   "label": "إلى (م)"
+  },
+  {
+   "fieldname": "field_uscs",
+   "fieldtype": "Link",
+   "label": "USCS حقلي",
+   "options": "USCS Classification"
+  },
+  {
+   "fieldname": "lab_uscs",
+   "fieldtype": "Link",
+   "label": "USCS نهائي",
+   "options": "USCS Classification"
+  },
+  {
+   "fieldname": "sec_",
+   "fieldtype": "Section Break",
+   "label": "اختبارات"
+  },
+  {
+   "fieldname": "tests",
+   "fieldtype": "Table",
+   "label": "الاختبارات",
+   "options": "Sample Test Row"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 0,
+ "links": [],
+ "modified": "2026-09-15 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Miyar",
+ "name": "Field Sample",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1,
+   "select": 1
+  },
+  {
+   "role": "Miyar Admin",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1,
+   "select": 1
+  },
+  {
+   "role": "Miyar Contractor Principal",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Contractor Employee",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Lab Principal",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Lab Employee",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Consultant Principal",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Consultant Employee",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Supervisor",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Support",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "FS-.#####",
+ "naming_rule": "Expression",
+ "title_field": "sample_code"
+}

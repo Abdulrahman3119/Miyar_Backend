@@ -1,0 +1,454 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-15 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "tab_org",
+  "organization_name",
+  "organization_type",
+  "cr",
+  "logo",
+  "col_org_2",
+  "cr_status",
+  "cr_activity",
+  "cr_issued_on",
+  "cr_issued_on_g",
+  "license",
+  "territory",
+  "district",
+  "sec_",
+  "phone",
+  "email",
+  "website",
+  "col_contact_2",
+  "address_html",
+  "about",
+  "tab_dir",
+  "saac",
+  "specialties",
+  "sec_",
+  "directory_status",
+  "active",
+  "featured",
+  "col_dir_2",
+  "since_year",
+  "employee_count",
+  "rating",
+  "reviews",
+  "on_time",
+  "auto_approvals"
+ ],
+ "fields": [
+  {
+   "fieldname": "tab_org",
+   "fieldtype": "Tab Break",
+   "label": "بيانات المنشأة"
+  },
+  {
+   "fieldname": "organization_name",
+   "fieldtype": "Data",
+   "label": "اسم المنشأة",
+   "reqd": 1,
+   "in_list_view": 1,
+   "bold": 1,
+   "in_global_search": 1
+  },
+  {
+   "fieldname": "organization_type",
+   "fieldtype": "Link",
+   "label": "النوع",
+   "reqd": 1,
+   "options": "Organization Type",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "cr",
+   "fieldtype": "Data",
+   "label": "السجل التجاري",
+   "reqd": 1,
+   "unique": 1,
+   "in_list_view": 1,
+   "length": 10
+  },
+  {
+   "fieldname": "logo",
+   "fieldtype": "Attach Image",
+   "label": "الشعار"
+  },
+  {
+   "fieldname": "col_org_2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "cr_status",
+   "fieldtype": "Data",
+   "label": "حالة السجل"
+  },
+  {
+   "fieldname": "cr_activity",
+   "fieldtype": "Data",
+   "label": "النشاط"
+  },
+  {
+   "fieldname": "cr_issued_on",
+   "fieldtype": "Data",
+   "label": "تاريخ الإصدار (واثق)"
+  },
+  {
+   "fieldname": "cr_issued_on_g",
+   "fieldtype": "Date",
+   "label": "تاريخ الإصدار الميلادي"
+  },
+  {
+   "fieldname": "license",
+   "fieldtype": "Data",
+   "label": "الرخصة البلدية"
+  },
+  {
+   "fieldname": "territory",
+   "fieldtype": "Link",
+   "label": "المدينة / المنطقة",
+   "reqd": 1,
+   "options": "Territory",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "district",
+   "fieldtype": "Data",
+   "label": "الحي"
+  },
+  {
+   "fieldname": "sec_",
+   "fieldtype": "Section Break",
+   "label": "تواصل"
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Data",
+   "label": "الهاتف"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "البريد"
+  },
+  {
+   "fieldname": "website",
+   "fieldtype": "Data",
+   "label": "الموقع"
+  },
+  {
+   "fieldname": "col_contact_2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "address_html",
+   "fieldtype": "Small Text",
+   "label": "العنوان"
+  },
+  {
+   "fieldname": "about",
+   "fieldtype": "Text Editor",
+   "label": "نبذة"
+  },
+  {
+   "fieldname": "tab_dir",
+   "fieldtype": "Tab Break",
+   "label": "اعتماد ودليل"
+  },
+  {
+   "fieldname": "saac",
+   "fieldtype": "Table",
+   "label": "اعتماد SAAC",
+   "options": "SAAC Accreditation"
+  },
+  {
+   "fieldname": "specialties",
+   "fieldtype": "Table",
+   "label": "التخصصات",
+   "options": "Organization Specialty"
+  },
+  {
+   "fieldname": "sec_",
+   "fieldtype": "Section Break",
+   "label": "الظهور"
+  },
+  {
+   "fieldname": "directory_status",
+   "fieldtype": "Select",
+   "label": "الظهور",
+   "options": "STS04\nSTS05",
+   "default": "STS04",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "active",
+   "fieldtype": "Check",
+   "label": "الحساب فعّال",
+   "default": "1",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "featured",
+   "fieldtype": "Check",
+   "label": "مميّز في الدليل"
+  },
+  {
+   "fieldname": "col_dir_2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "since_year",
+   "fieldtype": "Int",
+   "label": "منذ سنة"
+  },
+  {
+   "fieldname": "employee_count",
+   "fieldtype": "Int",
+   "label": "عدد الموظفين (تعريفي)"
+  },
+  {
+   "fieldname": "rating",
+   "fieldtype": "Float",
+   "label": "التقييم",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "reviews",
+   "fieldtype": "Int",
+   "label": "عدد التقييمات المعتمدة",
+   "read_only": 1
+  },
+  {
+   "fieldname": "on_time",
+   "fieldtype": "Percent",
+   "label": "الالتزام بالموعد %",
+   "read_only": 1
+  },
+  {
+   "fieldname": "auto_approvals",
+   "fieldtype": "Int",
+   "label": "اعتمادات تلقائية",
+   "read_only": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 0,
+ "links": [
+  {
+   "link_doctype": "Organization User",
+   "link_fieldname": "organization"
+  },
+  {
+   "link_doctype": "Lab Catalog Item",
+   "link_fieldname": "lab"
+  },
+  {
+   "link_doctype": "Service Contract",
+   "link_fieldname": "lab"
+  }
+ ],
+ "modified": "2026-09-15 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Miyar",
+ "name": "Organization",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1,
+   "select": 1
+  },
+  {
+   "role": "Miyar Admin",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1,
+   "select": 1
+  },
+  {
+   "role": "Miyar Visitor",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Contractor Principal",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Contractor Employee",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Lab Principal",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Lab Employee",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Consultant Principal",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Consultant Employee",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Supervisor",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Support",
+   "read": 1,
+   "write": 1,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "ORG-.#####",
+ "naming_rule": "Expression",
+ "title_field": "organization_name",
+ "search_fields": "organization_name,cr",
+ "image_field": "logo",
+ "show_name_in_global_search": 1
+}

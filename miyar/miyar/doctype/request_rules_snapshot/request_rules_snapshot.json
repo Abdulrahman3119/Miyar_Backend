@@ -1,0 +1,77 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-15 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "lab_decision_hours",
+  "consultant_decision_hours",
+  "vat_rate",
+  "min_lead_hours",
+  "geofence_meters",
+  "max_tests_per_request",
+  "proposed_slots"
+ ],
+ "fields": [
+  {
+   "fieldname": "lab_decision_hours",
+   "fieldtype": "Int",
+   "label": "مهلة المختبر (ساعة)",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "consultant_decision_hours",
+   "fieldtype": "Int",
+   "label": "مهلة الاستشاري (ساعة)",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "vat_rate",
+   "fieldtype": "Percent",
+   "label": "نسبة الضريبة",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "min_lead_hours",
+   "fieldtype": "Int",
+   "label": "أول موعد ≥ ساعات",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "geofence_meters",
+   "fieldtype": "Float",
+   "label": "نطاق التحقق (م)"
+  },
+  {
+   "fieldname": "max_tests_per_request",
+   "fieldtype": "Int",
+   "label": "أقصى اختبارات"
+  },
+  {
+   "fieldname": "proposed_slots",
+   "fieldtype": "Int",
+   "label": "عدد المواعيد"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-09-15 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Miyar",
+ "name": "Request Rules Snapshot",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 0,
+ "editable_grid": 1
+}

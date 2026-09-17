@@ -1,0 +1,475 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-15 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "status",
+  "service_contract",
+  "service_type",
+  "col_tr_2",
+  "contractor",
+  "lab",
+  "consultant",
+  "priority",
+  "sec_",
+  "project_name",
+  "category",
+  "city",
+  "location",
+  "col_loc_2",
+  "geo_lat",
+  "geo_lng",
+  "notes",
+  "delegate",
+  "tab_slots",
+  "submitted_at",
+  "lab_deadline_at",
+  "chosen_slot_date",
+  "chosen_slot_from",
+  "chosen_slot_to",
+  "reject_reason",
+  "sec_",
+  "slots",
+  "tab_snap",
+  "parent_request",
+  "retest_of",
+  "study",
+  "rules_snapshot",
+  "tab_hist",
+  "attachments",
+  "history",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "الترقيم",
+   "options": "TST-DRAFT-.\nTST-.YYYY.-.",
+   "default": "TST-DRAFT-."
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "الحالة",
+   "options": "STS09\nSTS10\nSTS11\nSTS12\nSTS13\nSTS14\nSTS15\nSTS16\nSTS26",
+   "default": "STS09",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "service_contract",
+   "fieldtype": "Link",
+   "label": "العقد",
+   "reqd": 1,
+   "options": "Service Contract",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "service_type",
+   "fieldtype": "Link",
+   "label": "نوع الخدمة",
+   "reqd": 1,
+   "options": "Service Type",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "col_tr_2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "contractor",
+   "fieldtype": "Link",
+   "label": "المقاول",
+   "read_only": 1,
+   "options": "Organization",
+   "in_list_view": 1,
+   "fetch_from": "service_contract.contractor"
+  },
+  {
+   "fieldname": "lab",
+   "fieldtype": "Link",
+   "label": "المختبر",
+   "read_only": 1,
+   "options": "Organization",
+   "in_list_view": 1,
+   "fetch_from": "service_contract.lab"
+  },
+  {
+   "fieldname": "consultant",
+   "fieldtype": "Link",
+   "label": "الاستشاري",
+   "read_only": 1,
+   "options": "Organization",
+   "fetch_from": "service_contract.consultant"
+  },
+  {
+   "fieldname": "priority",
+   "fieldtype": "Link",
+   "label": "الأولوية",
+   "options": "Priority"
+  },
+  {
+   "fieldname": "sec_",
+   "fieldtype": "Section Break",
+   "label": "مشروع وموقع"
+  },
+  {
+   "fieldname": "project_name",
+   "fieldtype": "Data",
+   "label": "المشروع",
+   "in_list_view": 1,
+   "in_global_search": 1
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Link",
+   "label": "تصنيف الاختبارات",
+   "options": "Item Group",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Link",
+   "label": "المدينة",
+   "options": "Territory"
+  },
+  {
+   "fieldname": "location",
+   "fieldtype": "Small Text",
+   "label": "وصف الموقع",
+   "reqd": 1
+  },
+  {
+   "fieldname": "col_loc_2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "geo_lat",
+   "fieldtype": "Float",
+   "label": "خط العرض"
+  },
+  {
+   "fieldname": "geo_lng",
+   "fieldtype": "Float",
+   "label": "خط الطول"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "ملاحظات"
+  },
+  {
+   "fieldname": "delegate",
+   "fieldtype": "Link",
+   "label": "المفوَّض الحالي",
+   "options": "User"
+  },
+  {
+   "fieldname": "tab_slots",
+   "fieldtype": "Tab Break",
+   "label": "مواعيد ومهل"
+  },
+  {
+   "fieldname": "submitted_at",
+   "fieldtype": "Datetime",
+   "label": "وقت الإرسال"
+  },
+  {
+   "fieldname": "lab_deadline_at",
+   "fieldtype": "Datetime",
+   "label": "مهلة رد المختبر"
+  },
+  {
+   "fieldname": "chosen_slot_date",
+   "fieldtype": "Date",
+   "label": "الموعد المعتمد"
+  },
+  {
+   "fieldname": "chosen_slot_from",
+   "fieldtype": "Time",
+   "label": "من"
+  },
+  {
+   "fieldname": "chosen_slot_to",
+   "fieldtype": "Time",
+   "label": "إلى"
+  },
+  {
+   "fieldname": "reject_reason",
+   "fieldtype": "Small Text",
+   "label": "سبب الرفض"
+  },
+  {
+   "fieldname": "sec_",
+   "fieldtype": "Section Break",
+   "label": "المواعيد المقترحة"
+  },
+  {
+   "fieldname": "slots",
+   "fieldtype": "Table",
+   "label": "المواعيد المقترحة",
+   "options": "Request Time Slot"
+  },
+  {
+   "fieldname": "tab_snap",
+   "fieldtype": "Tab Break",
+   "label": "لقطة وروابط"
+  },
+  {
+   "fieldname": "parent_request",
+   "fieldtype": "Link",
+   "label": "الطلب الأصل",
+   "options": "Test Request"
+  },
+  {
+   "fieldname": "retest_of",
+   "fieldtype": "Link",
+   "label": "بند الاختبار الأصل",
+   "options": "Test Line"
+  },
+  {
+   "fieldname": "study",
+   "fieldtype": "Link",
+   "label": "الدراسة",
+   "options": "Geotechnical Study"
+  },
+  {
+   "fieldname": "rules_snapshot",
+   "fieldtype": "Table",
+   "label": "لقطة القواعد",
+   "options": "Request Rules Snapshot"
+  },
+  {
+   "fieldname": "tab_hist",
+   "fieldtype": "Tab Break",
+   "label": "مرفقات وسجل"
+  },
+  {
+   "fieldname": "attachments",
+   "fieldtype": "Table",
+   "label": "مرفقات الطلب",
+   "options": "Request Attachment"
+  },
+  {
+   "fieldname": "history",
+   "fieldtype": "Table",
+   "label": "سجل الطلب",
+   "options": "Request History"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "read_only": 1,
+   "hidden": 1,
+   "options": "Test Request",
+   "no_copy": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 0,
+ "links": [
+  {
+   "link_doctype": "Test Line",
+   "link_fieldname": "test_request"
+  },
+  {
+   "link_doctype": "Geotechnical Study",
+   "link_fieldname": "test_request"
+  },
+  {
+   "link_doctype": "Laboratory Invoice",
+   "link_fieldname": "test_request"
+  },
+  {
+   "link_doctype": "Delegation",
+   "link_fieldname": "test_request"
+  }
+ ],
+ "modified": "2026-09-15 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Miyar",
+ "name": "Test Request",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1,
+   "select": 1
+  },
+  {
+   "role": "Miyar Admin",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1,
+   "select": 1
+  },
+  {
+   "role": "Miyar Contractor Principal",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 0,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Contractor Employee",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 0,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Lab Principal",
+   "read": 1,
+   "write": 1,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Lab Employee",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Consultant Principal",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Consultant Employee",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Supervisor",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Support",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 1,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "naming_series:",
+ "naming_rule": "By \"Naming Series\" field",
+ "is_submittable": 1,
+ "title_field": "project_name",
+ "search_fields": "project_name,contractor,lab,status",
+ "show_name_in_global_search": 1
+}

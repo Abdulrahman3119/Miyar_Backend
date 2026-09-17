@@ -1,0 +1,295 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-15 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "code",
+  "label_ar",
+  "floors_min",
+  "floors_max",
+  "built_area_min_m2",
+  "built_area_max_m2",
+  "base_count",
+  "extra_per_m2",
+  "count_cap",
+  "depth_two_thirds_m",
+  "depth_one_third_m",
+  "is_special",
+  "knowledge_version",
+  "borehole_count_rule"
+ ],
+ "fields": [
+  {
+   "fieldname": "code",
+   "fieldtype": "Data",
+   "label": "الرمز",
+   "reqd": 1,
+   "unique": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "label_ar",
+   "fieldtype": "Data",
+   "label": "التسمية",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "floors_min",
+   "fieldtype": "Int",
+   "label": "أدوار من"
+  },
+  {
+   "fieldname": "floors_max",
+   "fieldtype": "Int",
+   "label": "أدوار إلى"
+  },
+  {
+   "fieldname": "built_area_min_m2",
+   "fieldtype": "Float",
+   "label": "مساحة من م²"
+  },
+  {
+   "fieldname": "built_area_max_m2",
+   "fieldtype": "Float",
+   "label": "مساحة إلى م²"
+  },
+  {
+   "fieldname": "base_count",
+   "fieldtype": "Int",
+   "label": "العدد الأساسي"
+  },
+  {
+   "fieldname": "extra_per_m2",
+   "fieldtype": "Float",
+   "label": "جسة إضافية لكل م²"
+  },
+  {
+   "fieldname": "count_cap",
+   "fieldtype": "Int",
+   "label": "سقف العدد"
+  },
+  {
+   "fieldname": "depth_two_thirds_m",
+   "fieldtype": "Float",
+   "label": "عمق ثلثين (م)"
+  },
+  {
+   "fieldname": "depth_one_third_m",
+   "fieldtype": "Float",
+   "label": "عمق ثلث (م)"
+  },
+  {
+   "fieldname": "is_special",
+   "fieldtype": "Check",
+   "label": "دراسة خاصة"
+  },
+  {
+   "fieldname": "knowledge_version",
+   "fieldtype": "Link",
+   "label": "إصدار المعرفة",
+   "options": "Knowledge Version"
+  },
+  {
+   "fieldname": "borehole_count_rule",
+   "fieldtype": "Small Text",
+   "label": "قاعدة العدد"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 0,
+ "links": [],
+ "modified": "2026-09-15 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Miyar",
+ "name": "SBC Table 21 Row",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1,
+   "select": 1
+  },
+  {
+   "role": "Miyar Admin",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1,
+   "select": 1
+  },
+  {
+   "role": "Miyar Contractor Principal",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Contractor Employee",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Lab Principal",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Lab Employee",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Consultant Principal",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Consultant Employee",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Supervisor",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Support",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Visitor",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "field:code",
+ "naming_rule": "By fieldname",
+ "title_field": "label_ar"
+}

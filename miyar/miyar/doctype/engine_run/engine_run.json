@@ -1,0 +1,310 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-15 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "profile",
+  "mode",
+  "overall_status",
+  "ran_at",
+  "col_er_2",
+  "actor",
+  "test_request",
+  "study",
+  "scope_gate_stopped",
+  "effective_for_production",
+  "sec_",
+  "cloud_path",
+  "local_path",
+  "comparison",
+  "result",
+  "health_snapshot",
+  "sec_",
+  "cost",
+  "tokens",
+  "policy_version",
+  "control_pack_version",
+  "route_used",
+  "policy_at_run",
+  "source_file"
+ ],
+ "fields": [
+  {
+   "fieldname": "profile",
+   "fieldtype": "Link",
+   "label": "الملف",
+   "options": "Engine Profile"
+  },
+  {
+   "fieldname": "mode",
+   "fieldtype": "Select",
+   "label": "الوضع",
+   "options": "cloud\nlocal\ncompare",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "overall_status",
+   "fieldtype": "Select",
+   "label": "الحالة العامة",
+   "options": "COMPLIANT\nNON_COMPLIANT\nPARTIALLY_COMPLIANT\nNOT_EVALUABLE\nNOT_APPLICABLE",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "ran_at",
+   "fieldtype": "Datetime",
+   "label": "وقت التشغيل",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "col_er_2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "actor",
+   "fieldtype": "Link",
+   "label": "المشغّل",
+   "options": "User"
+  },
+  {
+   "fieldname": "test_request",
+   "fieldtype": "Link",
+   "label": "الطلب",
+   "options": "Test Request"
+  },
+  {
+   "fieldname": "study",
+   "fieldtype": "Link",
+   "label": "الدراسة",
+   "options": "Geotechnical Study"
+  },
+  {
+   "fieldname": "scope_gate_stopped",
+   "fieldtype": "Check",
+   "label": "أوقف قبل النموذج"
+  },
+  {
+   "fieldname": "effective_for_production",
+   "fieldtype": "Check",
+   "label": "فعّال للإنتاج"
+  },
+  {
+   "fieldname": "sec_",
+   "fieldtype": "Section Break",
+   "label": "مسارات"
+  },
+  {
+   "fieldname": "cloud_path",
+   "fieldtype": "JSON",
+   "label": "المسار السحابي"
+  },
+  {
+   "fieldname": "local_path",
+   "fieldtype": "JSON",
+   "label": "المسار المحلي"
+  },
+  {
+   "fieldname": "comparison",
+   "fieldtype": "JSON",
+   "label": "المقارنة"
+  },
+  {
+   "fieldname": "result",
+   "fieldtype": "JSON",
+   "label": "النتيجة"
+  },
+  {
+   "fieldname": "health_snapshot",
+   "fieldtype": "JSON",
+   "label": "لقطة الصحة"
+  },
+  {
+   "fieldname": "sec_",
+   "fieldtype": "Section Break",
+   "label": "تكلفة وسياسة"
+  },
+  {
+   "fieldname": "cost",
+   "fieldtype": "Float",
+   "label": "التكلفة"
+  },
+  {
+   "fieldname": "tokens",
+   "fieldtype": "Int",
+   "label": "الرموز"
+  },
+  {
+   "fieldname": "policy_version",
+   "fieldtype": "Data",
+   "label": "إصدار السياسة"
+  },
+  {
+   "fieldname": "control_pack_version",
+   "fieldtype": "Data",
+   "label": "حزمة الضوابط"
+  },
+  {
+   "fieldname": "route_used",
+   "fieldtype": "Data",
+   "label": "المسار الفعلي"
+  },
+  {
+   "fieldname": "policy_at_run",
+   "fieldtype": "Data",
+   "label": "سياسة التوجيه الملتقطة"
+  },
+  {
+   "fieldname": "source_file",
+   "fieldtype": "Attach",
+   "label": "الملف المصدر"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 0,
+ "links": [],
+ "modified": "2026-09-15 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Miyar",
+ "name": "Engine Run",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1,
+   "select": 1
+  },
+  {
+   "role": "Miyar Admin",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1,
+   "select": 1
+  },
+  {
+   "role": "Miyar Lab Principal",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Lab Employee",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Consultant Principal",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Consultant Employee",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Supervisor",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Support",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "ER-.#####",
+ "naming_rule": "Expression"
+}

@@ -1,0 +1,684 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-15 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "test_request",
+  "phase",
+  "knowledge_version",
+  "template",
+  "tab_prelim",
+  "deed_file",
+  "ocr_payload",
+  "parcel",
+  "plan_no",
+  "district",
+  "col_pre_2",
+  "city",
+  "region",
+  "deed_no",
+  "deed_date",
+  "plot_area",
+  "computed_area",
+  "boundary_ok",
+  "sec_",
+  "owner_name",
+  "owner_id",
+  "building_type",
+  "structure_type",
+  "col_proj_2",
+  "floors",
+  "built_area",
+  "foundation_type",
+  "foundation_depth",
+  "prior_info",
+  "neighbors",
+  "permit_no",
+  "prelim_approved",
+  "review_notes",
+  "sec_",
+  "site_conditions",
+  "polygon",
+  "tab_plan",
+  "engine_count",
+  "engine_depth",
+  "engine_spacing",
+  "engine_special",
+  "engine_ref",
+  "table_21_row",
+  "engine_basis",
+  "sec_",
+  "plan_approved",
+  "plan_approved_at",
+  "plan_justification",
+  "field_plan_reviewed",
+  "field_plan_reason",
+  "field_plan_ack",
+  "compliance_pct",
+  "field_approved",
+  "tab_chem",
+  "chemical_sample",
+  "chemical_suggested_sample",
+  "chemical_override_reason",
+  "chemical_results",
+  "chemical_done",
+  "chemical_partial_reason",
+  "tab_an",
+  "computed_fields",
+  "analytical_fields",
+  "recommendations",
+  "manual_fields",
+  "analysis_attachments",
+  "analysis_done",
+  "tab_rep",
+  "report_previewed",
+  "report_approved",
+  "report_approved_at",
+  "report_reject_reason",
+  "report_file",
+  "report_hash",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "test_request",
+   "fieldtype": "Link",
+   "label": "الطلب",
+   "reqd": 1,
+   "unique": 1,
+   "options": "Test Request",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "phase",
+   "fieldtype": "Int",
+   "label": "المرحلة",
+   "read_only": 1,
+   "default": "1",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "knowledge_version",
+   "fieldtype": "Link",
+   "label": "إصدار المعرفة المجمَّد",
+   "options": "Knowledge Version"
+  },
+  {
+   "fieldname": "template",
+   "fieldtype": "Link",
+   "label": "قالب التقرير",
+   "options": "Report Template"
+  },
+  {
+   "fieldname": "tab_prelim",
+   "fieldtype": "Tab Break",
+   "label": "بيانات أولية"
+  },
+  {
+   "fieldname": "deed_file",
+   "fieldtype": "Attach",
+   "label": "القرار المساحي"
+  },
+  {
+   "fieldname": "ocr_payload",
+   "fieldtype": "JSON",
+   "label": "استخراج OCR"
+  },
+  {
+   "fieldname": "parcel",
+   "fieldtype": "Data",
+   "label": "قطعة"
+  },
+  {
+   "fieldname": "plan_no",
+   "fieldtype": "Data",
+   "label": "مخطط"
+  },
+  {
+   "fieldname": "district",
+   "fieldtype": "Data",
+   "label": "حي"
+  },
+  {
+   "fieldname": "col_pre_2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Link",
+   "label": "مدينة",
+   "options": "Territory"
+  },
+  {
+   "fieldname": "region",
+   "fieldtype": "Link",
+   "label": "منطقة",
+   "options": "Territory"
+  },
+  {
+   "fieldname": "deed_no",
+   "fieldtype": "Data",
+   "label": "رقم الصك"
+  },
+  {
+   "fieldname": "deed_date",
+   "fieldtype": "Data",
+   "label": "تاريخ الصك"
+  },
+  {
+   "fieldname": "plot_area",
+   "fieldtype": "Float",
+   "label": "المساحة قرار"
+  },
+  {
+   "fieldname": "computed_area",
+   "fieldtype": "Float",
+   "label": "المساحة محسوبة"
+  },
+  {
+   "fieldname": "boundary_ok",
+   "fieldtype": "Check",
+   "label": "الحدود مطابقة"
+  },
+  {
+   "fieldname": "sec_",
+   "fieldtype": "Section Break",
+   "label": "مالك ومشروع"
+  },
+  {
+   "fieldname": "owner_name",
+   "fieldtype": "Data",
+   "label": "المالك"
+  },
+  {
+   "fieldname": "owner_id",
+   "fieldtype": "Data",
+   "label": "هوية المالك",
+   "length": 10
+  },
+  {
+   "fieldname": "building_type",
+   "fieldtype": "Link",
+   "label": "نوع المشروع",
+   "options": "Building Type"
+  },
+  {
+   "fieldname": "structure_type",
+   "fieldtype": "Link",
+   "label": "الهيكل",
+   "options": "Structure Type"
+  },
+  {
+   "fieldname": "col_proj_2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "floors",
+   "fieldtype": "Int",
+   "label": "الأدوار"
+  },
+  {
+   "fieldname": "built_area",
+   "fieldtype": "Float",
+   "label": "المساحة المبنية"
+  },
+  {
+   "fieldname": "foundation_type",
+   "fieldtype": "Link",
+   "label": "نوع التأسيس",
+   "options": "Foundation Type"
+  },
+  {
+   "fieldname": "foundation_depth",
+   "fieldtype": "Float",
+   "label": "عمق التأسيس (م)"
+  },
+  {
+   "fieldname": "prior_info",
+   "fieldtype": "Check",
+   "label": "معلومات سابقة"
+  },
+  {
+   "fieldname": "neighbors",
+   "fieldtype": "Check",
+   "label": "جوار"
+  },
+  {
+   "fieldname": "permit_no",
+   "fieldtype": "Data",
+   "label": "رقم الرخصة"
+  },
+  {
+   "fieldname": "prelim_approved",
+   "fieldtype": "Check",
+   "label": "اعتماد الاستشاري للأولية"
+  },
+  {
+   "fieldname": "review_notes",
+   "fieldtype": "Small Text",
+   "label": "ملاحظات المراجعة"
+  },
+  {
+   "fieldname": "sec_",
+   "fieldtype": "Section Break",
+   "label": "ظروف ومضلع"
+  },
+  {
+   "fieldname": "site_conditions",
+   "fieldtype": "Table",
+   "label": "ظروف الموقع",
+   "options": "Study Site Condition"
+  },
+  {
+   "fieldname": "polygon",
+   "fieldtype": "Table",
+   "label": "المضلع",
+   "options": "Study Polygon Point"
+  },
+  {
+   "fieldname": "tab_plan",
+   "fieldtype": "Tab Break",
+   "label": "خطة الاستكشاف"
+  },
+  {
+   "fieldname": "engine_count",
+   "fieldtype": "Int",
+   "label": "عدد الجسات المقترح",
+   "read_only": 1
+  },
+  {
+   "fieldname": "engine_depth",
+   "fieldtype": "Float",
+   "label": "العمق المقترح",
+   "read_only": 1
+  },
+  {
+   "fieldname": "engine_spacing",
+   "fieldtype": "Float",
+   "label": "التباعد المقترح",
+   "read_only": 1
+  },
+  {
+   "fieldname": "engine_special",
+   "fieldtype": "Check",
+   "label": "دراسة خاصة",
+   "read_only": 1
+  },
+  {
+   "fieldname": "engine_ref",
+   "fieldtype": "Small Text",
+   "label": "مرجع المحرك"
+  },
+  {
+   "fieldname": "table_21_row",
+   "fieldtype": "Link",
+   "label": "صف Table 2.1",
+   "read_only": 1,
+   "options": "SBC Table 21 Row"
+  },
+  {
+   "fieldname": "engine_basis",
+   "fieldtype": "Table",
+   "label": "أساس التوصية",
+   "options": "Engine Basis Line"
+  },
+  {
+   "fieldname": "sec_",
+   "fieldtype": "Section Break",
+   "label": "اعتماد الخطة"
+  },
+  {
+   "fieldname": "plan_approved",
+   "fieldtype": "Check",
+   "label": "اعتماد الخطة"
+  },
+  {
+   "fieldname": "plan_approved_at",
+   "fieldtype": "Datetime",
+   "label": "تاريخ الاعتماد"
+  },
+  {
+   "fieldname": "plan_justification",
+   "fieldtype": "Small Text",
+   "label": "مبرر الانحراف"
+  },
+  {
+   "fieldname": "field_plan_reviewed",
+   "fieldtype": "Check",
+   "label": "اعتماد الخطة الميدانية"
+  },
+  {
+   "fieldname": "field_plan_reason",
+   "fieldtype": "Small Text",
+   "label": "مبرر النقل/الإضافة"
+  },
+  {
+   "fieldname": "field_plan_ack",
+   "fieldtype": "Check",
+   "label": "إقرار التنسيق مع الاستشاري"
+  },
+  {
+   "fieldname": "compliance_pct",
+   "fieldtype": "Percent",
+   "label": "الالتزام %",
+   "read_only": 1
+  },
+  {
+   "fieldname": "field_approved",
+   "fieldtype": "Check",
+   "label": "اكتمال الحقلي"
+  },
+  {
+   "fieldname": "tab_chem",
+   "fieldtype": "Tab Break",
+   "label": "كيميائية"
+  },
+  {
+   "fieldname": "chemical_sample",
+   "fieldtype": "Link",
+   "label": "العينة المختارة",
+   "options": "Field Sample"
+  },
+  {
+   "fieldname": "chemical_suggested_sample",
+   "fieldtype": "Link",
+   "label": "مقترح المحرك",
+   "read_only": 1,
+   "options": "Field Sample"
+  },
+  {
+   "fieldname": "chemical_override_reason",
+   "fieldtype": "Small Text",
+   "label": "سبب تجاوز المقترح"
+  },
+  {
+   "fieldname": "chemical_results",
+   "fieldtype": "Table",
+   "label": "النتائج",
+   "options": "Chemical Result"
+  },
+  {
+   "fieldname": "chemical_done",
+   "fieldtype": "Check",
+   "label": "اعتماد الكيميائية"
+  },
+  {
+   "fieldname": "chemical_partial_reason",
+   "fieldtype": "Small Text",
+   "label": "إكمال جزئي"
+  },
+  {
+   "fieldname": "tab_an",
+   "fieldtype": "Tab Break",
+   "label": "تحليل"
+  },
+  {
+   "fieldname": "computed_fields",
+   "fieldtype": "Table",
+   "label": "حسابية",
+   "options": "Analysis Computed"
+  },
+  {
+   "fieldname": "analytical_fields",
+   "fieldtype": "Table",
+   "label": "تحليلية",
+   "options": "Analysis Key Value"
+  },
+  {
+   "fieldname": "recommendations",
+   "fieldtype": "Table",
+   "label": "توصيات",
+   "options": "Analysis Key Value"
+  },
+  {
+   "fieldname": "manual_fields",
+   "fieldtype": "Table",
+   "label": "يدوية مسموحة",
+   "options": "Analysis Key Value"
+  },
+  {
+   "fieldname": "analysis_attachments",
+   "fieldtype": "Table",
+   "label": "مرفقات",
+   "options": "Analysis Attachment"
+  },
+  {
+   "fieldname": "analysis_done",
+   "fieldtype": "Check",
+   "label": "اكتمال التحليل"
+  },
+  {
+   "fieldname": "tab_rep",
+   "fieldtype": "Tab Break",
+   "label": "تقرير"
+  },
+  {
+   "fieldname": "report_previewed",
+   "fieldtype": "Check",
+   "label": "عُرضت المعاينة"
+  },
+  {
+   "fieldname": "report_approved",
+   "fieldtype": "Check",
+   "label": "معتمد"
+  },
+  {
+   "fieldname": "report_approved_at",
+   "fieldtype": "Datetime",
+   "label": "تاريخ الاعتماد"
+  },
+  {
+   "fieldname": "report_reject_reason",
+   "fieldtype": "Small Text",
+   "label": "سبب الرفض"
+  },
+  {
+   "fieldname": "report_file",
+   "fieldtype": "Attach",
+   "label": "الملف الرسمي"
+  },
+  {
+   "fieldname": "report_hash",
+   "fieldtype": "Data",
+   "label": "بصمة",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "read_only": 1,
+   "hidden": 1,
+   "options": "Geotechnical Study",
+   "no_copy": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 0,
+ "links": [
+  {
+   "link_doctype": "Borehole",
+   "link_fieldname": "study"
+  }
+ ],
+ "modified": "2026-09-15 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Miyar",
+ "name": "Geotechnical Study",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1,
+   "select": 1
+  },
+  {
+   "role": "Miyar Admin",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1,
+   "select": 1
+  },
+  {
+   "role": "Miyar Contractor Principal",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Contractor Employee",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Lab Principal",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Lab Employee",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Consultant Principal",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Consultant Employee",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Supervisor",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Support",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "GT-.#####",
+ "naming_rule": "Expression",
+ "is_submittable": 1
+}

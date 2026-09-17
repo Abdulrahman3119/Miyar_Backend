@@ -1,0 +1,425 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-15 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "tab_ops",
+  "max_tests_per_request",
+  "proposed_slots",
+  "min_lead_hours",
+  "col_ops_2",
+  "lab_decision_hours",
+  "consultant_decision_hours",
+  "quote_validity_days",
+  "lab_timeout_action",
+  "auto_approve_consultant",
+  "sec_",
+  "min_borehole_depth",
+  "geofence_meters",
+  "vat_rate",
+  "col_geo_2",
+  "compliance_move_penalty_pct",
+  "compliance_added_bh_penalty_pct",
+  "invoice_due_days",
+  "tab_engine",
+  "engine_policy",
+  "engine_cloud_cost_ref",
+  "sec_",
+  "rating_dimensions",
+  "tab_support",
+  "support_phone",
+  "support_field_emergency",
+  "support_email",
+  "support_hours_text",
+  "col_sup_2",
+  "session_idle_minutes",
+  "saac_expiry_warn_days",
+  "sample_retention_soil_days",
+  "sample_retention_concrete_days",
+  "archive_capacity"
+ ],
+ "fields": [
+  {
+   "fieldname": "tab_ops",
+   "fieldtype": "Tab Break",
+   "label": "قواعد التشغيل"
+  },
+  {
+   "fieldname": "max_tests_per_request",
+   "fieldtype": "Int",
+   "label": "أقصى اختبارات لكل طلب",
+   "reqd": 1,
+   "default": "10"
+  },
+  {
+   "fieldname": "proposed_slots",
+   "fieldtype": "Int",
+   "label": "عدد المواعيد المقترحة",
+   "reqd": 1,
+   "default": "3"
+  },
+  {
+   "fieldname": "min_lead_hours",
+   "fieldtype": "Int",
+   "label": "أول موعد ≥ ساعات",
+   "reqd": 1,
+   "default": "48"
+  },
+  {
+   "fieldname": "col_ops_2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "lab_decision_hours",
+   "fieldtype": "Int",
+   "label": "مهلة قرار المختبر (ساعة)",
+   "reqd": 1,
+   "default": "12"
+  },
+  {
+   "fieldname": "consultant_decision_hours",
+   "fieldtype": "Int",
+   "label": "مهلة قرار الاستشاري (ساعة)",
+   "reqd": 1,
+   "default": "48"
+  },
+  {
+   "fieldname": "quote_validity_days",
+   "fieldtype": "Int",
+   "label": "صلاحية عرض السعر (يوم)",
+   "default": "14"
+  },
+  {
+   "fieldname": "lab_timeout_action",
+   "fieldtype": "Select",
+   "label": "إجراء انتهاء مهلة المختبر",
+   "options": "Expire\nNotify Only",
+   "default": "Expire"
+  },
+  {
+   "fieldname": "auto_approve_consultant",
+   "fieldtype": "Check",
+   "label": "اعتماد تلقائي بعد المهلة",
+   "default": "1"
+  },
+  {
+   "fieldname": "sec_",
+   "fieldtype": "Section Break",
+   "label": "جيوتقني وضريبة"
+  },
+  {
+   "fieldname": "min_borehole_depth",
+   "fieldtype": "Float",
+   "label": "حد أدنى لعمق الجسة (م)",
+   "reqd": 1,
+   "default": "10"
+  },
+  {
+   "fieldname": "geofence_meters",
+   "fieldtype": "Float",
+   "label": "نطاق التحقق الجغرافي (م)",
+   "reqd": 1,
+   "default": "3"
+  },
+  {
+   "fieldname": "vat_rate",
+   "fieldtype": "Percent",
+   "label": "نسبة الضريبة %",
+   "reqd": 1,
+   "default": "15"
+  },
+  {
+   "fieldname": "col_geo_2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "compliance_move_penalty_pct",
+   "fieldtype": "Float",
+   "label": "خصم الالتزام لكل متر نقل",
+   "default": "2"
+  },
+  {
+   "fieldname": "compliance_added_bh_penalty_pct",
+   "fieldtype": "Float",
+   "label": "خصم الالتزام لكل جسة مضافة",
+   "default": "4"
+  },
+  {
+   "fieldname": "invoice_due_days",
+   "fieldtype": "Int",
+   "label": "أيام استحقاق الفاتورة",
+   "default": "30"
+  },
+  {
+   "fieldname": "tab_engine",
+   "fieldtype": "Tab Break",
+   "label": "محرك وتقييم"
+  },
+  {
+   "fieldname": "engine_policy",
+   "fieldtype": "Link",
+   "label": "سياسة مسار المحرك",
+   "options": "Engine Policy"
+  },
+  {
+   "fieldname": "engine_cloud_cost_ref",
+   "fieldtype": "JSON",
+   "label": "مرجع تكلفة السحابة"
+  },
+  {
+   "fieldname": "sec_",
+   "fieldtype": "Section Break",
+   "label": "أبعاد التقييم"
+  },
+  {
+   "fieldname": "rating_dimensions",
+   "fieldtype": "Table",
+   "label": "أبعاد التقييم",
+   "options": "Rating Dimension"
+  },
+  {
+   "fieldname": "tab_support",
+   "fieldtype": "Tab Break",
+   "label": "دعم وأرشيف"
+  },
+  {
+   "fieldname": "support_phone",
+   "fieldtype": "Data",
+   "label": "هاتف الدعم",
+   "default": "920000000"
+  },
+  {
+   "fieldname": "support_field_emergency",
+   "fieldtype": "Data",
+   "label": "طوارئ ميدانية",
+   "default": "0550001112"
+  },
+  {
+   "fieldname": "support_email",
+   "fieldtype": "Data",
+   "label": "بريد الدعم",
+   "default": "support@miyar.gov.sa"
+  },
+  {
+   "fieldname": "support_hours_text",
+   "fieldtype": "Data",
+   "label": "ساعات العمل",
+   "default": "الأحد–الخميس 8–16"
+  },
+  {
+   "fieldname": "col_sup_2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "session_idle_minutes",
+   "fieldtype": "Int",
+   "label": "انتهاء الجلسة خمول",
+   "default": "30"
+  },
+  {
+   "fieldname": "saac_expiry_warn_days",
+   "fieldtype": "Int",
+   "label": "تنبيه قرب انتهاء SAAC",
+   "default": "120"
+  },
+  {
+   "fieldname": "sample_retention_soil_days",
+   "fieldtype": "Int",
+   "label": "احتفاظ تربة (يوم)",
+   "default": "90"
+  },
+  {
+   "fieldname": "sample_retention_concrete_days",
+   "fieldtype": "Int",
+   "label": "احتفاظ خرسانة (يوم)",
+   "default": "180"
+  },
+  {
+   "fieldname": "archive_capacity",
+   "fieldtype": "Int",
+   "label": "سعة أرشيف العينات"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 0,
+ "links": [],
+ "modified": "2026-09-15 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Miyar",
+ "name": "Miyar Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1,
+   "select": 1
+  },
+  {
+   "role": "Miyar Admin",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1,
+   "select": 1
+  },
+  {
+   "role": "Miyar Contractor Principal",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Contractor Employee",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Lab Principal",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Lab Employee",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Consultant Principal",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Consultant Employee",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Supervisor",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Support",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "issingle": 1
+}

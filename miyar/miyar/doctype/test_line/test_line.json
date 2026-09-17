@@ -1,0 +1,457 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-15 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "test_request",
+  "reference_test",
+  "test_method",
+  "status",
+  "col_tl_2",
+  "uom",
+  "price",
+  "sla_days",
+  "auto_approved",
+  "sec_",
+  "sample_id",
+  "sample_depth",
+  "technician",
+  "sample_received_at",
+  "col_samp_2",
+  "geo_verified",
+  "geo_distance_m",
+  "contractor_confirmed",
+  "contractor_confirmed_at",
+  "sec_",
+  "lab_temperature_c",
+  "lab_humidity_pct",
+  "field_weather",
+  "tab_res",
+  "result_values",
+  "specimen_values",
+  "equipment_used",
+  "photos",
+  "tab_out",
+  "started_at",
+  "submitted_at",
+  "decided_at",
+  "execution_deadline_at",
+  "consultant_deadline_at",
+  "delay_hours",
+  "report_file",
+  "notes",
+  "reject_reason",
+  "delegate",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "test_request",
+   "fieldtype": "Link",
+   "label": "الطلب",
+   "reqd": 1,
+   "options": "Test Request",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "reference_test",
+   "fieldtype": "Link",
+   "label": "الاختبار",
+   "reqd": 1,
+   "options": "Reference Test",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "test_method",
+   "fieldtype": "Link",
+   "label": "الطريقة",
+   "reqd": 1,
+   "options": "Test Method"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "الحالة",
+   "options": "STS17\nSTS18\nSTS19\nSTS20\nSTS21",
+   "default": "STS17",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "col_tl_2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "uom",
+   "fieldtype": "Link",
+   "label": "الوحدة",
+   "options": "UOM"
+  },
+  {
+   "fieldname": "price",
+   "fieldtype": "Currency",
+   "label": "السعر",
+   "options": "SAR"
+  },
+  {
+   "fieldname": "sla_days",
+   "fieldtype": "Int",
+   "label": "SLA"
+  },
+  {
+   "fieldname": "auto_approved",
+   "fieldtype": "Check",
+   "label": "اعتماد تلقائي"
+  },
+  {
+   "fieldname": "sec_",
+   "fieldtype": "Section Break",
+   "label": "عينة وتنفيذ"
+  },
+  {
+   "fieldname": "sample_id",
+   "fieldtype": "Data",
+   "label": "رقم العينة الميدانية"
+  },
+  {
+   "fieldname": "sample_depth",
+   "fieldtype": "Float",
+   "label": "العمق (م)"
+  },
+  {
+   "fieldname": "technician",
+   "fieldtype": "Link",
+   "label": "الفني",
+   "options": "User"
+  },
+  {
+   "fieldname": "sample_received_at",
+   "fieldtype": "Datetime",
+   "label": "استلام العينة"
+  },
+  {
+   "fieldname": "col_samp_2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "geo_verified",
+   "fieldtype": "Check",
+   "label": "تحقق جغرافي"
+  },
+  {
+   "fieldname": "geo_distance_m",
+   "fieldtype": "Float",
+   "label": "المسافة (م)"
+  },
+  {
+   "fieldname": "contractor_confirmed",
+   "fieldtype": "Check",
+   "label": "تأكيد المقاول"
+  },
+  {
+   "fieldname": "contractor_confirmed_at",
+   "fieldtype": "Datetime",
+   "label": "وقت التأكيد"
+  },
+  {
+   "fieldname": "sec_",
+   "fieldtype": "Section Break",
+   "label": "بيئة"
+  },
+  {
+   "fieldname": "lab_temperature_c",
+   "fieldtype": "Float",
+   "label": "حرارة المختبر °م"
+  },
+  {
+   "fieldname": "lab_humidity_pct",
+   "fieldtype": "Float",
+   "label": "رطوبة المختبر %"
+  },
+  {
+   "fieldname": "field_weather",
+   "fieldtype": "Link",
+   "label": "طقس الموقع",
+   "options": "Weather Condition"
+  },
+  {
+   "fieldname": "tab_res",
+   "fieldtype": "Tab Break",
+   "label": "نتائج ومعدات"
+  },
+  {
+   "fieldname": "result_values",
+   "fieldtype": "Table",
+   "label": "النتائج",
+   "options": "Test Result Value"
+  },
+  {
+   "fieldname": "specimen_values",
+   "fieldtype": "Table",
+   "label": "قياسات العينة",
+   "options": "Test Specimen Value"
+  },
+  {
+   "fieldname": "equipment_used",
+   "fieldtype": "Table",
+   "label": "المعدات المستخدمة",
+   "options": "Test Equipment Use"
+  },
+  {
+   "fieldname": "photos",
+   "fieldtype": "Table",
+   "label": "الأدلة",
+   "options": "Test Photo Link"
+  },
+  {
+   "fieldname": "tab_out",
+   "fieldtype": "Tab Break",
+   "label": "مخرج ومهل"
+  },
+  {
+   "fieldname": "started_at",
+   "fieldtype": "Datetime",
+   "label": "بدء التنفيذ"
+  },
+  {
+   "fieldname": "submitted_at",
+   "fieldtype": "Datetime",
+   "label": "رفع المخرج"
+  },
+  {
+   "fieldname": "decided_at",
+   "fieldtype": "Datetime",
+   "label": "قرار الاستشاري"
+  },
+  {
+   "fieldname": "execution_deadline_at",
+   "fieldtype": "Datetime",
+   "label": "مهلة التنفيذ"
+  },
+  {
+   "fieldname": "consultant_deadline_at",
+   "fieldtype": "Datetime",
+   "label": "مهلة الاستشاري"
+  },
+  {
+   "fieldname": "delay_hours",
+   "fieldtype": "Int",
+   "label": "ساعات التأخر عن الموعد"
+  },
+  {
+   "fieldname": "report_file",
+   "fieldtype": "Attach",
+   "label": "تقرير PDF"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "ملاحظات المختبر"
+  },
+  {
+   "fieldname": "reject_reason",
+   "fieldtype": "Small Text",
+   "label": "سبب رفض المخرج"
+  },
+  {
+   "fieldname": "delegate",
+   "fieldtype": "Link",
+   "label": "المفوَّض",
+   "options": "User"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "read_only": 1,
+   "hidden": 1,
+   "options": "Test Line",
+   "no_copy": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 0,
+ "links": [],
+ "modified": "2026-09-15 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Miyar",
+ "name": "Test Line",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1,
+   "select": 1
+  },
+  {
+   "role": "Miyar Admin",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 1,
+   "share": 1,
+   "select": 1
+  },
+  {
+   "role": "Miyar Contractor Principal",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Contractor Employee",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Lab Principal",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 0,
+   "submit": 1,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Lab Employee",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 0,
+   "submit": 1,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Consultant Principal",
+   "read": 1,
+   "write": 1,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Consultant Employee",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Supervisor",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  },
+  {
+   "role": "Miyar Support",
+   "read": 1,
+   "write": 0,
+   "create": 0,
+   "delete": 0,
+   "submit": 0,
+   "cancel": 0,
+   "amend": 0,
+   "report": 1,
+   "export": 1,
+   "print": 1,
+   "email": 0,
+   "share": 0,
+   "select": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "TL-.#####",
+ "naming_rule": "Expression",
+ "is_submittable": 1,
+ "search_fields": "test_request,reference_test,status"
+}
