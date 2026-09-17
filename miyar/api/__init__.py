@@ -16,7 +16,7 @@ Geotech:     miyar.api.geotech.get_study | save_prelim | approve_prelim | run_pl
 Invoices:    miyar.api.invoices.list_invoices | pay
 Delegations: miyar.api.delegations.create | decide | revoke
 Help:        miyar.api.help.articles | faqs | integrations | useful_links | create_ticket
-Engine:      miyar.api.engine.config | health | analyze | list_runs | get_run | run  (embedded dual AI)
+Engine:      miyar.api.engine.config | health | diagnose | analyze | list_runs | get_run | run  (embedded dual AI)
 Admin:       miyar.api.admin.pending_registrations | activate | reject_registration | masters
 Writes:      miyar.api.write.*   (client-shaped mutations used by the React store)
 """

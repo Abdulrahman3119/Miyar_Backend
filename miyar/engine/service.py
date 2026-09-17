@@ -9,8 +9,6 @@ from typing import Any
 
 import frappe
 
-from miyar.engine import dual_core
-
 
 def load_engine_config() -> dict[str, Any]:
 	"""Resolve secrets/settings from Miyar Settings → site_config → env."""
@@ -22,10 +20,19 @@ def load_engine_config() -> dict[str, Any]:
 	except Exception:
 		s = None
 
+	def _field_val(field: str):
+		if s is None or not getattr(s, "meta", None) or not s.meta.has_field(field):
+			return None
+		df = s.meta.get_field(field)
+		if df and df.fieldtype == "Password":
+			try:
+				return s.get_password(field) or None
+			except Exception:
+				return None
+		return getattr(s, field, None)
+
 	def _get(field: str, conf_key: str | None = None, env_key: str | None = None, default=None):
-		val = None
-		if s is not None and getattr(s, "meta", None) and s.meta.has_field(field):
-			val = getattr(s, field, None)
+		val = _field_val(field)
 		if not val and conf_key:
 			val = frappe.conf.get(conf_key)
 		if not val and env_key:
@@ -58,15 +65,99 @@ def cint_bool(v) -> bool:
 	return str(v or "").strip().lower() in {"1", "true", "yes", "on"}
 
 
+def _import_dual_core():
+	try:
+		from miyar.engine import dual_core
+
+		return dual_core, None
+	except Exception as e:
+		return None, str(e)
+
+
+def _degraded_health(error: str, cfg: dict[str, Any] | None = None) -> dict[str, Any]:
+	cfg = cfg or {}
+	key = (cfg.get("openrouter_api_key") or "").strip()
+	return {
+		"status": "degraded",
+		"embedded": True,
+		"error": error,
+		"cloud": {
+			"provider": cfg.get("cloud_provider") or "openrouter",
+			"configured": bool(key),
+			"model": cfg.get("openrouter_model") or "openai/gpt-5.6-sol",
+			"base_url": cfg.get("openrouter_base_url") or "https://openrouter.ai/api/v1",
+			"pdf_engine": cfg.get("openrouter_pdf_engine") or "native",
+			"input_mode": cfg.get("cloud_input_mode") or "auto",
+			"fast": cint_bool(cfg.get("cloud_fast", True)),
+			"skip_arabic_repair": cint_bool(cfg.get("cloud_skip_arabic_repair", True)),
+			"max_report_chars": int(cfg.get("cloud_max_report_chars") or 35000),
+		},
+		"local": {
+			"provider": cfg.get("local_provider") or "lmstudio",
+			"reachable": False,
+			"model": cfg.get("local_model") or "",
+			"base_url": cfg.get("local_base_url") or "",
+			"thinking_enabled": False,
+			"structured_mode": "prompt",
+			"num_ctx": 0,
+			"num_predict": 0,
+			"evidence_chars": 0,
+			"timeout_seconds": 0,
+			"error": error,
+			"pipeline": "v2",
+			"v2_evidence_chars": 0,
+			"v2_max_snippets": 0,
+			"v2_force_json": True,
+		},
+		"policy_version": "embedded-unavailable",
+		"meyar_engineering_controls": {
+			"guardrails_loaded": False,
+			"control_pack_loaded": False,
+			"clause_registry_loaded": False,
+			"control_pack_version": None,
+			"clause_registry_version": None,
+			"effective_for_production": False,
+			"edition_gate": {"required": True, "reason": error, "on_unconfirmed": "NOT_EVALUABLE"},
+		},
+	}
+
+
 def engine_health() -> dict[str, Any]:
-	dual_core.apply_runtime_config(load_engine_config())
-	return dual_core.get_health()
+	cfg = load_engine_config()
+	dual_core, err = _import_dual_core()
+	if err or dual_core is None:
+		return _degraded_health(
+			err or "تعذّر تحميل المحرك المدمج — ثبّت الاعتماديات: pip install httpx jsonschema pymupdf",
+			cfg,
+		)
+	try:
+		dual_core.apply_runtime_config(cfg)
+		return dual_core.get_health()
+	except Exception as e:
+		return _degraded_health(str(e), cfg)
 
 
 def analyze_pdf_bytes(content: bytes, filename: str, profile: str, mode: str = "cloud") -> dict[str, Any]:
-	dual_core.apply_runtime_config(load_engine_config())
+	cfg = load_engine_config()
+	dual_core, err = _import_dual_core()
+	if err or dual_core is None:
+		raise RuntimeError(
+			err or "المحرك المدمج غير متاح. نفّذ: bench setup requirements && ./env/bin/pip install httpx jsonschema pymupdf"
+		)
+	if mode in {"cloud", "compare"} and not (cfg.get("openrouter_api_key") or "").strip():
+		raise RuntimeError(
+			"مفتاح OpenRouter غير مضبوط. أضِفه في Miyar Settings أو: bench --site <site> set-config miyar_openrouter_api_key \"<key>\""
+		)
+	dual_core.apply_runtime_config(cfg)
 	return dual_core.analyze_bytes(content, filename, profile, mode)
 
 
 def list_profiles() -> list[str]:
+	dual_core, err = _import_dual_core()
+	if err or dual_core is None:
+		return [
+			"الدراسة الجيوتقنية — منصة معيار",
+			"الفحص والتقييم الإنشائي",
+			"تقرير هندسي عام — نسخة العرض",
+		]
 	return list(dual_core.PROFILE_MAP.keys())

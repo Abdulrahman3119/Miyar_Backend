@@ -145,7 +145,10 @@ export interface EngineRunSummary {
 
 export interface EngineHealth {
   status: string
-  cloud: { provider: string; configured: boolean; model: string; base_url: string; pdf_engine: string }
+  embedded?: boolean
+  error?: string
+  cloud: { provider: string; configured: boolean; model: string; base_url: string; pdf_engine: string
+    input_mode?: string; fast?: boolean; skip_arabic_repair?: boolean; max_report_chars?: number }
   local: {
     provider: string; reachable: boolean; model: string; base_url: string
     thinking_enabled: boolean; structured_mode: string; num_ctx: number
@@ -233,6 +236,8 @@ function transportReason(e: unknown): string {
   const m = e instanceof Error ? e.message : String(e)
   if (typeof console !== 'undefined') console.warn('[engine]', m)
   if (/abort/i.test(m)) return 'انتهت مهلة الاتصال بخدمة التحليل قبل وصول نتيجة.'
+  // Prefer Arabic server messages when the whitelist threw (missing key / deps).
+  if (/[\u0600-\u06FF]/.test(m) && m.length < 400 && !/<!doctype|<html/i.test(m)) return m
   return 'خدمة التحليل غير متاحة حالياً.'
 }
 

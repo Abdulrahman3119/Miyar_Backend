@@ -135,7 +135,7 @@ def config():
 
 @frappe.whitelist()
 def health():
-	"""In-process engine health (cached briefly)."""
+	"""In-process engine health (cached briefly). Never hard-fails the SPA."""
 	require_login()
 	now = time.monotonic()
 	cached = _HEALTH_CACHE.get("payload")
@@ -144,10 +144,63 @@ def health():
 	try:
 		payload = engine_health()
 	except Exception as e:
-		frappe.throw(f"تعذّر فحص المحرك المدمج: {e}")
+		frappe.log_error(title="Miyar engine health failed")
+		from miyar.engine.service import _degraded_health, load_engine_config
+
+		payload = _degraded_health(str(e), load_engine_config())
 	_HEALTH_CACHE["at"] = now
 	_HEALTH_CACHE["payload"] = payload
 	return payload
+
+
+@frappe.whitelist()
+def diagnose():
+	"""Operator checklist for production — why the engine badge is red."""
+	require_login()
+	if "System Manager" not in frappe.get_roles():
+		frappe.throw("التشخيص متاح لمدير النظام فقط.")
+	cfg = load_engine_config()
+	key = (cfg.get("openrouter_api_key") or "").strip()
+	checks = []
+	try:
+		import httpx  # noqa: F401
+
+		checks.append({"id": "httpx", "ok": True, "detail": "مثبّت"})
+	except Exception as e:
+		checks.append({"id": "httpx", "ok": False, "detail": str(e)})
+	try:
+		import jsonschema  # noqa: F401
+
+		checks.append({"id": "jsonschema", "ok": True, "detail": "مثبّت"})
+	except Exception as e:
+		checks.append({"id": "jsonschema", "ok": False, "detail": str(e)})
+	try:
+		import fitz  # noqa: F401
+
+		checks.append({"id": "pymupdf", "ok": True, "detail": "مثبّت"})
+	except Exception as e:
+		checks.append({"id": "pymupdf", "ok": False, "detail": str(e)})
+	try:
+		from miyar.engine import dual_core  # noqa: F401
+
+		checks.append({"id": "dual_core", "ok": True, "detail": "يُحمَّل"})
+	except Exception as e:
+		checks.append({"id": "dual_core", "ok": False, "detail": str(e)})
+	checks.append(
+		{
+			"id": "openrouter_key",
+			"ok": bool(key),
+			"detail": "موجود" if key else "ناقص — أضِف miyar_openrouter_api_key في site_config أو Miyar Settings",
+		}
+	)
+	checks.append({"id": "openrouter_model", "ok": True, "detail": cfg.get("openrouter_model") or "—"})
+	h = engine_health()
+	return {
+		"ok": all(c["ok"] for c in checks if c["id"] != "local"),
+		"checks": checks,
+		"health": h,
+		"hint": "bench setup requirements && ./env/bin/pip install httpx jsonschema pymupdf && bench --site <site> set-config miyar_openrouter_api_key \"<KEY>\" && bench --site <site> clear-cache",
+	}
 
 
 @frappe.whitelist()

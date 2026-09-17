@@ -151,6 +151,15 @@ export default function Engine() {
           <div className="mt-1">لا يوقف هذا سير المنصة — تستمر جميع الإجراءات النظامية للدراسة الجيوتقنية، ويُسجَّل تعذّر إنتاج نتيجة دون إسنادها إلى أي مرجع (B.R.230).</div>
         </Callout>
       )}
+      {probed && !!health && !cloudUp && !localUp && (
+        <Callout tone="warn" className="mb-3">
+          <b>لا يوجد مسار تحليل جاهز.</b>
+          {health.error ? <> {health.error}</> : !health.cloud.configured
+            ? ' مفتاح OpenRouter غير مضبوط على هذا الموقع.'
+            : ' المسار المحلي غير متصل.'}
+          <div className="mt-1 meta">مدير النظام: اضبط المفتاح في إعدادات معيار أو <span className="ltr">site_config.miyar_openrouter_api_key</span> وثبّت <span className="ltr">httpx jsonschema pymupdf</span>.</div>
+        </Callout>
+      )}
 
       <div className="grid grid-cols-12 gap-3">
         {/* ── left: run + results ── */}
