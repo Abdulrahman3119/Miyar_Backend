@@ -29,6 +29,22 @@ add_to_apps_screen = [
 after_install = "miyar.install.after_install"
 after_migrate = "miyar.install.after_migrate"
 
+# Send any user with a Miyar role to the React portal after login
+on_session_creation = "miyar.auth.on_session_creation"
+
+role_home_page = {
+	"Miyar Visitor": "miyar",
+	"Miyar Contractor Principal": "miyar",
+	"Miyar Contractor Employee": "miyar",
+	"Miyar Lab Principal": "miyar",
+	"Miyar Lab Employee": "miyar",
+	"Miyar Consultant Principal": "miyar",
+	"Miyar Consultant Employee": "miyar",
+	"Miyar Supervisor": "miyar",
+	"Miyar Admin": "miyar",
+	"Miyar Support": "miyar",
+}
+
 export_python_type_annotations = True
 
 default_currency = "SAR"

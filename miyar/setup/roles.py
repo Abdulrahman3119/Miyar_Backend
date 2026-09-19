@@ -21,6 +21,8 @@ def ensure_roles():
 		"Miyar Admin": 1,
 		"Miyar Support": 1,
 	}
+	# After login, Role.home_page sends these users to the React portal (/miyar).
+	portal_home = "miyar"
 	for role in ALL_ROLES:
 		if not frappe.db.exists("Role", role):
 			doc = frappe.get_doc(
@@ -28,9 +30,12 @@ def ensure_roles():
 					"doctype": "Role",
 					"role_name": role,
 					"desk_access": desk_roles.get(role, 1),
+					"home_page": portal_home,
 				}
 			)
 			doc.insert(ignore_permissions=True)
+		else:
+			frappe.db.set_value("Role", role, "home_page", portal_home, update_modified=False)
 	for profile, roles in ROLE_PROFILES.items():
 		if frappe.db.exists("Role Profile", profile):
 			continue

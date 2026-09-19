@@ -95,5 +95,9 @@
   {"color": "Gray", "doc_view": "List", "label": "الإعدادات", "link_to": "Miyar Settings", "stats_filter": "[]", "type": "DocType"},
   {"color": "Red", "doc_view": "List", "label": "سجل التدقيق", "link_to": "Audit Event", "stats_filter": "[]", "type": "DocType"}
  ],
- "title": "معيار"
+ "title": "معيار",
+ "type": "Workspace",
+ "link_type": "",
+ "link_to": "",
+ "external_link": ""
 }
