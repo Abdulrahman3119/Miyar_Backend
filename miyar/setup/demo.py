@@ -84,14 +84,23 @@ ORGS = [
 ]
 
 USERS = [
+	# مقاول — شركة الإنشاءات المتكاملة
 	("ahmad.otaibi@miyar.demo", "أحمد العتيبي", "0551234567", "1010111222", "Principal"),
 	("sara.dossary@miyar.demo", "سارة الدوسري", "0551234568", "1010111222", "Employee"),
+	# مختبر 1 — مختبر التربة والمواد (جدة)
 	("mohammed.subaie@miyar.demo", "محمد السبيعي", "0559876543", "4030123456", "Principal"),
 	("faisal.qahtani@miyar.demo", "فيصل القحطاني", "0559876544", "4030123456", "Employee"),
+	# مختبر 2 — مختبر الجودة الشاملة (الرياض)
+	("noura.rashid@miyar.demo", "نورة الراشد", "0559876550", "1010987654", "Principal"),
+	("omar.shahrani@miyar.demo", "عمر الشهراني", "0559876551", "1010987654", "Employee"),
+	# استشاري — مكتب الاستشارات الهندسية المتكاملة
 	("khaled.asiri@miyar.demo", "خالد العسيري", "0553334444", "4030777888", "Principal"),
 	("reem.harbi@miyar.demo", "ريم الحربي", "0553334445", "4030777888", "Employee"),
+	# إشراف — الإدارة العامة لكود البناء السعودي
 	("abdullah.ghamdi@miyar.demo", "عبدالله الغامدي", "0551112222", "0000000001", "Principal"),
-	("yasser.ali@miyar.demo", "سوبر أدمن", "0550001111", "0000000002", "Principal"),
+	("layan.qahtani@miyar.demo", "ليان القحطاني", "0551112223", "0000000001", "Employee"),
+	# تشغيل معيار — أدمن + دعم
+	("yasser.ali@miyar.demo", "ياسر العلي", "0550001111", "0000000002", "Principal"),
 	("rehab.madkhali@miyar.demo", "رحاب مدخلي", "0550001112", "0000000002", "Employee"),
 ]
 
