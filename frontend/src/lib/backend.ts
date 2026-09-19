@@ -60,12 +60,28 @@ export const setBackendUrl = (url: string, site = '') => {
 export const setToken = (token: string) => { try { token ? localStorage.setItem(TOKEN_KEY, token) : localStorage.removeItem(TOKEN_KEY) } catch {} }
 export const clearToken = () => setToken('')
 
+const LOGGED_OUT_KEY = 'miyar.logged_out'
+
+/** Prevent silent desk re-auth right after an intentional logout. */
+export const markLoggedOut = () => {
+  try { sessionStorage.setItem(LOGGED_OUT_KEY, '1') } catch { /* */ }
+}
+export const clearLoggedOut = () => {
+  try { sessionStorage.removeItem(LOGGED_OUT_KEY) } catch { /* */ }
+}
+export const wasLoggedOut = () => {
+  try { return sessionStorage.getItem(LOGGED_OUT_KEY) === '1' } catch { return false }
+}
+
 export const setCsrf = (token: string) => {
   try {
     if (token) {
       localStorage.setItem(CSRF_KEY, token)
       ;(window as unknown as { csrf_token?: string }).csrf_token = token
-    } else localStorage.removeItem(CSRF_KEY)
+    } else {
+      localStorage.removeItem(CSRF_KEY)
+      try { delete (window as unknown as { csrf_token?: string }).csrf_token } catch { /* */ }
+    }
   } catch {}
 }
 

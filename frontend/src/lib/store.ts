@@ -6,7 +6,7 @@ import type {
   Equipment, ArchivedSample, CustodyEvent, Photo, MethodSheet, Masters, Analytics, HelpCenter, Knowledge, RefLimits, Ticket, Permission, UserPreferences, UserSession, ScheduledJob, PendingRegistration,
 } from './types'
 import { uid } from './format'
-import { BackendError, call, clearToken, getBackend, isEmbedded, isLive, prefersCookieSession, setCsrf, setToken } from './backend'
+import { BackendError, call, clearLoggedOut, clearToken, getBackend, isEmbedded, isLive, markLoggedOut, prefersCookieSession, setCsrf, setToken, wasLoggedOut } from './backend'
 
 interface Toast { id: string; title: string; body?: string; tone?: 'ok' | 'warn' | 'danger' | 'info' }
 
@@ -60,7 +60,7 @@ interface State {
   pull: () => Promise<void>
   requestOtp: (mobile: string) => Promise<{ dev_otp?: string }>
   loginLive: (mobile: string, otp: string) => Promise<void>
-  logout: () => void
+  logout: () => Promise<void>
   can: (p: Permission) => boolean
   toast: (t: Omit<Toast, 'id'>) => void
   dismissToast: (id: string) => void
@@ -137,6 +137,8 @@ const consumeShellOnce = (): { boot?: any } => {
   if (shell.csrf_token) setCsrf(shell.csrf_token)
   const auth = shell.__MIYAR_AUTH__
   if (auth?.ok && auth.token) {
+    // Fresh server session (Desk/OTP) — allow portal access again.
+    clearLoggedOut()
     setToken(auth.token)
     if (auth.csrf_token) setCsrf(auth.csrf_token)
   }
@@ -148,17 +150,46 @@ const consumeShellOnce = (): { boot?: any } => {
 }
 
 const ensureDeskAuth = async () => {
-  if (getBackend().token) return true
+  // After logout we clear the token; only skip auto re-auth while the marker is set
+  // AND there is no live cookie session yet.
+  if (getBackend().token && !wasLoggedOut()) return true
   if (!(isEmbedded() || prefersCookieSession())) return false
   try {
     const desk = await call<{ ok: boolean; token?: string; csrf_token?: string }>('miyar.api.auth.desk_session', {}, { get: true })
     if (desk?.ok && desk.token) {
+      clearLoggedOut()
       setToken(desk.token)
       if (desk.csrf_token) setCsrf(desk.csrf_token)
       return true
     }
   } catch { /* guest */ }
   return false
+}
+
+const clearClientSession = () => {
+  clearToken()
+  setCsrf('')
+  markLoggedOut()
+  try {
+    const shell = window as ShellWindow & { __MIYAR_LOGGED_IN__?: number; __MIYAR_DESK_USER__?: string }
+    shell.__MIYAR_AUTH__ = { ok: false, guest: true }
+    shell.__MIYAR_BOOT__ = null
+    shell.__MIYAR_BOOT_USED__ = true
+    shell.__MIYAR_LOGGED_IN__ = 0
+    shell.__MIYAR_DESK_USER__ = ''
+  } catch { /* */ }
+}
+
+/** End Frappe cookie session (+ API token), matching Desk logout effectiveness. */
+const logoutServerSession = async () => {
+  // Prefer Miyar endpoint; fall back to core Frappe logout.
+  try {
+    await call('miyar.api.auth.logout', {})
+    return
+  } catch { /* try core */ }
+  try {
+    await call('logout', {})
+  } catch { /* already guest / network */ }
 }
 
 const EMPTY_MASTERS: Masters = {
@@ -275,22 +306,20 @@ export const useStore = create<State>((set, get) => ({
   requestOtp: (mobile) => call('miyar.api.auth.request_otp', { mobile }),
   loginLive: async (mobile, otp) => {
     const res = await call<{ token: string; csrf_token?: string }>('miyar.api.auth.verify_otp', { mobile, otp })
+    clearLoggedOut()
     setToken(res.token)
     if (res.csrf_token) setCsrf(res.csrf_token)
     set({ live: true })
     await get().pull()
   },
 
-  logout: () => {
-    if (isEmbedded()) {
-      clearToken()
-      // Stay on the React portal — never bounce to Desk workspace (/app/miyar → /desk/miyar).
-      window.location.href = '/miyar/login'
-      return
-    }
-    if (getBackend().token) { call('miyar.api.auth.logout').catch(() => {}); clearToken() }
+  logout: async () => {
+    // Must await so Set-Cookie (cleared sid) is applied before we navigate.
+    await logoutServerSession()
+    clearClientSession()
     set({ user: null, permissions: [] })
-    if (isLive()) get().pull()
+    // Hard navigate so the portal shell reloads as Guest (no embedded desk auth).
+    window.location.href = isEmbedded() || prefersCookieSession() ? '/miyar/login' : '/login'
   },
   can: (p) => get().permissions.includes(p),
   toast: (t) => { const id = uid('t'); set(s => ({ toasts: [...s.toasts, { ...t, id }] })); setTimeout(() => get().dismissToast(id), 4200) },

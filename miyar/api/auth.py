@@ -175,7 +175,22 @@ def desk_session():
 	return build_desk_auth()
 
 
-@frappe.whitelist(methods=["POST"])
+@frappe.whitelist(allow_guest=True, methods=["GET", "POST"])
 def logout():
-	frappe.local.login_manager.logout()
+	"""End the Frappe session the same way Desk does (`frappe.handler.logout`).
+
+	Clears the ``sid`` cookie so the portal cannot silently re-auth via desk_session.
+	"""
+	try:
+		if getattr(frappe.local, "login_manager", None):
+			frappe.local.login_manager.logout()
+		else:
+			from frappe.auth import clear_cookies
+
+			clear_cookies()
+	except Exception:
+		from frappe.auth import clear_cookies
+
+		clear_cookies()
+	frappe.db.commit()
 	return {"ok": True}

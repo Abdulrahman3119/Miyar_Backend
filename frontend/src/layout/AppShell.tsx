@@ -146,7 +146,7 @@ export default function AppShell() {
                 <Link to="/delegations" className="block px-3 py-2 text-[12.5px] hover:bg-ink-50">التفويضات</Link>
                 <Link to="/settings" className="block px-3 py-2 text-[12.5px] hover:bg-ink-50">الإعدادات</Link>
                 <div className="my-1 border-t border-ink-100" />
-                <button onClick={() => { logout(); nav('/login') }} className="flex w-full items-center gap-2 px-3 py-2 text-[12.5px] text-danger-600 hover:bg-ink-50"><LogOut className="size-4" />تسجيل الخروج</button>
+                <button onClick={() => { void logout() }} className="flex w-full items-center gap-2 px-3 py-2 text-[12.5px] text-danger-600 hover:bg-ink-50"><LogOut className="size-4" />تسجيل الخروج</button>
               </div>
             )}
           </div>
