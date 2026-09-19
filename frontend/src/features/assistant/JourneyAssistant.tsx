@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
+import { createPortal } from 'react-dom'
 import { useLocation, useNavigate } from 'react-router-dom'
 import {
   Sparkles, X, ChevronLeft, ChevronRight, MessageCircle, Map, Compass,
@@ -8,6 +9,14 @@ import { useStore, useSel, visibleRequests } from '@/lib/store'
 import { ROLE_LABEL, POSITION_LABEL } from '@/lib/roles'
 import { Badge, Button, Callout, Progress, cx } from '@/ds/primitives'
 import { journeyFor, type JourneyStep } from './journeys'
+
+/** Pin to viewport bottom — avoids parent overflow/transform breaking `fixed`. */
+const DOCK: CSSProperties = {
+  position: 'fixed',
+  bottom: 20,
+  insetInlineEnd: 20,
+  zIndex: 1100,
+}
 
 type ChatMsg = { id: string; from: 'bot' | 'user'; text: string; to?: string; cta?: string }
 
@@ -27,9 +36,7 @@ export default function JourneyAssistant() {
   const user = useStore(s => s.user)
   const loc = useLocation()
   const nav = useNavigate()
-  const [open, setOpen] = useState(() => {
-    try { return localStorage.getItem(LS_KEY) === '1' } catch { return false }
-  })
+  const [open, setOpen] = useState(false)
   const [tab, setTab] = useState<Tab>('now')
   const [stepIdx, setStepIdx] = useState(0)
   const [input, setInput] = useState('')
@@ -57,16 +64,19 @@ export default function JourneyAssistant() {
   useEffect(() => {
     if (!user) return
     try {
-      const seen = localStorage.getItem(LS_SEEN)
-      if (seen !== user.id) {
+      // First visit: remember user, keep FAB closed at the bottom (don't pop a full panel).
+      if (localStorage.getItem(LS_SEEN) !== user.id) {
         localStorage.setItem(LS_SEEN, user.id)
-        setOpen(true)
-        setTab('journey')
+        localStorage.setItem(LS_KEY, '0')
+        setOpen(false)
       }
     } catch { /* */ }
   }, [user?.id]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  useEffect(() => { chatEnd.current?.scrollIntoView({ behavior: 'smooth' }) }, [msgs, open, tab])
+  useEffect(() => {
+    if (tab !== 'ask' || !open) return
+    chatEnd.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' })
+  }, [msgs, open, tab])
 
   const def = journeyFor((user?.role ?? 'visitor') as import('@/lib/types').Role)
   const steps = useMemo(() => (user ? filterSteps(def.steps, user) : []), [def.steps, user])
@@ -204,14 +214,15 @@ export default function JourneyAssistant() {
     }
   }
 
-  return (
+  const ui = (
     <>
-      {/* FAB — opposite side of toasts */}
+      {/* FAB — docked to viewport bottom (inline-end), opposite side of toasts */}
       {!open && (
         <button
           type="button"
           onClick={openAssistant}
-          className="fixed bottom-5 end-5 z-[1100] flex items-center gap-2 rounded-full bg-brand-700 px-4 py-3 text-white shadow-pop hover:bg-brand-800"
+          style={DOCK}
+          className="flex items-center gap-2 rounded-full bg-brand-700 px-4 py-3 text-white shadow-pop hover:bg-brand-800"
           aria-label="مساعد الرحلة"
         >
           <span className="relative grid size-8 place-items-center rounded-full bg-white/15">
@@ -228,7 +239,10 @@ export default function JourneyAssistant() {
       )}
 
       {open && (
-        <div className="fixed bottom-4 end-4 z-[1100] flex h-[min(640px,calc(100vh-5rem))] w-[min(420px,calc(100vw-1.5rem))] flex-col overflow-hidden rounded-xl border border-ink-200 bg-ink-0 shadow-pop">
+        <div
+          style={{ ...DOCK, bottom: 16, insetInlineEnd: 16, display: 'flex' }}
+          className="h-[min(520px,calc(100vh-6.5rem))] w-[min(400px,calc(100vw-1.5rem))] flex-col overflow-hidden rounded-xl border border-ink-200 bg-ink-0 shadow-pop"
+        >
           <header className="flex items-start gap-2 bg-brand-800 px-3 py-2.5 text-white">
             <div className="grid size-9 shrink-0 place-items-center rounded-full bg-white/15"><Compass className="size-4" /></div>
             <div className="min-w-0 flex-1">
@@ -379,4 +393,6 @@ export default function JourneyAssistant() {
       )}
     </>
   )
+
+  return typeof document !== 'undefined' ? createPortal(ui, document.body) : ui
 }
