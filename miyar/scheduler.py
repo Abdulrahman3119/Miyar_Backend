@@ -46,6 +46,22 @@ def expire_lab_deadlines():
 			)
 			save_lifecycle(doc)
 			log_event("انتهاء مهلة المختبر STS26", entity=doc, organization=doc.lab, severity="warning")
+			from miyar.utils.notify import notify_org_principals
+
+			notify_org_principals(
+				doc.contractor,
+				subject=f"انتهت مهلة قرار المختبر — {doc.name}",
+				body="انتقل الطلب إلى STS26.",
+				document_type="Test Request",
+				document_name=doc.name,
+			)
+			notify_org_principals(
+				doc.lab,
+				subject=f"انتهت مهلة القرار — {doc.name}",
+				body="انتهت مهلة قبول/رفض الطلب.",
+				document_type="Test Request",
+				document_name=doc.name,
+			)
 		else:
 			log_event("تنبيه مهلة المختبر", entity=doc, organization=doc.lab, severity="notice")
 
@@ -125,3 +141,16 @@ def run_scheduled_reports():
 	rows = frappe.get_all("Scheduled Report", filters={"is_active": 1}, fields=["name", "frequency", "last_run"])
 	for row in rows:
 		frappe.db.set_value("Scheduled Report", row.name, "last_run", now_datetime())
+
+
+def recalc_all_lab_on_time():
+	"""Daily refresh of Organization.on_time from test-line SLA outcomes (B.R.155/156)."""
+	from miyar.utils.sla import recalc_lab_on_time
+
+	labs = frappe.get_all("Organization", filters={"organization_type": ["like", "%lab%"]}, pluck="name")
+	# also by code link if types use code names
+	if not labs:
+		lab_type = frappe.db.get_value("Organization Type", {"code": "lab"}, "name")
+		labs = frappe.get_all("Organization", filters={"organization_type": lab_type}, pluck="name") if lab_type else []
+	for lab in labs:
+		recalc_lab_on_time(lab)

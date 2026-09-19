@@ -161,6 +161,22 @@ class TestRequest(Document):
 			self._append_history("رفض المختبر", reason)
 		save_lifecycle(self)
 		log_event("قرار المختبر على الطلب", entity=self, organization=self.lab)
+		from miyar.utils.notify import notify_org_principals
+
+		notify_org_principals(
+			self.contractor,
+			subject=f"{'قُبل' if accept else 'رُفض'} الطلب — {self.name}",
+			body=reason or ("اختار المختبر موعداً للتنفيذ." if accept else "رُفض الطلب."),
+			document_type="Test Request",
+			document_name=self.name,
+		)
+		notify_org_principals(
+			self.consultant,
+			subject=f"تحديث طلب — {self.name}",
+			body=f"قرار المختبر: {'قبول' if accept else 'رفض'}.",
+			document_type="Test Request",
+			document_name=self.name,
+		)
 
 	def _start_lines(self):
 		for name in frappe.get_all("Test Line", filters={"test_request": self.name}, pluck="name"):

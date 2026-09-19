@@ -2,13 +2,14 @@ import { useEffect, useRef, useState } from 'react'
 import { NavLink, Outlet, useNavigate, Link, useLocation } from 'react-router-dom'
 import {
   LayoutDashboard, FlaskConical, FileCheck2, Building2, ListChecks, Users, Settings, BookOpen, Bell, LogOut, ChevronDown, Menu, X, Search,
-  ShieldCheck, Sliders, Database, Star, FileText, LifeBuoy, BarChart3, Archive, ScrollText, Gavel, PanelRightClose, PanelRightOpen, HelpCircle, Receipt, type LucideIcon, CheckCheck, Boxes, Wrench, FileSignature, Cpu,
+  ShieldCheck, Sliders, Database, Star, FileText, LifeBuoy, BarChart3, Archive, ScrollText, Gavel, PanelRightClose, PanelRightOpen, HelpCircle, Receipt, type LucideIcon, CheckCheck, Boxes, Wrench, FileSignature, Cpu, Sparkles,
 } from 'lucide-react'
 import { useStore, useSel, visibleRequests } from '@/lib/store'
 import { ROLE_LABEL, POSITION_LABEL } from '@/lib/roles'
 import { Avatar, cx, Badge } from '@/ds/primitives'
 import { MiyarMark, IdoLogo } from '@/ds/Logo'
 import { ago } from '@/lib/format'
+import JourneyAssistant from '@/features/assistant/JourneyAssistant'
 
 interface NavItem { to: string; label: string; icon: LucideIcon; end?: boolean }
 interface NavGroup { title: string; items: NavItem[] }
@@ -124,6 +125,7 @@ export default function AppShell() {
           </Link>
           <span className="hidden rounded-full border border-white/20 px-2.5 py-0.5 text-[11.5px] font-medium sm:inline">{ROLE_LABEL[user.role]}</span>
           <button className="grid size-9 place-items-center rounded-sm text-white/80 hover:bg-white/10" aria-label="المساعدة" onClick={() => nav('/help')}><HelpCircle className="size-4" /></button>
+          <button className="hidden size-9 place-items-center rounded-sm text-white/80 hover:bg-white/10 sm:grid" aria-label="مساعد الرحلة" title="مساعد الرحلة" onClick={() => window.dispatchEvent(new CustomEvent('miyar:open-journey'))}><Sparkles className="size-4" /></button>
           <div className="relative">
             <button onClick={() => setMenu(m => m === 'bell' ? 'none' : 'bell')} className="relative grid size-9 place-items-center rounded-sm text-white/80 hover:bg-white/10" aria-label="الإشعارات"><Bell className="size-4" />{unread > 0 && <span className="num absolute -top-0.5 -end-0.5 grid min-w-4 place-items-center rounded-full bg-danger-500 px-1 text-[10px] font-bold">{unread}</span>}</button>
             {menu === 'bell' && (
@@ -193,6 +195,7 @@ export default function AppShell() {
         </main>
       </div>
       <Toasts />
+      <JourneyAssistant />
     </div>
   )
 }

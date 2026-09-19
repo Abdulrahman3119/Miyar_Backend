@@ -634,7 +634,10 @@ export const useStore = create<State>((set, get) => ({
   },
   editDelegation: async (id, toUserId) => {
     try {
-      await call('miyar.api.write.revoke_delegation', { name: id, to_user: toUserId })
+      await call('miyar.api.write.revoke_delegation', {
+        name: id,
+        ...(toUserId ? { to_user: toUserId } : {}),
+      })
       await get().pull()
     } catch (e) { fail(get, e, 'تعذّر تعديل التفويض') }
   },

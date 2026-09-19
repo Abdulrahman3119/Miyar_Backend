@@ -1,0 +1,2310 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>دليل تشغيل منصة معيار — الأدوار ودورات العمل</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --brand-900:#0B332D; --brand-800:#104840; --brand-700:#165449; --brand-600:#1E6355;
+    --brand-300:#7FB6A4; --brand-100:#D9EAE3; --brand-50:#EEF5F2;
+    --lime:#88B925;
+    --ink-950:#0C111B; --ink-900:#111927; --ink-800:#1F2A37; --ink-700:#384250;
+    --ink-600:#4D5761; --ink-500:#6C727E; --ink-400:#9DA4AE; --ink-300:#D2D6DB;
+    --ink-200:#E5E7EB; --ink-100:#F3F4F6; --ink-50:#F9FAFB; --ink-0:#FFFFFF;
+    --canvas:#EEF2F1;
+
+    --bg:var(--canvas); --surface:var(--ink-0); --surface-2:var(--ink-50);
+    --line:var(--ink-200); --line-soft:var(--ink-100);
+    --text:var(--ink-800); --text-strong:var(--ink-900); --text-mute:var(--ink-500);
+    --accent:var(--brand-600); --accent-strong:var(--brand-800); --accent-soft:var(--brand-50);
+    --ok:#15803D; --ok-soft:#E9F5EE; --warn:#B45309; --warn-soft:#FDF3E3; --danger:#B42318; --danger-soft:#FDECEA;
+
+    --r-contractor:#1E6355; --r-lab:#1D5FB4; --r-consultant:#6B3FA0;
+    --r-supervisor:#8A5A0A; --r-admin:#384250; --r-support:#384250;
+
+    --shadow:0 1px 2px rgba(16,25,40,.06), 0 8px 24px -12px rgba(16,25,40,.18);
+    --mono:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0A1614; --surface:#0F1F1C; --surface-2:#132622;
+      --line:#233A35; --line-soft:#1A2C28;
+      --text:#D7E2DE; --text-strong:#F2F7F5; --text-mute:#8FA39D;
+      --accent:#5FB49B; --accent-strong:#8ED0BA; --accent-soft:#12302A;
+      --ok:#6CC58F; --ok-soft:#13291E; --warn:#E0A758; --warn-soft:#2B2113; --danger:#EB8F86; --danger-soft:#2E1715;
+      --r-contractor:#5FB49B; --r-lab:#79A7E8; --r-consultant:#B292DC;
+      --r-supervisor:#D6A75C; --r-admin:#9FB0BF; --r-support:#9FB0BF;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 26px -14px rgba(0,0,0,.7);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0A1614; --surface:#0F1F1C; --surface-2:#132622;
+    --line:#233A35; --line-soft:#1A2C28;
+    --text:#D7E2DE; --text-strong:#F2F7F5; --text-mute:#8FA39D;
+    --accent:#5FB49B; --accent-strong:#8ED0BA; --accent-soft:#12302A;
+    --ok:#6CC58F; --ok-soft:#13291E; --warn:#E0A758; --warn-soft:#2B2113; --danger:#EB8F86; --danger-soft:#2E1715;
+    --r-contractor:#5FB49B; --r-lab:#79A7E8; --r-consultant:#B292DC;
+    --r-supervisor:#D6A75C; --r-admin:#9FB0BF; --r-support:#9FB0BF;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 26px -14px rgba(0,0,0,.7);
+  }
+
+  *{box-sizing:border-box}
+  img{max-width:100%}
+  html{color-scheme:light dark; scroll-behavior:smooth; scroll-padding-top:24px}
+  body{
+    direction:rtl; background:var(--bg); color:var(--text);
+    font-family:"IBM Plex Sans Arabic", "Segoe UI", system-ui, sans-serif;
+    font-size:15px; line-height:1.75; margin:0;
+  }
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} *{animation:none!important; transition:none!important} }
+
+  .wrap{max-width:1280px; margin:0 auto; padding-inline:20px; padding-block:0 64px}
+  .cols{display:grid; grid-template-columns:232px minmax(0,1fr); gap:40px; align-items:start}
+  @media (max-width:1040px){ .cols{grid-template-columns:1fr; gap:24px} }
+
+  /* ── masthead ── */
+  .mast{background:var(--brand-800); color:#fff; padding:38px 20px 30px; border-bottom:4px solid var(--lime)}
+  .mast-in{max-width:1280px; margin:0 auto}
+  .mast .eyebrow{font-size:11.5px; letter-spacing:.14em; font-weight:600; color:rgba(255,255,255,.6)}
+  .mast h1{margin:.35em 0 .2em; font-size:clamp(26px,4vw,40px); line-height:1.3; font-weight:700; color:#fff}
+  .mast p{margin:0; max-width:64ch; color:rgba(255,255,255,.78); font-size:14.5px}
+  .docctl{display:grid; grid-template-columns:repeat(auto-fit,minmax(168px,1fr)); gap:1px; margin-top:22px;
+          background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.16); border-radius:8px; overflow:hidden}
+  .docctl div{background:#104840; padding:9px 12px}
+  .docctl span{display:block; font-size:10.5px; letter-spacing:.08em; color:rgba(255,255,255,.58)}
+  .docctl b{display:block; font-size:13px; font-weight:600; color:#fff; margin-top:2px}
+  .mast-meta{display:flex; flex-wrap:wrap; gap:8px; margin-top:18px}
+  .mast-meta span{border:1px solid rgba(255,255,255,.22); background:rgba(255,255,255,.08); border-radius:999px; padding:3px 11px; font-size:11.5px; color:rgba(255,255,255,.88)}
+
+  /* ── toc ── */
+  nav.toc{position:sticky; top:20px; font-size:13px}
+  nav.toc .t{font-size:10.5px; letter-spacing:.14em; font-weight:700; color:var(--text-mute); margin:0 0 10px}
+  nav.toc ol{list-style:none; margin:0 0 18px; padding:0; display:flex; flex-direction:column; gap:1px}
+  nav.toc a{display:block; padding:5px 10px; border-radius:5px; color:var(--text); text-decoration:none; border-inline-start:2px solid transparent}
+  nav.toc a:hover{background:var(--surface); border-inline-start-color:var(--accent); color:var(--accent-strong)}
+  nav.toc .sub a{padding-inline-start:20px; font-size:12.3px; color:var(--text-mute)}
+  @media (max-width:1040px){ nav.toc{position:static; border:1px solid var(--line); background:var(--surface); border-radius:10px; padding:14px} }
+
+  /* ── typography ── */
+  main{min-width:0}
+  h2{font-size:24px; font-weight:700; color:var(--text-strong); margin:56px 0 6px; line-height:1.35; scroll-margin-top:20px}
+  h2:first-of-type{margin-top:36px}
+  h3{font-size:18px; font-weight:700; color:var(--text-strong); margin:36px 0 6px; scroll-margin-top:20px}
+  h4{font-size:14.5px; font-weight:700; color:var(--text-strong); margin:22px 0 4px}
+  p{margin:0 0 12px; max-width:72ch}
+  .lede{font-size:16px; color:var(--text-mute); max-width:70ch; margin-bottom:22px}
+  .num{font-family:var(--mono); font-variant-numeric:tabular-nums; direction:ltr; unicode-bidi:isolate}
+  code{font-family:var(--mono); font-size:.86em; background:var(--surface-2); border:1px solid var(--line-soft);
+       border-radius:4px; padding:1px 5px; direction:ltr; unicode-bidi:isolate; display:inline-block; color:var(--accent-strong)}
+  a{color:var(--accent); text-underline-offset:3px}
+  ul,ol{margin:0 0 14px; padding-inline-start:20px; max-width:72ch}
+  li{margin-bottom:5px}
+  li::marker{color:var(--accent)}
+  strong{color:var(--text-strong); font-weight:600}
+  hr{border:0; border-top:1px solid var(--line); margin:44px 0}
+
+  .kicker{font-size:10.5px; letter-spacing:.14em; font-weight:700; color:var(--accent); margin:0 0 2px}
+
+  /* ── generic blocks ── */
+  .note{border-inline-start:3px solid var(--accent); background:var(--surface); padding:12px 16px; border-radius:0 8px 8px 0; margin:0 0 16px; font-size:14px; max-width:78ch}
+  .note.warn{border-inline-start-color:var(--warn); background:var(--warn-soft)}
+  .note.ok{border-inline-start-color:var(--ok); background:var(--ok-soft)}
+  .note.bad{border-inline-start-color:var(--danger); background:var(--danger-soft)}
+  .note p:last-child{margin-bottom:0}
+
+  table{width:100%; border-collapse:collapse; font-size:13.3px; background:var(--surface); margin:0 0 18px}
+  .scroll{overflow-x:auto; margin:0 0 18px; border:1px solid var(--line); border-radius:10px}
+  .scroll table{margin:0; border-radius:0}
+  th{text-align:start; font-weight:600; font-size:11px; letter-spacing:.06em; color:var(--text-mute);
+     background:var(--surface-2); padding:9px 12px; border-bottom:1px solid var(--line); white-space:nowrap}
+  td{padding:9px 12px; border-bottom:1px solid var(--line-soft); vertical-align:top}
+  tr:last-child td{border-bottom:0}
+  td.ltr{direction:ltr; text-align:start; font-family:var(--mono); font-size:12px; white-space:nowrap}
+
+  /* ── role chips ── */
+  .chip{display:inline-flex; align-items:center; gap:6px; border-radius:999px; padding:2px 10px; font-size:11.5px; font-weight:600;
+        border:1px solid color-mix(in srgb, var(--c) 40%, transparent); color:var(--c); background:color-mix(in srgb, var(--c) 9%, transparent); white-space:nowrap}
+  .chip::before{content:""; width:6px; height:6px; border-radius:99px; background:var(--c)}
+  .c-contractor{--c:var(--r-contractor)} .c-lab{--c:var(--r-lab)} .c-consultant{--c:var(--r-consultant)}
+  .c-supervisor{--c:var(--r-supervisor)} .c-admin{--c:var(--r-admin)} .c-visitor{--c:var(--ink-400)}
+
+  /* ── order chain ── */
+  .chain{display:flex; flex-direction:column; gap:0; margin:22px 0 26px}
+  .stage{display:grid; grid-template-columns:34px minmax(0,1fr); gap:16px; padding-bottom:20px; position:relative}
+  .stage:not(:last-child)::before{content:""; position:absolute; inset-block:34px 0; inset-inline-start:16px; width:2px; background:var(--line)}
+  .stage .n{width:34px; height:34px; border-radius:99px; display:grid; place-items:center; font-family:var(--mono); font-size:13px; font-weight:600;
+            background:var(--surface); border:1px solid var(--line); color:var(--text-mute); z-index:1}
+  .stage.now .n{background:var(--brand-800); border-color:var(--brand-800); color:#fff}
+  .stage .b{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:14px 16px; box-shadow:var(--shadow)}
+  .stage.now .b{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft), var(--shadow)}
+  .stage h4{margin:0 0 4px; display:flex; flex-wrap:wrap; align-items:center; gap:8px; font-size:15px}
+  .stage p{margin:0; font-size:13.6px; color:var(--text-mute); max-width:70ch}
+  .stage .gate{margin-top:8px; font-size:12.5px; color:var(--text); background:var(--surface-2); border-radius:6px; padding:6px 10px}
+  .stage .gate b{color:var(--text-strong)}
+
+  /* ── screen card ── */
+  .screen{border:1px solid var(--line); background:var(--surface); border-radius:12px; overflow:hidden; margin:0 0 26px; box-shadow:var(--shadow)}
+  .screen > header{display:flex; flex-wrap:wrap; align-items:baseline; gap:10px; padding:13px 18px; border-bottom:1px solid var(--line); background:var(--surface-2)}
+  .screen > header h3{margin:0; font-size:16.5px}
+  .screen .route{font-family:var(--mono); font-size:12px; direction:ltr; color:var(--accent-strong); background:var(--accent-soft);
+                 border:1px solid color-mix(in srgb, var(--accent) 25%, transparent); border-radius:5px; padding:2px 8px}
+  .screen .guard{font-size:11.5px; color:var(--text-mute); margin-inline-start:auto; font-family:var(--mono); direction:ltr}
+  .screen .body{padding:18px}
+  .screen .body > :last-child{margin-bottom:0}
+
+  figure{margin:0 0 16px}
+  figure img{display:block; width:100%; max-width:100%; height:auto; border:1px solid var(--line); border-radius:8px; background:var(--ink-100)}
+  figcaption{font-size:12px; color:var(--text-mute); margin-top:7px; padding-inline-start:2px}
+
+  .spec{display:grid; gap:14px; margin:0 0 4px}
+  @media (min-width:760px){ .spec.two{grid-template-columns:1fr 1fr} }
+  .spec section{min-width:0}
+  .spec h4{margin:0 0 6px; font-size:11px; letter-spacing:.1em; color:var(--text-mute); text-transform:none}
+  .spec ul{margin:0; padding-inline-start:18px; font-size:13.6px}
+  .spec li{margin-bottom:4px}
+
+  .actions{width:100%; font-size:13.3px}
+  .actions th:first-child, .actions td:first-child{width:26%}
+
+  /* ── perms grid ── */
+  .perm{display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:6px; margin:0 0 16px; padding:0; list-style:none; max-width:none}
+  .perm li{display:flex; align-items:center; gap:8px; font-size:12.8px; background:var(--surface); border:1px solid var(--line-soft);
+           border-radius:7px; padding:6px 10px; margin:0}
+  .perm li .mk{width:16px; height:16px; border-radius:99px; display:grid; place-items:center; font-size:10px; font-weight:700; flex:none;
+               background:var(--ok-soft); color:var(--ok)}
+  .perm li.no .mk{background:var(--danger-soft); color:var(--danger)}
+  .perm li code{background:none; border:0; padding:0; font-size:11px; color:var(--text-mute); margin-inline-start:auto}
+
+  .day{list-style:none; padding:0; margin:0 0 18px; max-width:none}
+  .day li{display:grid; grid-template-columns:70px minmax(0,1fr); gap:14px; padding:10px 0; border-bottom:1px solid var(--line-soft); margin:0}
+  .day li:last-child{border-bottom:0}
+  .day .t{font-family:var(--mono); font-size:12px; color:var(--accent); direction:ltr; padding-top:2px}
+  .day b{display:block; color:var(--text-strong); font-size:14px}
+  .day span{font-size:13.3px; color:var(--text-mute)}
+
+  .finding{border:1px solid var(--line); border-radius:10px; background:var(--surface); padding:14px 16px; margin:0 0 12px}
+  .finding h4{margin:0 0 4px; display:flex; align-items:center; gap:8px}
+  .finding .sev{font-size:10.5px; font-weight:700; letter-spacing:.06em; border-radius:4px; padding:2px 7px}
+  .sev.high{background:var(--danger-soft); color:var(--danger)}
+  .sev.med{background:var(--warn-soft); color:var(--warn)}
+  .sev.low{background:var(--surface-2); color:var(--text-mute)}
+  .finding p{margin:0; font-size:13.6px; color:var(--text-mute)}
+  .finding p + p{margin-top:6px}
+  .finding code{font-size:11.5px}
+
+  /* ── flowcharts (SVG) ── */
+  .fcw{border:1px solid var(--line); background:var(--surface); border-radius:12px; padding:14px 16px 10px; margin:18px 0 10px; box-shadow:var(--shadow)}
+  .fcw.scrollx{overflow-x:auto}
+  .fc{display:block; width:100%; height:auto; min-width:640px; font-family:inherit}
+  .fc .b{stroke-width:1.6}
+  .fc .cont{fill:color-mix(in srgb,var(--r-contractor) 13%, var(--surface)); stroke:var(--r-contractor)}
+  .fc .lab{fill:color-mix(in srgb,var(--r-lab) 13%, var(--surface)); stroke:var(--r-lab)}
+  .fc .cons{fill:color-mix(in srgb,var(--r-consultant) 13%, var(--surface)); stroke:var(--r-consultant)}
+  .fc .plat{fill:var(--surface-2); stroke:var(--ink-400); stroke-dasharray:6 4}
+  .fc .bad{fill:var(--danger-soft); stroke:var(--danger)}
+  .fc .good{fill:var(--ok-soft); stroke:var(--ok)}
+  .fc .dec{fill:var(--surface-2); stroke:var(--text-mute)}
+  .fc .note{fill:none; stroke:var(--line); stroke-dasharray:4 4}
+  .fc text{fill:var(--text-strong); font-size:13px; font-weight:600; direction:rtl}
+  .fc text.s{fill:var(--text-mute); font-size:11px; font-weight:500}
+  .fc text.e{fill:var(--text-mute); font-size:10.5px; font-weight:600}
+  .fc text.h{fill:var(--text-mute); font-size:11.5px; font-weight:700; letter-spacing:.04em}
+  .fc .ln{fill:none; stroke:var(--ink-400); stroke-width:1.6; marker-end:url(#fa)}
+  .fc .ln.d{stroke-dasharray:5 4}
+  .fc .ln.no{marker-end:none}
+  .fc .mk{fill:var(--ink-400); stroke:none}
+  .fclg{display:flex; flex-wrap:wrap; gap:6px 14px; margin:0 0 4px; padding-top:10px; border-top:1px solid var(--line-soft); font-size:11.5px; color:var(--text-mute)}
+  .fclg span{display:inline-flex; align-items:center; gap:6px}
+  .fclg i{width:14px; height:11px; border-radius:3px; border:1.5px solid var(--text-mute); background:var(--surface-2); flex:none}
+  .fclg i.cont{border-color:var(--r-contractor); background:color-mix(in srgb,var(--r-contractor) 15%,transparent)}
+  .fclg i.lab{border-color:var(--r-lab); background:color-mix(in srgb,var(--r-lab) 15%,transparent)}
+  .fclg i.cons{border-color:var(--r-consultant); background:color-mix(in srgb,var(--r-consultant) 15%,transparent)}
+  .fclg i.plat{border-style:dashed; border-color:var(--ink-400)}
+  .fclg i.dec{transform:rotate(45deg); border-radius:2px; width:11px; height:11px}
+  .fclg i.bad{border-color:var(--danger); background:var(--danger-soft)}
+  .fcap{font-size:12px; color:var(--text-mute); margin:8px 0 0}
+
+  /* ── lifecycle diagrams ── */
+  .st{display:inline-flex; align-items:center; gap:5px; border-radius:5px; padding:1px 7px; font-size:11.5px; font-weight:600; white-space:nowrap;
+      background:var(--surface-2); border:1px solid var(--line); color:var(--text)}
+  .st code{background:none; border:0; padding:0; font-size:10px; color:inherit; opacity:.7}
+  .st.ok{background:var(--ok-soft); border-color:color-mix(in srgb,var(--ok) 30%,transparent); color:var(--ok)}
+  .st.warn{background:var(--warn-soft); border-color:color-mix(in srgb,var(--warn) 30%,transparent); color:var(--warn)}
+  .st.bad{background:var(--danger-soft); border-color:color-mix(in srgb,var(--danger) 30%,transparent); color:var(--danger)}
+  .st.acc{background:var(--accent-soft); border-color:color-mix(in srgb,var(--accent) 30%,transparent); color:var(--accent-strong)}
+
+  .arw{font-style:normal; color:var(--text-mute); font-size:12px; line-height:1; flex:none}
+
+  .pipe{display:flex; flex-wrap:wrap; align-items:stretch; gap:7px; margin:18px 0 10px}
+  .pipe .p{flex:1 1 152px; min-width:152px; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:10px 12px}
+  .pipe .p b{display:block; font-size:13.2px; color:var(--text-strong)}
+  .pipe .p span{display:block; font-size:11.6px; color:var(--text-mute); line-height:1.55}
+  .pipe .arw{align-self:center; font-size:15px}
+
+  .swim{display:grid; grid-template-columns:38px repeat(4,minmax(0,1fr)); grid-template-rows:repeat(14,auto); gap:9px; margin:20px 0 8px}
+  .swim .lane-bg{grid-row:1/-1; border-radius:12px; background:color-mix(in srgb,var(--c) 10%,transparent); border:1px solid color-mix(in srgb,var(--c) 22%,transparent)}
+  .swim .lane-h{grid-row:1; align-self:center; text-align:center; font-size:12.5px; font-weight:700; color:var(--c); padding:9px 4px; z-index:1}
+  .swim .sn{z-index:1; align-self:start; margin-top:9px; width:25px; height:25px; border-radius:99px; display:grid; place-items:center;
+            font-family:var(--mono); font-size:11px; background:var(--surface); border:1px solid var(--line); color:var(--text-mute)}
+  .swim .node{z-index:1; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:10px 12px; box-shadow:var(--shadow); min-width:0}
+  .swim .node.auto{border-style:dashed; background:var(--surface-2); box-shadow:none}
+  .swim .node b{display:block; font-size:13.2px; color:var(--text-strong); margin-bottom:3px}
+  .swim .node p{margin:0 0 7px; font-size:12.3px; line-height:1.6; color:var(--text-mute); max-width:none}
+  .swim .node .out{display:flex; flex-wrap:wrap; gap:4px}
+  .swim .node .who{display:none}
+  @media (max-width:860px){
+    .swim{grid-template-columns:30px minmax(0,1fr)}
+    .swim .lane-bg, .swim .lane-h{display:none}
+    .swim .node{grid-column:2!important; grid-row:auto!important; border-inline-start:3px solid var(--c,var(--accent))}
+    .swim .sn{grid-column:1!important; grid-row:auto!important}
+    .swim .node .who{display:block; font-size:11px; font-weight:700; color:var(--c,var(--accent)); margin-bottom:2px}
+  }
+
+  .rail{margin:18px 0 10px}
+  .rnode{display:grid; grid-template-columns:28px minmax(0,1fr); gap:13px; padding-bottom:14px; position:relative}
+  .rnode:not(:last-child)::before{content:""; position:absolute; inset-block:30px 0; inset-inline-start:13px; width:2px; background:var(--line)}
+  .rnode .dot{width:28px; height:28px; border-radius:99px; display:grid; place-items:center; font-family:var(--mono); font-size:11px; z-index:1;
+              background:var(--surface); border:2px solid var(--accent); color:var(--accent)}
+  .rnode.end .dot{border-color:var(--ok); color:var(--ok)}
+  .rnode.stop .dot{border-color:var(--danger); color:var(--danger)}
+  .rnode .rb{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:11px 13px; min-width:0}
+  .rnode .rb > b{display:flex; flex-wrap:wrap; align-items:center; gap:8px; font-size:13.6px; color:var(--text-strong); margin-bottom:4px}
+  .rnode .rb p{margin:0; font-size:12.6px; color:var(--text-mute); max-width:none}
+  .rnode .rb p + p{margin-top:5px}
+  .branch{margin-top:9px; display:grid; gap:7px}
+  .branch div{border-inline-start:3px solid var(--line); padding:5px 11px; font-size:12.3px; background:var(--surface-2); border-radius:0 7px 7px 0}
+  .branch div.y{border-inline-start-color:var(--ok)}
+  .branch div.n{border-inline-start-color:var(--danger)}
+  .branch div.a{border-inline-start-color:var(--warn)}
+  .branch b{color:var(--text-strong)}
+
+  .mini{display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:12px; margin:18px 0}
+  .mcy{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:12px 14px}
+  .mcy h4{margin:0 0 7px; font-size:13.6px}
+  .mcy .flow{display:flex; flex-wrap:wrap; align-items:center; gap:5px; margin-bottom:8px}
+  .mcy p{margin:0; font-size:12.3px; line-height:1.6; color:var(--text-mute); max-width:none}
+  .mcy p + p{margin-top:5px}
+
+  .legend{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:6px; margin:0 0 18px; padding:0; list-style:none; max-width:none}
+  .legend li{display:flex; align-items:center; gap:8px; font-size:12.4px; margin:0; background:var(--surface); border:1px solid var(--line-soft); border-radius:7px; padding:5px 9px}
+  .legend li span:last-child{color:var(--text-mute)}
+
+  footer.end{margin-top:52px; padding-top:20px; border-top:1px solid var(--line); font-size:12.5px; color:var(--text-mute)}
+  footer.end p{max-width:none}
+</style>
+
+<header class="mast">
+  <div class="mast-in">
+    <div class="eyebrow">وزارة البلديات والإسكان · الإدارة العامة لكود البناء السعودي</div>
+    <h1>دليل تشغيل منصة معيار — الأدوار ودورات العمل</h1>
+    <p>وثيقة تشغيلية مرجعية تصف دورات العمل في المنصة الوطنية لاختبارات التربة والطرق، وتوزيع الأدوار والصلاحيات عليها، وآليات الرقابة على المهل وخطط التنفيذ ونسب الإنجاز، وحوكمة المحرك الذكي، مع دليل استخدام مفصّل لكل دور على حدة.</p>
+    <div class="docctl">
+      <div><span>الجهة المستفيدة</span><b>وزارة البلديات والإسكان</b></div>
+      <div><span>النظام</span><b>منصة معيار</b></div>
+      <div><span>نوع الوثيقة</span><b>دليل تشغيل واستخدام</b></div>
+      <div><span>الإصدار</span><b>1.0</b></div>
+      <div><span>تاريخ الإصدار</span><b>16 سبتمبر 2026</b></div>
+      <div><span>التصنيف</span><b>داخلي — للجهة المستفيدة</b></div>
+    </div>
+    <div class="mast-meta">
+      <span>10 دورات عمل موثّقة بمخططاتها</span>
+      <span>7 أدوار · 35 صلاحية في مصفوفة الملحق 7.1</span>
+      <span>الفصل الأول: مدير النظام — 19 شاشة</span>
+      <span>موثّق من السلوك الفعلي للنظام</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+<div class="cols">
+
+<nav class="toc" aria-label="فهرس الدليل">
+  <p class="t">الفهرس</p>
+  <ol>
+    <li><a href="#read">١ · عن هذه الوثيقة</a></li>
+    <li><a href="#cycles">٢ · دورات العمل</a></li>
+  </ol>
+  <ol class="sub" style="margin-top:-14px">
+    <li><a href="#cy-map">خريطة الدورات</a></li>
+    <li><a href="#cy-request">دورة الطلب</a></li>
+    <li><a href="#cy-test">دورة الاختبار</a></li>
+    <li><a href="#cy-study">دورة الدراسة والتقرير</a></li>
+    <li><a href="#cy-sample">دورة العينة</a></li>
+    <li><a href="#cy-support">الدورات المساندة</a></li>
+  </ol>
+  <ol>
+    <li><a href="#ctrl">٣ · الرقابة والمؤشرات</a></li>
+  </ol>
+  <ol class="sub" style="margin-top:-14px">
+    <li><a href="#ctrl-lab">مراقبة قرارات المختبر</a></li>
+    <li><a href="#ctrl-plan">مراقبة خطة التنفيذ</a></li>
+    <li><a href="#ctrl-progress">قياس نسب الإنجاز</a></li>
+    <li><a href="#ctrl-boards">لوحات المتابعة والتقارير</a></li>
+  </ol>
+  <ol>
+    <li><a href="#ai">٤ · حلول الذكاء الاصطناعي</a></li>
+  </ol>
+  <ol class="sub" style="margin-top:-14px">
+    <li><a href="#ai-scope">الغرض والحدود</a></li>
+    <li><a href="#ai-routes">مسارات التشغيل والتكلفة</a></li>
+    <li><a href="#ai-gov">الحوكمة والضمانات</a></li>
+    <li><a href="#ai-study">المحرك داخل الدراسة</a></li>
+    <li><a href="#ai-advisor">الاستشارة قبل القرار</a></li>
+  </ol>
+  <ol>
+    <li><a href="#order">٥ · ترتيب تشغيل الأدوار</a></li>
+    <li><a href="#accounts">٦ · الأدوار والحسابات</a></li>
+    <li><a href="#admin">٧ · دليل مدير النظام</a></li>
+  </ol>
+  <p class="t">فصل مدير النظام</p>
+  <ol class="sub">
+    <li><a href="#login">١ · الدخول</a></li>
+    <li><a href="#shell">٢ · الإطار العام</a></li>
+    <li><a href="#perms">٣ · صلاحياته</a></li>
+    <li><a href="#s-dashboard">٤ · لوحة التشغيل</a></li>
+    <li><a href="#s-reference">٥ · العناصر المرجعية</a></li>
+    <li><a href="#s-rules">٦ · قواعد الأعمال</a></li>
+    <li><a href="#s-knowledge">٧ · قاعدة المعرفة</a></li>
+    <li><a href="#s-templates">٨ · القوالب</a></li>
+    <li><a href="#s-accounts">٩ · المنشآت والحسابات</a></li>
+    <li><a href="#s-ratings">١٠ · مراجعة التقييمات</a></li>
+    <li><a href="#s-engine">١١ · المحرك الذكي</a></li>
+    <li><a href="#s-requests">١٢ · طلبات الاختبارات</a></li>
+    <li><a href="#s-detail">١٣ · تفاصيل الطلب</a></li>
+    <li><a href="#s-governance">١٤ · الحوكمة والتدقيق</a></li>
+    <li><a href="#s-policies">١٥ · السياسات</a></li>
+    <li><a href="#s-reports">١٦ · التقارير</a></li>
+    <li><a href="#s-archive">١٧ · الأرشيف والعينات</a></li>
+    <li><a href="#s-finance">١٨ · الفواتير والعقود</a></li>
+    <li><a href="#s-rest">١٩ · الدليل والإعدادات والدعم</a></li>
+    <li><a href="#ripple">أثر قراراته على الأدوار</a></li>
+    <li><a href="#day">يوم في حياته</a></li>
+    <li><a href="#findings">ملاحظات مرصودة</a></li>
+    <li><a href="#next">الفصول القادمة</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<h2 id="read">١ · عن هذه الوثيقة</h2>
+<p class="lede">وثيقة تشغيلية مرجعية توثّق سلوك منصة معيار كما هو مطبَّق فعلياً في النظام: دورات العمل وانتقالات الحالات، وتوزيع الصلاحيات على الأدوار، وآليات الرقابة على المهل وخطط التنفيذ، ومنهجية احتساب نسب الإنجاز، وحوكمة المحرك الذكي، مع دليل استخدام تفصيلي لكل شاشة.</p>
+
+<div class="spec two">
+  <section>
+    <h4>الغرض</h4>
+    <ul>
+      <li>توفير مرجع موحّد لسلوك المنصة يُعتمد في التشغيل والتدريب وقبول التسليم.</li>
+      <li>توثيق الضوابط الرقابية المضمّنة في النظام ومواضع إعمالها.</li>
+      <li>بيان حدود مسؤولية كل دور، وما يترتب على كل إجراء من إشعارات وقيود وأثر في سجل التدقيق.</li>
+    </ul>
+  </section>
+  <section>
+    <h4>الفئة المستهدفة</h4>
+    <ul>
+      <li>فرق التشغيل والإشراف في الإدارة العامة لكود البناء السعودي.</li>
+      <li>مديرو النظام والدعم التقني المسؤولون عن الإعداد المرجعي وحسابات المنشآت.</li>
+      <li>المنشآت المشاركة: المقاولون والمختبرات والمكاتب الاستشارية.</li>
+    </ul>
+  </section>
+</div>
+
+<div class="note">
+  <p><strong>منهجية الإعداد:</strong> استُخلص محتوى هذه الوثيقة من السلوك الفعلي للنظام — انتقالات الحالات وقواعد المنع والسماح ومعادلات الاحتساب — لا من وصف تصميمي مسبق. ولقطات الشاشة مأخوذة من النظام نفسه بدقة عرض <span class="num">1440×900</span>. وما ورد بوصفه ملاحظة مرصودة فهو فارق فعلي بين السلوك القائم والسلوك المتوقع، أُثبت في موضعه.</p>
+</div>
+
+<div class="note">
+  <p><strong>نطاق هذا الإصدار:</strong> تغطي الأقسام من الثاني إلى السادس المنصة بكامل أدوارها. أما دليل الشاشات فيبدأ بدور <strong>مدير النظام</strong>، وتصدر بقية الأدوار في إصدارات لاحقة وفق الترتيب الوارد في نهاية الوثيقة، لأن كل دور يستلم العمل من سابقه.</p>
+</div>
+
+<div class="scroll">
+<table>
+  <thead><tr><th>الرمز</th><th>المقصود</th></tr></thead>
+  <tbody>
+    <tr><td><code>/admin/rules</code></td><td>مسار الشاشة داخل التطبيق — يُضاف بعده <code>?as=u-admin</code> للدخول المباشر بحساب الدور.</td></tr>
+    <tr><td><code>admin.settings</code></td><td>الصلاحية التي تحرس المسار في مصفوفة الملحق 7.1؛ من لا يملكها يُعاد إلى لوحته و<strong>تُسجَّل محاولته</strong> كحدث حرج.</td></tr>
+    <tr><td><code>B.R.147</code></td><td>قاعدة عمل من وثيقة المتطلبات — مذكورة حيث تحكم الشاشة فعلياً.</td></tr>
+    <tr><td><code>STS11</code></td><td>حالة من جدول الحالات (القسم 6 من الوثيقة) — مثل «بانتظار قرار المختبر».</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="cycles">٢ · دورات العمل في المنصة</h2>
+<p class="lede">يعرض هذا القسم دورات العمل المطبَّقة في المنصة، والجهة المسؤولة عن كل مرحلة، والشرط الذي ينقل العمل من جهة إلى أخرى. وقد أُثبتت الحالات برموزها المعتمدة في النظام، وكل انتقال بينها محكوم بشرط تشغيلي يمنع أو يسمح.</p>
+
+<h3 id="cy-map">٢.١ · ترابط الدورات</h3>
+<p>تتألف المنصة من <strong>ثماني دورات مترابطة</strong>: دورة رئيسية تمتد من تسجيل المنشأة إلى أرشفة المستندات، تتفرّع عنها دورات فرعية متكررة — فالطلب يتكرر على العقد الواحد، والاختبار يتكرر داخل الطلب، والعينة تتكرر داخل الاختبار.</p>
+
+<div class="fcw scrollx">
+<svg class="fc" viewBox="0 0 1000 336" role="img" aria-label="مخطط المسار الكبير للمنصة من التسجيل إلى الأرشيف">
+  <defs><marker id="fa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+  <text class="h" x="960" y="20" text-anchor="start">المسار الكبير — من تسجيل المنشأة إلى الأرشيف</text>
+
+  <rect class="b plat" x="760" y="44" width="190" height="58" rx="9"/>
+  <text x="855" y="70" text-anchor="middle">التسجيل والتفعيل</text>
+  <text class="s" x="855" y="88" text-anchor="middle">سجل تجاري ← مفوّض رئيسي</text>
+  <polyline class="ln" points="760,73 734,73"/>
+
+  <rect class="b lab" x="540" y="44" width="190" height="58" rx="9"/>
+  <text x="635" y="70" text-anchor="middle">القائمة والظهور</text>
+  <text class="s" x="635" y="88" text-anchor="middle">عنصر مرجعي ← قائمة ← دليل</text>
+  <polyline class="ln" points="540,73 514,73"/>
+
+  <rect class="b cont" x="320" y="44" width="190" height="58" rx="9"/>
+  <text x="415" y="70" text-anchor="middle">عرض السعر</text>
+  <text class="s" x="415" y="88" text-anchor="middle">طلب ← ردّ ← قرار المقاول</text>
+  <polyline class="ln" points="320,73 294,73"/>
+
+  <rect class="b good" x="100" y="44" width="190" height="58" rx="9"/>
+  <text x="195" y="70" text-anchor="middle">العقد الإلكتروني</text>
+  <text class="s" x="195" y="88" text-anchor="middle">توقيع OTP ← عقد فعّال</text>
+
+  <polyline class="ln" points="195,102 195,139 855,139 855,172"/>
+
+  <rect class="b cont" x="760" y="172" width="190" height="58" rx="9"/>
+  <text x="855" y="198" text-anchor="middle">طلب الاختبار</text>
+  <text class="s" x="855" y="216" text-anchor="middle">قياسي أو دراسة جيوتقنية</text>
+  <polyline class="ln" points="760,201 734,201"/>
+
+  <rect class="b lab" x="540" y="172" width="190" height="58" rx="9"/>
+  <text x="635" y="198" text-anchor="middle">العينة والتنفيذ</text>
+  <text class="s" x="635" y="216" text-anchor="middle">استلام ← تأكيد ← مخرج</text>
+  <polyline class="ln" points="540,201 514,201"/>
+
+  <rect class="b cons" x="320" y="172" width="190" height="58" rx="9"/>
+  <text x="415" y="198" text-anchor="middle">الاعتماد</text>
+  <text class="s" x="415" y="216" text-anchor="middle">قرار الاستشاري أو تلقائي</text>
+  <polyline class="ln" points="320,201 294,201"/>
+
+  <rect class="b good" x="100" y="172" width="190" height="58" rx="9"/>
+  <text x="195" y="198" text-anchor="middle">الإغلاق</text>
+  <text class="s" x="195" y="216" text-anchor="middle">فاتورة ← تقييم ← شهادة</text>
+
+  <polyline class="ln d" points="195,230 195,286 855,286 855,234"/>
+  <text class="e" x="525" y="278" text-anchor="middle">الطلب يتكرر بلا حد على العقد الفعّال — والاختبار يتكرر داخل الطلب، والعينة داخل الاختبار</text>
+</svg>
+<div class="fclg">
+  <span><i class="cont"></i>إجراء المقاول</span>
+  <span><i class="lab"></i>إجراء المختبر</span>
+  <span><i class="cons"></i>إجراء المكتب الاستشاري</span>
+  <span><i class="plat"></i>إجراء تلقائي من المنصة</span>
+  <span><i class="dec"></i>نقطة قرار</span>
+  <span><i class="bad"></i>حالة نهائية / مسار متعثر</span>
+</div>
+</div>
+
+<div class="note">
+  <p><strong>تكرار الدورات:</strong> يتم تسجيل المنشأة مرة واحدة، ويُبرم عقد مستقل لكل مشروع. <strong>ولا يوجد حد لعدد الطلبات المنشأة على العقد الفعّال</strong>، ويتكرر الاختبار داخل الطلب بحد أقصى عشرة اختبارات من تصنيف واحد، وتتكرر العينة داخل الاختبار. أما الدراسة الجيوتقنية فهي دورة متكاملة داخل طلب واحد تمرّ بستّ مراحل متتابعة.</p>
+</div>
+
+<h3 id="cy-request">٢.٢ · دورة حياة الطلب — من الإنشاء إلى الإغلاق</h3>
+<p>يوضّح المخطط الآتي المسار الكامل للطلب. يدل لون الصندوق على <strong>الجهة المنفِّذة</strong>، ويمثّل المعيّن نقطة قرار، ويشير الصندوق المتقطع إلى إجراء تنفّذه المنصة تلقائياً، بينما يمثّل الصندوق الأحمر حالة نهائية لا يستكمل الطلب بعدها مساره.</p>
+
+<div class="fcw scrollx">
+<svg class="fc" viewBox="0 0 1000 1340" role="img" aria-label="مخطط تدفق دورة حياة طلب الاختبار من الإنشاء إلى الإغلاق">
+  <defs><marker id="fa2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+  <g style="marker-end:url(#fa2)">
+
+  <rect class="b cont" x="400" y="20" width="320" height="56" rx="9"/>
+  <text x="560" y="44" text-anchor="middle">المقاول ينشئ الطلب على عقد فعّال</text>
+  <text class="s" x="560" y="63" text-anchor="middle">مسودة · STS09</text>
+  <polyline class="ln" points="560,76 560,96"/>
+
+  <rect class="b cont" x="400" y="100" width="320" height="56" rx="9"/>
+  <text x="560" y="124" text-anchor="middle">يرسل الطلب — ولا تعديل بعده</text>
+  <text class="s" x="560" y="143" text-anchor="middle">تُجمَّد القواعد ويصدر الرقم العام</text>
+  <polyline class="ln d" points="720,128 756,128"/>
+  <rect class="b bad" x="760" y="100" width="180" height="56" rx="9"/>
+  <text x="850" y="124" text-anchor="middle">ملغي · STS16</text>
+  <text class="s" x="850" y="143" text-anchor="middle">إلغاء قبل قبول المختبر</text>
+  <polyline class="ln" points="560,156 560,176"/>
+
+  <polygon class="b dec" points="560,180 700,226 560,272 420,226"/>
+  <text x="560" y="231" text-anchor="middle">نوع الخدمة؟</text>
+  <polyline class="ln" points="420,226 304,226"/>
+  <text class="e" x="362" y="217" text-anchor="middle">دراسة جيوتقنية</text>
+  <polyline class="ln" points="560,272 560,298"/>
+  <text class="e" x="572" y="290" text-anchor="start">اختبارات قياسية</text>
+
+  <rect class="b cons" x="60" y="198" width="240" height="56" rx="9"/>
+  <text x="180" y="222" text-anchor="middle">الاستشاري يراجع الأولية</text>
+  <text class="s" x="180" y="241" text-anchor="middle">ويعتمد خطة الاستكشاف</text>
+  <polyline class="ln" points="180,254 180,330 396,330"/>
+
+  <rect class="b plat" x="400" y="302" width="320" height="56" rx="9"/>
+  <text x="560" y="326" text-anchor="middle">بانتظار قرار المختبر</text>
+  <text class="s" x="560" y="345" text-anchor="middle">STS11 · مهلة 12 ساعة</text>
+  <polyline class="ln" points="560,358 560,378"/>
+
+  <polygon class="b dec" points="560,382 700,430 560,478 420,430"/>
+  <text x="560" y="426" text-anchor="middle">قرار المختبر</text>
+  <text x="560" y="444" text-anchor="middle">خلال المهلة؟</text>
+  <polyline class="ln" points="420,430 304,430"/>
+  <text class="e" x="362" y="421" text-anchor="middle">رفض بسبب</text>
+  <polyline class="ln" points="700,430 756,430"/>
+  <text class="e" x="728" y="421" text-anchor="middle">لا ردّ</text>
+  <polyline class="ln" points="560,478 560,498"/>
+  <text class="e" x="572" y="492" text-anchor="start">قبول</text>
+
+  <rect class="b bad" x="60" y="408" width="240" height="44" rx="9"/>
+  <text x="180" y="436" text-anchor="middle">مرفوض · STS13</text>
+  <rect class="b bad" x="760" y="408" width="180" height="44" rx="9"/>
+  <text x="850" y="436" text-anchor="middle">منتهي المهلة · STS26</text>
+
+  <rect class="b lab" x="400" y="502" width="320" height="56" rx="9"/>
+  <text x="560" y="526" text-anchor="middle">يقبل ويختار النطاق الزمني</text>
+  <text class="s" x="560" y="545" text-anchor="middle">مقبول · STS12 — وتصدر الفاتورة</text>
+  <polyline class="ln" points="560,558 560,578"/>
+
+  <rect class="b lab" x="400" y="582" width="320" height="56" rx="9"/>
+  <text x="560" y="606" text-anchor="middle">تسجيل استلام العينة في الموقع</text>
+  <text class="s" x="560" y="625" text-anchor="middle">جارٍ التنفيذ · STS14</text>
+  <polyline class="ln" points="560,638 560,658"/>
+
+  <polygon class="b dec" points="560,662 700,710 560,758 420,710"/>
+  <text x="560" y="706" text-anchor="middle">المقاول يؤكد</text>
+  <text x="560" y="724" text-anchor="middle">الاستلام؟</text>
+  <polyline class="ln" points="700,710 965,710 965,610 724,610"/>
+  <text class="e" x="838" y="700" text-anchor="middle">رفض بسبب — تُلغى العينة وتُعاد</text>
+  <polyline class="ln" points="560,758 560,778"/>
+  <text class="e" x="572" y="772" text-anchor="start">تأكيد — يبدأ عدّاد المدة</text>
+
+  <rect class="b lab" x="400" y="782" width="320" height="56" rx="9"/>
+  <text x="560" y="806" text-anchor="middle">تنفيذ الاختبار ورفع المخرج</text>
+  <text class="s" x="560" y="825" text-anchor="middle">بانتظار الاستشاري · STS19</text>
+  <polyline class="ln" points="560,838 560,858"/>
+
+  <polygon class="b dec" points="560,862 700,910 560,958 420,910"/>
+  <text x="560" y="906" text-anchor="middle">قرار الاستشاري</text>
+  <text x="560" y="924" text-anchor="middle">خلال 48 ساعة؟</text>
+  <polyline class="ln" points="420,910 304,910"/>
+  <text class="e" x="362" y="901" text-anchor="middle">رفض فني</text>
+  <polyline class="ln" points="700,910 756,910"/>
+  <text class="e" x="728" y="901" text-anchor="middle">انقضت</text>
+  <polyline class="ln" points="560,958 560,980"/>
+  <text class="e" x="572" y="974" text-anchor="start">اعتماد</text>
+
+  <rect class="b bad" x="60" y="888" width="240" height="44" rx="9"/>
+  <text x="180" y="916" text-anchor="middle">مرفوض · STS21</text>
+  <polyline class="ln" points="180,932 180,982"/>
+  <rect class="b cont" x="60" y="986" width="240" height="56" rx="9"/>
+  <text x="180" y="1010" text-anchor="middle">طلب إعادة اختبار -R1</text>
+  <text class="s" x="180" y="1029" text-anchor="middle">يبدأ من قرار المختبر</text>
+
+  <rect class="b plat" x="760" y="888" width="180" height="44" rx="9"/>
+  <text x="850" y="916" text-anchor="middle">اعتماد تلقائي</text>
+  <polyline class="ln" points="850,932 850,1006 724,1006"/>
+
+  <rect class="b good" x="400" y="984" width="320" height="44" rx="9"/>
+  <text x="560" y="1012" text-anchor="middle">مقبول · STS20</text>
+  <polyline class="ln" points="560,1028 560,1048"/>
+
+  <polygon class="b dec" points="560,1052 700,1100 560,1148 420,1100"/>
+  <text x="560" y="1096" text-anchor="middle">صدر قرار على</text>
+  <text x="560" y="1114" text-anchor="middle">كل الاختبارات؟</text>
+  <polyline class="ln" points="700,1100 965,1100 965,810 724,810"/>
+  <text class="e" x="838" y="1090" text-anchor="middle">لا — تبقّى اختبارات في الطلب</text>
+  <polyline class="ln" points="560,1148 560,1168"/>
+  <text class="e" x="572" y="1162" text-anchor="start">نعم</text>
+
+  <rect class="b plat" x="400" y="1172" width="320" height="56" rx="9"/>
+  <text x="560" y="1196" text-anchor="middle">إغلاق الطلب تلقائياً</text>
+  <text class="s" x="560" y="1215" text-anchor="middle">مكتمل · STS15 — الفاتورة مستحقة</text>
+  <polyline class="ln" points="560,1228 560,1248"/>
+
+  <rect class="b cont" x="400" y="1252" width="320" height="56" rx="9"/>
+  <text x="560" y="1276" text-anchor="middle">تقييم المختبر</text>
+  <text class="s" x="560" y="1295" text-anchor="middle">ثم تحميل شهادة الإتمام</text>
+  </g>
+</svg>
+<div class="fclg">
+  <span><i class="cont"></i>المقاول</span>
+  <span><i class="lab"></i>المختبر</span>
+  <span><i class="cons"></i>المكتب الاستشاري</span>
+  <span><i class="plat"></i>تلقائي من المنصة</span>
+  <span><i class="dec"></i>قرار</span>
+  <span><i class="bad"></i>نهاية متعثرة</span>
+</div>
+</div>
+<p class="fcap">للمخطط قراءة اتجاهية مقصودة: ما يتفرّع إلى اليمين إجراء تنفّذه المنصة تلقائياً بانقضاء مهلة نظامية، وما يتفرّع إلى اليسار مسار رفض أو إلغاء يوقف الطلب أو يستوجب إنشاء طلب جديد.</p>
+
+<h4>تفصيل الخطوات والجهة المسؤولة عن كل منها</h4>
+
+<div class="swim">
+  <div class="lane-bg" style="--c:var(--r-contractor); grid-column:2"></div>
+  <div class="lane-bg" style="--c:var(--r-lab); grid-column:3"></div>
+  <div class="lane-bg" style="--c:var(--r-consultant); grid-column:4"></div>
+  <div class="lane-bg" style="--c:var(--r-admin); grid-column:5"></div>
+  <div class="lane-h" style="--c:var(--r-contractor); grid-column:2">المقاول</div>
+  <div class="lane-h" style="--c:var(--r-lab); grid-column:3">المختبر</div>
+  <div class="lane-h" style="--c:var(--r-consultant); grid-column:4">المكتب الاستشاري</div>
+  <div class="lane-h" style="--c:var(--r-admin); grid-column:5">المنصة — تلقائي</div>
+
+  <div class="sn" style="grid-row:2">١</div>
+  <div class="node" style="grid-column:2; grid-row:2; --c:var(--r-contractor)">
+    <span class="who">المقاول</span>
+    <b>إنشاء الطلب</b>
+    <p>يختار عقداً فعّالاً، ونوع الخدمة، وحتى عشرة اختبارات من <strong>تصنيف واحد</strong>، وثلاثة نطاقات زمنية أولها بعد ٤٨ ساعة على الأقل، وموقع التنفيذ والمرفقات.</p>
+    <div class="out"><span class="st">مسودة <code>STS09</code></span></div>
+  </div>
+
+  <div class="sn" style="grid-row:3">٢</div>
+  <div class="node" style="grid-column:2; grid-row:3; --c:var(--r-contractor)">
+    <span class="who">المقاول</span>
+    <b>الإرسال — ولا تعديل بعده</b>
+    <p>الطلب القياسي يذهب إلى المختبر مباشرة. طلب الدراسة الجيوتقنية يمرّ أولاً على تعبئة البيانات الأولية ورفع القرار المساحي، ثم يذهب إلى المكتب الاستشاري.</p>
+    <div class="out"><span class="st warn">بانتظار قرار المختبر <code>STS11</code></span><span class="st acc">إعداد خطة التنفيذ <code>STS10</code></span></div>
+  </div>
+
+  <div class="sn" style="grid-row:4">٣</div>
+  <div class="node auto" style="grid-column:5; grid-row:4; --c:var(--r-admin)">
+    <span class="who">المنصة</span>
+    <b>تثبيت الطلب</b>
+    <p>تُجمَّد قواعد الأعمال داخل الطلب (المهل والضريبة والنطاق الجغرافي) فلا يتأثر بأي تعديل لاحق، ويحلّ الرقم العام محل رقم المسودة في الدراسة والتفويضات والفواتير والمستندات. وإن كان الدفع مقدّماً صدرت الفاتورة وسُدّدت قبل وصول الطلب للمختبر.</p>
+  </div>
+
+  <div class="sn" style="grid-row:5">٤</div>
+  <div class="node" style="grid-column:4; grid-row:5; --c:var(--r-consultant)">
+    <span class="who">المكتب الاستشاري</span>
+    <b>الدراسة الجيوتقنية فقط: اعتماد الخطة</b>
+    <p>يراجع البيانات الأولية ويعتمدها فيشتغل المحرك الذكي، ثم يراجع خطة الاستكشاف ويعتمدها — وعندها فقط يُحال الطلب إلى المختبر.</p>
+    <div class="out"><span class="st warn">بانتظار قرار المختبر <code>STS11</code></span></div>
+  </div>
+
+  <div class="sn" style="grid-row:6">٥</div>
+  <div class="node" style="grid-column:3; grid-row:6; --c:var(--r-lab)">
+    <span class="who">المختبر — المفوّض الرئيسي</span>
+    <b>القرار خلال ١٢ ساعة</b>
+    <p>يتم القبول <strong>باختيار أحد النطاقات الزمنية</strong> المقترحة لا بموافقة مجردة، ويستوجب الرفض سبباً مكتوباً يظهر للمقاول. عند القبول تُهيَّأ كل اختبارات الطلب للتنفيذ وتصدر فاتورة مسودة في عقود «الدفع عند الإتمام».</p>
+    <div class="out"><span class="st ok">مقبول <code>STS12</code></span><span class="st bad">مرفوض <code>STS13</code></span></div>
+  </div>
+
+  <div class="sn" style="grid-row:7">٦</div>
+  <div class="node auto" style="grid-column:5; grid-row:7; --c:var(--r-admin)">
+    <span class="who">المنصة</span>
+    <b>انتهاء المهلة دون ردّ</b>
+    <p>تُفحص المهل كل دقيقة. تجاوز مهلة المختبر يُنهي الطلب بحالة مستقلة عن الإلغاء لأنها تُحتسب على المختبر لا على المقاول: إشعار للطرفين وخصم من مؤشر الالتزام. ويمكن لمدير النظام تحويل الأثر إلى «إشعار فقط» من قواعد الأعمال.</p>
+    <div class="out"><span class="st bad">منتهي المهلة <code>STS26</code></span></div>
+  </div>
+
+  <div class="sn" style="grid-row:8">٧</div>
+  <div class="node" style="grid-column:3; grid-row:8; --c:var(--r-lab)">
+    <span class="who">المختبر</span>
+    <b>تسجيل استلام العينة في الموقع</b>
+    <p>لا يبدأ التنفيذ قبل الموعد المعتمد، والبدء بعده مسموح لكن مدة التأخر تُسجَّل وتُخصم من المؤشر. يُشترط وجود الفني داخل النطاق الجغرافي المعتمد، وتُسجَّل العينة بعمقها واسم مستلمها.</p>
+    <div class="out"><span class="st acc">جارٍ التنفيذ <code>STS14</code></span></div>
+  </div>
+
+  <div class="sn" style="grid-row:9">٨</div>
+  <div class="node" style="grid-column:2; grid-row:9; --c:var(--r-contractor)">
+    <span class="who">المقاول</span>
+    <b>تأكيد الاستلام — وبه يبدأ احتساب المدة</b>
+    <p>لا يبدأ احتساب مدة إنجاز الاختبار بتسجيل المختبر للعينة، بل <strong>بتأكيد المقاول استلامها</strong>. ورفض التأكيد بسبب مكتوب يُلغي العينة ويعيد الاختبار إلى حالة «لم يتم البدء».</p>
+  </div>
+
+  <div class="sn" style="grid-row:10">٩</div>
+  <div class="node" style="grid-column:3; grid-row:10; --c:var(--r-lab)">
+    <span class="who">المختبر</span>
+    <b>التنفيذ ورفع المخرجات</b>
+    <p>لكل اختبار: طريقة قياس ومعدات بمعايرة سارية، وصور بالوقت والإحداثيات، وحقول نتيجة مهيكلة، وتقرير PDF. لا يُرفع مخرج ناقص الحقول أو بلا تقرير.</p>
+    <div class="out"><span class="st warn">بانتظار قرار الاستشاري <code>STS19</code></span></div>
+  </div>
+
+  <div class="sn" style="grid-row:11">١٠</div>
+  <div class="node" style="grid-column:4; grid-row:11; --c:var(--r-consultant)">
+    <span class="who">المكتب الاستشاري — المفوّض الرئيسي</span>
+    <b>قرار على كل مخرج خلال ٤٨ ساعة</b>
+    <p>القرار لكل اختبار على حدة لا للطلب كله. الرفض يستوجب سبباً فنياً يظهر للمقاول والمختبر ويفتح باب إعادة الاختبار. وللموظف المفوَّض أن يراجع ويكتب ملاحظات دون أن يعتمد.</p>
+    <div class="out"><span class="st ok">مقبول <code>STS20</code></span><span class="st bad">مرفوض <code>STS21</code></span></div>
+  </div>
+
+  <div class="sn" style="grid-row:12">١١</div>
+  <div class="node auto" style="grid-column:5; grid-row:12; --c:var(--r-admin)">
+    <span class="who">المنصة</span>
+    <b>الاعتماد التلقائي</b>
+    <p>انقضاء مهلة الاستشاري دون قرار يعني اعتماد المخرج تلقائياً، مع وسم صريح «اعتُمد تلقائياً» على الاختبار وزيادة عدّاد الاعتمادات التلقائية على المكتب — وهو مؤشر يظهر في تقاريره وفي بطاقة المختبر.</p>
+    <div class="out"><span class="st warn">مقبول — تلقائياً <code>STS20</code></span></div>
+  </div>
+
+  <div class="sn" style="grid-row:13">١٢</div>
+  <div class="node auto" style="grid-column:5; grid-row:13; --c:var(--r-admin)">
+    <span class="who">المنصة</span>
+    <b>إغلاق الطلب</b>
+    <p>بصدور قرار على <strong>جميع</strong> اختبارات الطلب يُغلق الطلب تلقائياً ويُسجَّل ذلك في سجل عملياته، وتتحول الفاتورة من مسودة إلى مستحقة خلال ثلاثين يوماً.</p>
+    <div class="out"><span class="st ok">مكتمل <code>STS15</code></span></div>
+  </div>
+
+  <div class="sn" style="grid-row:14">١٣</div>
+  <div class="node" style="grid-column:2; grid-row:14; --c:var(--r-contractor)">
+    <span class="who">المقاول</span>
+    <b>التقييم ثم الشهادة</b>
+    <p>بعد انتهاء العقد يقيّم المقاول المختبر مرة واحدة (جودة · التزام بالمواعيد · تواصل)، والتقييم <strong>شرط لتحميل شهادة إتمام الاختبارات</strong>.</p>
+  </div>
+</div>
+
+<div class="mini">
+  <div class="mcy">
+    <h4>مساران استثنائيان خارج المسار الرئيسي</h4>
+    <div class="flow"><span class="st">مسودة <code>STS09</code></span><i class="arw">←</i><span class="st acc">خطة <code>STS10</code></span><i class="arw">←</i><span class="st warn">قرار المختبر <code>STS11</code></span><i class="arw">←</i><span class="st">ملغي <code>STS16</code></span></div>
+    <p><strong>الإلغاء:</strong> من اختصاص المقاول وحده، ولا يُتاح إلا <strong>قبل قبول المختبر للطلب</strong>؛ فإذا بدأ التنفيذ امتنع الإلغاء. ويُشعَر المختبر والمكتب الاستشاري بالإلغاء، ويُقيَّد الإجراء في سجل التدقيق.</p>
+    <p><strong>إعادة الاختبار:</strong> لا تُنشأ إلا على مخرج مرفوض، ومرة واحدة، وعلى عقد فعّال. ويُنشئ النظام طلباً مستقلاً بلاحقة <code>-R1</code> مرتبطاً بالطلب الأصلي، يبدأ دورته من قرار المختبر، مع بقاء الطلب الأصلي مغلقاً بقرار رفضه ودون رسوم إضافية.</p>
+  </div>
+  <div class="mcy">
+    <h4>حالات الطلب التسع</h4>
+    <ul class="legend" style="margin:0">
+      <li><span class="st">مسودة <code>STS09</code></span><span>عند المقاول فقط</span></li>
+      <li><span class="st acc">إعداد خطة <code>STS10</code></span><span>جيوتقني</span></li>
+      <li><span class="st warn">قرار المختبر <code>STS11</code></span><span>بعدّاد</span></li>
+      <li><span class="st ok">مقبول <code>STS12</code></span><span>بموعد معتمد</span></li>
+      <li><span class="st bad">مرفوض <code>STS13</code></span><span>بسبب</span></li>
+      <li><span class="st acc">جارٍ التنفيذ <code>STS14</code></span><span>بدأت العينات</span></li>
+      <li><span class="st ok">مكتمل <code>STS15</code></span><span>تلقائي</span></li>
+      <li><span class="st">ملغي <code>STS16</code></span><span>من المقاول</span></li>
+      <li><span class="st bad">منتهي المهلة <code>STS26</code></span><span>على المختبر</span></li>
+    </ul>
+  </div>
+</div>
+
+<h3 id="cy-test">٢.٣ · دورة حياة الاختبار داخل الطلب</h3>
+<p>الطلب وعاء تنظيمي، والاختبار هو الوحدة التي تُنفَّذ ويصدر عليها قرار مستقل. ولكل اختبار حالته ومهلته وسعره وتقريره، ويمكن أن يُعتمد اختبار ويُرفض آخر في الطلب نفسه.</p>
+
+<div class="fcw scrollx">
+<svg class="fc" viewBox="0 0 1000 610" role="img" aria-label="مخطط تدفق دورة حياة الاختبار من لم يتم البدء إلى القرار">
+  <defs><marker id="fa3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+  <g style="marker-end:url(#fa3)">
+
+  <rect class="b lab" x="400" y="20" width="320" height="56" rx="9"/>
+  <text x="560" y="44" text-anchor="middle">المختبر يقبل الطلب</text>
+  <text class="s" x="560" y="63" text-anchor="middle">كل اختبارات الطلب ← لم يتم البدء · STS17</text>
+  <polyline class="ln" points="560,76 560,96"/>
+
+  <rect class="b lab" x="400" y="100" width="320" height="56" rx="9"/>
+  <text x="560" y="124" text-anchor="middle">تسجيل استلام العينة</text>
+  <text class="s" x="560" y="143" text-anchor="middle">جارٍ التنفيذ · STS18 — العدّاد لم يبدأ</text>
+  <polyline class="ln" points="560,156 560,176"/>
+
+  <polygon class="b dec" points="560,180 700,226 560,272 420,226"/>
+  <text x="560" y="222" text-anchor="middle">المقاول يؤكد</text>
+  <text x="560" y="240" text-anchor="middle">الاستلام؟</text>
+  <polyline class="ln" points="420,226 304,226"/>
+  <text class="e" x="362" y="217" text-anchor="middle">رفض بسبب</text>
+  <polyline class="ln" points="560,272 560,296"/>
+  <text class="e" x="572" y="290" text-anchor="start">تأكيد — يبدأ عدّاد مدة الإنجاز</text>
+
+  <rect class="b bad" x="60" y="204" width="240" height="44" rx="9"/>
+  <text x="180" y="232" text-anchor="middle">تُلغى العينة ← STS17</text>
+  <polyline class="ln" points="180,204 180,128 396,128"/>
+
+  <rect class="b lab" x="400" y="300" width="320" height="56" rx="9"/>
+  <text x="560" y="324" text-anchor="middle">تنفيذ الاختبار ورفع المخرج</text>
+  <text class="s" x="560" y="343" text-anchor="middle">حقول مهيكلة + تقرير ← STS19</text>
+  <polyline class="ln" points="560,356 560,376"/>
+
+  <polygon class="b dec" points="560,380 700,426 560,472 420,426"/>
+  <text x="560" y="422" text-anchor="middle">قرار المكتب</text>
+  <text x="560" y="440" text-anchor="middle">الاستشاري؟</text>
+  <polyline class="ln" points="420,426 304,426"/>
+  <text class="e" x="362" y="417" text-anchor="middle">رفض فني</text>
+  <polyline class="ln" points="700,426 756,426"/>
+  <text class="e" x="728" y="417" text-anchor="middle">انقضت المهلة</text>
+  <polyline class="ln" points="560,472 560,494"/>
+  <text class="e" x="572" y="488" text-anchor="start">اعتماد</text>
+
+  <rect class="b bad" x="60" y="404" width="240" height="44" rx="9"/>
+  <text x="180" y="432" text-anchor="middle">مرفوض · STS21</text>
+  <polyline class="ln" points="180,448 180,498"/>
+  <rect class="b cont" x="60" y="502" width="240" height="56" rx="9"/>
+  <text x="180" y="526" text-anchor="middle">طلب إعادة -R1</text>
+  <text class="s" x="180" y="545" text-anchor="middle">مرة واحدة على عقد فعّال</text>
+
+  <rect class="b plat" x="760" y="404" width="180" height="44" rx="9"/>
+  <text x="850" y="432" text-anchor="middle">اعتماد تلقائي</text>
+  <polyline class="ln" points="850,448 850,520 724,520"/>
+
+  <rect class="b good" x="400" y="498" width="320" height="44" rx="9"/>
+  <text x="560" y="526" text-anchor="middle">مقبول · STS20</text>
+  </g>
+</svg>
+<div class="fclg">
+  <span><i class="lab"></i>المختبر</span>
+  <span><i class="cont"></i>المقاول</span>
+  <span><i class="plat"></i>تلقائي</span>
+  <span><i class="dec"></i>قرار</span>
+  <span><i class="bad"></i>رفض</span>
+</div>
+</div>
+<p class="fcap">القرار نهائي لا يُعدَّل — تصحيحه يكون بطلب إعادة مستقل لا بتغيير القرار. والمخرج الذي يُعتمد تلقائياً يُوسم بذلك ويُحتسب على المكتب الاستشاري لا على المختبر.</p>
+
+<h4>تفصيل الحالات</h4>
+
+<div class="rail">
+  <div class="rnode">
+    <div class="dot">١</div>
+    <div class="rb">
+      <b>لم يتم البدء <span class="st">STS17</span> <span class="chip c-lab">المختبر</span></b>
+      <p>تنتقل كل اختبارات الطلب إلى هذه الحالة لحظة قبول المختبر للطلب. الاختبار هنا معرَّف بطريقته وسعره ومدته، ولم تُسحب له عينة بعد.</p>
+    </div>
+  </div>
+  <div class="rnode">
+    <div class="dot">٢</div>
+    <div class="rb">
+      <b>جارٍ التنفيذ <span class="st acc">STS18</span> <span class="chip c-lab">المختبر</span> <span class="chip c-contractor">المقاول</span></b>
+      <p>يبدأ بتسجيل استلام العينة داخل النطاق الجغرافي وفي الموعد المعتمد. <strong>العدّاد لا يعمل بعد</strong>.</p>
+      <div class="branch">
+        <div class="y"><b>المقاول يؤكد الاستلام:</b> يبدأ عدّاد مدة الإنجاز من هذه اللحظة، ويُحسب الموعد النهائي من مدة الاختبار في العقد.</div>
+        <div class="n"><b>المقاول يرفض التأكيد بسبب:</b> تُلغى العينة ويعود الاختبار إلى «لم يتم البدء» — دورة العينة تُعاد من أولها.</div>
+      </div>
+    </div>
+  </div>
+  <div class="rnode">
+    <div class="dot">٣</div>
+    <div class="rb">
+      <b>بانتظار قرار المكتب الاستشاري <span class="st warn">STS19</span> <span class="chip c-consultant">المكتب الاستشاري</span></b>
+      <p>لا يُرفع المخرج إلا مكتملاً: حقول النتيجة المهيكلة كلها معبّأة، وتقرير PDF مرفق، ومعدات القياس سارية المعايرة. عند الرفع تُحسب مهلة الاعتماد (٤٨ ساعة) ويُشعَر المكتب الاستشاري.</p>
+    </div>
+  </div>
+  <div class="rnode end">
+    <div class="dot">٤</div>
+    <div class="rb">
+      <b>القرار — ثلاثة مسارات</b>
+      <div class="branch">
+        <div class="y"><b>اعتماد <span class="st ok">STS20</span></b> — قرار المفوّض الرئيسي للمكتب؛ يُشعَر المقاول والمختبر وتُقفل حالة الاختبار نهائياً.</div>
+        <div class="a"><b>اعتماد تلقائي <span class="st ok">STS20</span></b> — انقضت المهلة دون قرار: يُعتمد المخرج ويوسَم «اعتُمد تلقائياً» ويُحتسب على المكتب لا على المختبر.</div>
+        <div class="n"><b>رفض <span class="st bad">STS21</span></b> — بسبب فني إلزامي يظهر للمقاول والمختبر، ويفتح للمقاول إنشاء طلب إعادة اختبار مستقل.</div>
+      </div>
+      <p style="margin-top:9px">القرار نهائي ولا يُعدَّل — تصحيحه يكون بطلب إعادة لا بتغيير القرار. وتجاوز المختبر لمدة الإنجاز يُسجَّل عليه عند صدور القرار.</p>
+    </div>
+  </div>
+</div>
+
+<h3 id="cy-study">٢.٤ · دورة حياة الدراسة الجيوتقنية والتقرير</h3>
+<p>تُنفَّذ الدراسة الجيوتقنية داخل طلب واحد، غير أنها تسير في مسار خاص من ست مراحل متتابعة لا يجوز تجاوز أي منها؛ وحتى الرابط المباشر لمرحلة لم تبدأ يُعاد إلى المرحلة الحالية.</p>
+
+<div class="fcw scrollx">
+<svg class="fc" viewBox="0 0 1000 1190" role="img" aria-label="مخطط تدفق مراحل الدراسة الجيوتقنية الست حتى اعتماد التقرير">
+  <defs><marker id="fa4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+  <g style="marker-end:url(#fa4)">
+
+  <rect class="b cont" x="400" y="20" width="320" height="56" rx="9"/>
+  <text x="560" y="44" text-anchor="middle">المرحلة ١ · البيانات الأولية</text>
+  <text class="s" x="560" y="63" text-anchor="middle">القرار المساحي + وصف المشروع</text>
+  <polyline class="ln" points="560,76 560,96"/>
+
+  <polygon class="b dec" points="560,100 700,148 560,196 420,148"/>
+  <text x="560" y="144" text-anchor="middle">الاستشاري</text>
+  <text x="560" y="162" text-anchor="middle">يعتمد الأولية؟</text>
+  <polyline class="ln no d" points="420,148 304,148"/>
+  <rect class="b note" x="60" y="126" width="240" height="44" rx="9"/>
+  <text class="s" x="180" y="153" text-anchor="middle">له تعديل المستخرج ويُسجَّل التعديل</text>
+  <polyline class="ln" points="560,196 560,216"/>
+  <text class="e" x="572" y="210" text-anchor="start">اعتماد ← يشتغل المحرك الذكي</text>
+
+  <rect class="b cons" x="400" y="220" width="320" height="56" rx="9"/>
+  <text x="560" y="244" text-anchor="middle">المرحلة ٢ · خطة الاستكشاف</text>
+  <text class="s" x="560" y="263" text-anchor="middle">المحرك يقترح العدد والعمق والتباعد</text>
+  <polyline class="ln" points="560,276 560,296"/>
+
+  <polygon class="b dec" points="560,300 700,348 560,396 420,348"/>
+  <text x="560" y="344" text-anchor="middle">الاستشاري</text>
+  <text x="560" y="362" text-anchor="middle">يعتمد الخطة؟</text>
+  <polyline class="ln no d" points="420,348 304,348"/>
+  <rect class="b note" x="60" y="326" width="240" height="44" rx="9"/>
+  <text class="s" x="180" y="353" text-anchor="middle">أي خروج عن المقترح يوجب مبرراً</text>
+  <polyline class="ln" points="560,396 560,416"/>
+  <text class="e" x="572" y="410" text-anchor="start">اعتماد ← تُجمَّد الخطة ويُحال الطلب للمختبر</text>
+
+  <rect class="b lab" x="400" y="420" width="320" height="56" rx="9"/>
+  <text x="560" y="444" text-anchor="middle">المرحلة ٣ · الأعمال الميدانية</text>
+  <text class="s" x="560" y="463" text-anchor="middle">خطة تشغيلية ثم تنفيذ الجسات</text>
+  <polyline class="ln no d" points="400,448 304,448"/>
+  <rect class="b note" x="60" y="420" width="240" height="56" rx="9"/>
+  <text class="s" x="180" y="444" text-anchor="middle">للمختبر نقل جسة أو إضافتها بمبرر</text>
+  <text class="s" x="180" y="462" text-anchor="middle">لا حذف ولا تغيير للعمق المعتمد</text>
+  <polyline class="ln" points="560,476 560,496"/>
+
+  <polygon class="b dec" points="560,500 700,548 560,596 420,548"/>
+  <text x="560" y="553" text-anchor="middle">اكتملت كل الجسات؟</text>
+  <polyline class="ln" points="700,548 965,548 965,448 724,448"/>
+  <text class="e" x="838" y="538" text-anchor="middle">لا — تبقّت جسات قيد التنفيذ</text>
+  <polyline class="ln" points="560,596 560,616"/>
+  <text class="e" x="572" y="610" text-anchor="start">نعم — أو سبب موثّق لعدم بلوغ العمق</text>
+
+  <rect class="b lab" x="400" y="620" width="320" height="56" rx="9"/>
+  <text x="560" y="644" text-anchor="middle">المرحلة ٤ · البيانات المعملية</text>
+  <text class="s" x="560" y="663" text-anchor="middle">اختبارات إلزامية + تحليل كيميائي</text>
+  <polyline class="ln" points="560,676 560,696"/>
+
+  <polygon class="b dec" points="560,700 700,748 560,796 420,748"/>
+  <text x="560" y="753" text-anchor="middle">اكتملت كل العينات؟</text>
+  <polyline class="ln" points="420,748 304,748"/>
+  <text class="e" x="362" y="739" text-anchor="middle">لا</text>
+  <rect class="b note" x="60" y="726" width="240" height="44" rx="9"/>
+  <text class="s" x="180" y="753" text-anchor="middle">إكمال جزئي بسبب موثّق</text>
+  <polyline class="ln" points="180,770 180,850 396,850"/>
+  <polyline class="ln" points="560,796 560,818"/>
+  <text class="e" x="572" y="812" text-anchor="start">نعم</text>
+
+  <rect class="b lab" x="400" y="822" width="320" height="56" rx="9"/>
+  <text x="560" y="846" text-anchor="middle">المرحلة ٥ · التحليل الهندسي</text>
+  <text class="s" x="560" y="865" text-anchor="middle">حقول حسابية وتحليلية وتوصيات</text>
+  <polyline class="ln" points="560,878 560,898"/>
+
+  <rect class="b lab" x="400" y="902" width="320" height="56" rx="9"/>
+  <text x="560" y="926" text-anchor="middle">المرحلة ٦ · معاينة التقرير</text>
+  <text class="s" x="560" y="945" text-anchor="middle">تُبنى من المراحل المعتمدة وحدها</text>
+  <polyline class="ln" points="560,958 560,978"/>
+
+  <polygon class="b dec" points="560,982 700,1030 560,1078 420,1030"/>
+  <text x="560" y="1026" text-anchor="middle">قرار المكتب</text>
+  <text x="560" y="1044" text-anchor="middle">الاستشاري؟</text>
+  <polyline class="ln" points="420,1030 304,1030"/>
+  <text class="e" x="362" y="1021" text-anchor="middle">رفض بسبب</text>
+  <polyline class="ln" points="560,1078 560,1098"/>
+  <text class="e" x="572" y="1092" text-anchor="start">اعتماد</text>
+
+  <rect class="b bad" x="60" y="1008" width="240" height="44" rx="9"/>
+  <text x="180" y="1036" text-anchor="middle">تعود إلى المرحلة ٥</text>
+  <polyline class="ln" points="60,1030 24,1030 24,866 396,866"/>
+
+  <rect class="b good" x="400" y="1102" width="320" height="56" rx="9"/>
+  <text x="560" y="1126" text-anchor="middle">تقرير رسمي + اعتماد مخرج الدراسة</text>
+  <text class="s" x="560" y="1145" text-anchor="middle">مكتمل · STS15 ← توزيع وأرشفة</text>
+  </g>
+</svg>
+<div class="fclg">
+  <span><i class="cont"></i>المقاول</span>
+  <span><i class="lab"></i>المختبر</span>
+  <span><i class="cons"></i>المكتب الاستشاري</span>
+  <span><i class="dec"></i>بوابة مرحلة</span>
+  <span><i style="border-style:dashed"></i>قيد يحكم المرحلة</span>
+</div>
+</div>
+<p class="fcap">لا قفز بين المراحل: فتح مرحلة لم تبدأ — حتى برابط مباشر — يعيدك إلى المرحلة الحالية. والاعتماد النهائي للتقرير هو نفسه إغلاق الطلب.</p>
+
+<h4>تفصيل المراحل والبوابات</h4>
+
+<div class="chain">
+  <div class="stage">
+    <div class="n">١</div>
+    <div class="b">
+      <h4><span class="chip c-contractor">المقاول</span> <span class="chip c-consultant">المكتب الاستشاري</span> البيانات الأولية</h4>
+      <p>المقاول يرفع القرار المساحي فتُستخرج بياناته ويُبنى مضلع الأرض ويُتحقق من إغلاقه ومن مطابقة مساحته المحسوبة للصك، ثم يُدخل بيانات المالك ووصف المشروع: نوع المنشأ وعدد الأدوار والمساحة المبنية وعمق التأسيس.</p>
+      <div class="gate"><b>البوابة:</b> المكتب الاستشاري يراجع ويعدّل المستخرج (مع تسجيل التعديل) ثم يعتمد — والاعتماد هو ما يشغّل المحرك الذكي.</div>
+    </div>
+  </div>
+  <div class="stage">
+    <div class="n">٢</div>
+    <div class="b">
+      <h4><span class="chip c-consultant">المكتب الاستشاري</span> خطة الاستكشاف</h4>
+      <p>المحرك يقترح عدد الجسات وأعماقها وتباعدها من جدول كود البناء بحسب المساحة المبنية وعدد الأدوار، ويعرض أساس التوصية صفاً صفاً. الاستشاري يسحب مواقع الجسات ويعدّل الأعماق ويضيف أو يحذف.</p>
+      <div class="gate"><b>البوابة:</b> أي خروج عن مقترح المحرك — عدداً أو موقعاً أو عمقاً — يوجب مبرراً فنياً مكتوباً. وبعد الاعتماد <b>تُجمَّد الخطة كمرجع رسمي</b> ويُحال الطلب إلى المختبر لقرار القبول.</div>
+    </div>
+  </div>
+  <div class="stage">
+    <div class="n">٣</div>
+    <div class="b">
+      <h4><span class="chip c-lab">المختبر</span> الأعمال الميدانية</h4>
+      <p>المختبر يبني <strong>خطته التشغيلية</strong> فوق خطة الاستشاري: يجوز له نقل جسة أو إضافة جسة بمبرر وإقرار بالمسؤولية، ولا يجوز له حذف جسة ولا تعديل عمقها المعتمد. ثم ينفّذ جسةً جسة: تحقق جغرافي، بيانات الحفرة ومنسوب المياه، الطبقات وتصنيفها ودقّات الاختراق القياسي، العينات والصور.</p>
+      <div class="gate"><b>البوابة:</b> لا انتقال للمرحلة التالية قبل اكتمال <b>جميع</b> الجسات، وكل جسة لم تبلغ عمقها المعتمد توجب سبباً موثّقاً. ولوحة «التحقق من التنفيذ» تقارن المعتمد بالمنفَّذ فعلياً وتحسب نسبة الالتزام.</div>
+    </div>
+  </div>
+  <div class="stage">
+    <div class="n">٤</div>
+    <div class="b">
+      <h4><span class="chip c-lab">المختبر</span> البيانات المعملية</h4>
+      <p>لكل عينة اختبارات إلزامية تُحدَّد تلقائياً بنوعها (تربة أو صخر)، والتصنيف المعملي هو النهائي ويبقى الحقلي للمقارنة. ويلزم تحليل كيميائي كامل على عينة واحدة على الأقل يوصي المحرك باختيارها.</p>
+      <div class="gate"><b>البوابة:</b> اختيار عينة غير الموصى بها يوجب سبباً، وإكمال المرحلة والعينات ناقصة يوجب سبباً يظهر في معاينة التقرير.</div>
+    </div>
+  </div>
+  <div class="stage">
+    <div class="n">٥</div>
+    <div class="b">
+      <h4><span class="chip c-lab">المختبر</span> التحليل الهندسي</h4>
+      <p>ثلاث طبقات: <strong>حقول حسابية</strong> تُحسب بمعادلات معرَّفة بإصدارها ومحمية من التعديل اليدوي وتُعاد عند تغيير أي مدخل؛ <strong>حقول تحليلية</strong> ينتجها المحرك من قاعدة المعرفة (التصنيف الزلزالي يُشتق من قيم الاختراق المسجّلة)؛ <strong>توصيات</strong> بنوع الأساس وعمقه وقدرة التحمل ونوع الأسمنت والعزل — إضافة إلى حقول يدوية معدودة تتطلب حكم مهندس.</p>
+      <div class="gate"><b>البوابة:</b> لا انتقال قبل حساب كل الحقول وإنتاج التحليلية والتوصيات. وإصدار المعادلات مثبَّت على الدراسة ولا يتغير بعد إصدار التقرير.</div>
+    </div>
+  </div>
+  <div class="stage">
+    <div class="n">٦</div>
+    <div class="b">
+      <h4><span class="chip c-consultant">المكتب الاستشاري</span> التقرير النهائي</h4>
+      <p>تُبنى معاينة كاملة من المراحل المعتمدة وحدها — لا يُكتب داخل التقرير شيء — موزّعة على أقسام مطابقة لبنود الكود، ومعها قائمة تحقق من ثمانية بنود لا يُفعَّل زر الاعتماد قبل استيفائها كلها.</p>
+      <div class="gate"><b>القرار:</b> <b>الاعتماد</b> يولّد التقرير الرسمي بالقالب الساري، ويعتمد مخرج الدراسة، ويُغلق الطلب، ويوزّع النسخ على المقاول والاستشاري والأرشيف الحكومي ونسخة غير قابلة للتعديل. <b>الرفض</b> بسبب يعيد الدراسة إلى مرحلة التحليل ويلغي اكتمالها.</div>
+    </div>
+  </div>
+</div>
+
+<div class="note warn">
+  <p><strong>خصوصية الدراسة الجيوتقنية:</strong> في الطلب القياسي يصدر قرار المكتب الاستشاري على كل مخرج على حدة، أما الدراسة الجيوتقنية فمخرجها واحد هو التقرير، واعتماده هو ذاته إغلاق الطلب. ولهذا انفردت بمسار «الرفض المعيد إلى مرحلة سابقة» بدلاً من «الرفض المستوجب لطلب إعادة».</p>
+</div>
+
+<h3 id="cy-sample">٢.٥ · دورة حياة العينة — مساران متوازيان</h3>
+<p>للعينة في المنصة بُعدان: بُعد <strong>تعاقدي</strong> يربطها بالاختبار ويحكم بدء احتساب المدة، وبُعد <strong>مختبري</strong> يوثّق حيازتها من لحظة الجمع إلى الإتلاف وفق متطلبات اعتماد المختبرات.</p>
+
+<div class="fcw scrollx">
+<svg class="fc" viewBox="0 0 1000 486" role="img" aria-label="مخطط دورة حياة العينة: المسار التعاقدي وسلسلة الحيازة">
+  <defs><marker id="fa5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+  <g style="marker-end:url(#fa5)">
+
+  <text class="h" x="960" y="22" text-anchor="start">المسار الأول · العينة التعاقدية — تحكم بدء العدّاد</text>
+
+  <rect class="b lab" x="740" y="40" width="220" height="56" rx="9"/>
+  <text x="850" y="64" text-anchor="middle">المختبر يسجّل العينة</text>
+  <text class="s" x="850" y="83" text-anchor="middle">تحقق جغرافي + عمق + اسم الفني</text>
+  <polyline class="ln" points="740,68 704,68"/>
+
+  <polygon class="b dec" points="600,28 700,68 600,108 500,68"/>
+  <text x="600" y="73" text-anchor="middle">تأكيد المقاول؟</text>
+  <polyline class="ln" points="500,68 464,68"/>
+  <text class="e" x="482" y="58" text-anchor="middle">نعم</text>
+  <polyline class="ln" points="600,108 600,146"/>
+  <text class="e" x="612" y="132" text-anchor="start">لا — برفض مسبَّب</text>
+
+  <rect class="b good" x="240" y="40" width="220" height="56" rx="9"/>
+  <text x="350" y="64" text-anchor="middle">يبدأ عدّاد مدة الإنجاز</text>
+  <text class="s" x="350" y="83" text-anchor="middle">وأي تأخر بعده على المختبر</text>
+
+  <rect class="b bad" x="490" y="150" width="220" height="56" rx="9"/>
+  <text x="600" y="174" text-anchor="middle">تُلغى العينة ويعود</text>
+  <text class="s" x="600" y="193" text-anchor="middle">الاختبار إلى STS17</text>
+  <polyline class="ln" points="710,178 850,178 850,100"/>
+
+  <line class="ln no d" x1="40" y1="232" x2="960" y2="232"/>
+
+  <text class="h" x="960" y="266" text-anchor="start">المسار الثاني · سلسلة الحيازة — لا تُعدَّل بعد التسجيل</text>
+
+  <rect class="b lab" x="740" y="286" width="180" height="46" rx="9"/>
+  <text x="830" y="314" text-anchor="middle">في الموقع</text>
+  <polyline class="ln" points="740,309 704,309"/>
+  <text class="e" x="722" y="300" text-anchor="middle">نقل</text>
+
+  <rect class="b lab" x="520" y="286" width="180" height="46" rx="9"/>
+  <text x="610" y="314" text-anchor="middle">قيد النقل</text>
+  <polyline class="ln" points="520,309 484,309"/>
+  <text class="e" x="502" y="300" text-anchor="middle">استلام</text>
+
+  <rect class="b lab" x="300" y="286" width="180" height="46" rx="9"/>
+  <text x="390" y="314" text-anchor="middle">مستلمة</text>
+  <polyline class="ln" points="300,309 264,309"/>
+  <text class="e" x="282" y="300" text-anchor="middle">تجهيز</text>
+
+  <rect class="b lab" x="80" y="286" width="180" height="46" rx="9"/>
+  <text x="170" y="314" text-anchor="middle">قيد التجهيز</text>
+  <polyline class="ln" points="170,332 170,364 830,364 830,392"/>
+  <text class="e" x="500" y="357" text-anchor="middle">حدث حيازة: اختبار</text>
+
+  <rect class="b lab" x="740" y="396" width="180" height="46" rx="9"/>
+  <text x="830" y="424" text-anchor="middle">قيد الاختبار</text>
+  <polyline class="ln d" points="740,419 704,419"/>
+
+  <rect class="b lab" x="520" y="396" width="180" height="46" rx="9"/>
+  <text x="610" y="424" text-anchor="middle">مختبرة</text>
+  <polyline class="ln" points="520,419 484,419"/>
+  <text class="e" x="502" y="410" text-anchor="middle">تخزين</text>
+
+  <rect class="b good" x="300" y="396" width="180" height="46" rx="9"/>
+  <text x="390" y="424" text-anchor="middle">مؤرشفة</text>
+  <polyline class="ln" points="300,419 264,419"/>
+  <text class="e" x="282" y="410" text-anchor="middle">إتلاف</text>
+
+  <rect class="b bad" x="80" y="396" width="180" height="46" rx="9"/>
+  <text x="170" y="424" text-anchor="middle">متلفة</text>
+  </g>
+</svg>
+<div class="fclg">
+  <span><i class="lab"></i>حيازة المختبر</span>
+  <span><i class="dec"></i>قرار المقاول</span>
+  <span><i class="good" style="border-color:var(--ok); background:var(--ok-soft)"></i>حالة مستقرة</span>
+  <span><i class="bad"></i>إلغاء أو إتلاف</span>
+</div>
+</div>
+<p class="fcap">كل انتقال في سلسلة الحيازة حدث موثّق بمن نفّذه وأين ومتى وبأي حرارة، ولا يُحذف بعد تسجيله. والسهم المتقطع بين «قيد الاختبار» و«مختبرة» مرسوم كذلك لأن الحالة معرَّفة في النموذج ولا يصل إليها حدث حيازة في التطبيق حالياً — ملاحظة مرصودة لا سلوك مقصود.</p>
+
+<div class="mini">
+  <div class="mcy">
+    <h4>المسار الأول: عينة الاختبار — تحكم العدّاد</h4>
+    <div class="flow">
+      <span class="st">تسجيل المختبر</span><i class="arw">←</i>
+      <span class="st warn">بانتظار تأكيد المقاول</span><i class="arw">←</i>
+      <span class="st ok">مؤكَّدة — بدأ العدّاد</span>
+    </div>
+    <p><strong>التسجيل:</strong> داخل النطاق الجغرافي المعتمد وفي الموعد المتفق عليه، بعمق العينة واسم الفني المستلم، ويُرسل إشعار فوري للمقاول.</p>
+    <p><strong>التأكيد:</strong> بيد المقاول وحده. تأكيده يشغّل عدّاد مدة الإنجاز ويجعل أي تأخر لاحق محسوباً على المختبر. ورفضه بسبب مكتوب يلغي العينة ويعيد الاختبار إلى نقطة الصفر.</p>
+  </div>
+  <div class="mcy">
+    <h4>المسار الثاني: سلسلة الحيازة — لا تُعدَّل بعد التسجيل</h4>
+    <div class="flow">
+      <span class="st">في الموقع</span><i class="arw">←</i><span class="st">قيد النقل</span><i class="arw">←</i><span class="st">مستلمة</span><i class="arw">←</i><span class="st acc">قيد التجهيز</span><i class="arw">←</i><span class="st acc">قيد الاختبار</span><i class="arw">←</i><span class="st ok">مؤرشفة</span><i class="arw">←</i><span class="st bad">متلفة</span>
+    </div>
+    <p><strong>كل انتقال حدث موثّق:</strong> جمع · نقل · استلام · تجهيز · اختبار · تخزين · إتلاف — بمن نفّذه وأين وبأي حرارة وأي ملاحظة، ولا يُحذف حدث بعد تسجيله.</p>
+    <p><strong>الهوية:</strong> وسم فريد ورقم ختم وصور بالوقت والإحداثيات وأبعاد وكتلة وحالة فيزيائية وموقع تخزين ومدة احتفاظ (تسعون يوماً للتربة، وستة أشهر للخرسانة بعد الاعتماد). والإتلاف بمحضر مسبَّب يُقيَّد في السلسلة نفسها.</p>
+  </div>
+</div>
+
+<h3 id="cy-support">٢.٦ · الدورات المساندة</h3>
+<p>ست دورات فرعية تحيط بالدورة الرئيسية، منها ما يغذّيها قبل انطلاقها ومنها ما يُغلقها بعد اكتمالها.</p>
+
+<div class="mini">
+  <div class="mcy">
+    <h4>عرض السعر ← العقد</h4>
+    <div class="flow"><span class="st warn">بانتظار رد المختبر</span><i class="arw">←</i><span class="st acc">عرض مقدَّم</span><i class="arw">←</i><span class="st ok">مقبول — عقد</span><i class="arw">←</i><span class="st bad">مرفوض</span></div>
+    <p><span class="chip c-contractor">المقاول</span> يطلب العرض من صفحة المختبر في الدليل ويحدّد المشروع والاستشاري المشرف وآلية الدفع والاختبارات. <span class="chip c-lab">المختبر</span> يردّ بسعر نهائي لكل بند دون تغيير سعره الأساسي، ولا يُقبل ردّه وفي قائمته بيانات ناقصة. القبول يوقَّع بـ OTP فيصدر عقد إلكتروني فعّال وتُحفظ نسخته ويُشعَر الاستشاري. العرض صالح أربعة عشر يوماً.</p>
+  </div>
+  <div class="mcy">
+    <h4>قائمة اختبارات المختبر</h4>
+    <div class="flow"><span class="st warn">بيانات ناقصة <code>STS03</code></span><i class="arw">←</i><span class="st ok">فعّال <code>STS01</code></span><i class="arw">↔</i><span class="st bad">موقوف <code>STS02</code></span></div>
+    <p>الاختيار من العناصر المرجعية فقط. يكتمل العنصر بالوحدة وطرق التنفيذ والسعر ومدة الإنجاز فيصبح فعّالاً ويظهر في الدليل وفي عروض الأسعار. <strong>لا حذف</strong> — إيقاف مؤقت فقط. وتعديل السعر لا يمسّ العقود القائمة.</p>
+  </div>
+  <div class="mcy">
+    <h4>التفويض</h4>
+    <div class="flow"><span class="st warn">بانتظار القبول <code>STS22</code></span><i class="arw">←</i><span class="st ok">فعّال <code>STS23</code></span><i class="arw">←</i><span class="st bad">مرفوض <code>STS24</code></span><i class="arw">·</i><span class="st">ملغي <code>STS25</code></span></div>
+    <p>المباشر — من المفوّض الرئيسي أو من يملك صلاحية التفويض — يبدأ فوراً. وغير المباشر لا يسري قبل قبول الموظف، ولا يتجاوز نطاق مُفوِّضه. والموظف المفوَّض يرى ما فُوِّض له وحده. وبعد بدء الأعمال الميدانية لا يُعدَّل التفويض إلا من المفوّض الرئيسي، والإلغاء يقطع الوصول فوراً ويُبقي السجل.</p>
+  </div>
+  <div class="mcy">
+    <h4>التقييم والشهادة</h4>
+    <div class="flow"><span class="st">عقد منتهٍ</span><i class="arw">←</i><span class="st ok">معتمد <code>STS06</code></span><i class="arw">←</i><span class="st">مخفي <code>STS07</code></span><i class="arw">←</i><span class="st bad">محذوف <code>STS08</code></span></div>
+    <p>مرة واحدة لكل عقد، وللمقاول المفوّض الرئيسي وحده، وبعد انتهاء العقد لا أثناءه. التقييم يعيد حساب متوسط المختبر وترتيبه في الدليل فوراً، وهو <strong>شرط لتحميل شهادة الإتمام</strong>. الدعم التقني يخفي المخالف، ومدير النظام وحده يحذف.</p>
+  </div>
+  <div class="mcy">
+    <h4>الفاتورة</h4>
+    <div class="flow"><span class="st">مسودة</span><i class="arw">←</i><span class="st warn">مستحقة</span><i class="arw">←</i><span class="st ok">مسددة</span><i class="arw">·</i><span class="st bad">متأخرة</span></div>
+    <p>في عقود <strong>الدفع المقدّم</strong> تصدر الفاتورة وتُسدَّد لحظة إرسال الطلب وقبل وصوله للمختبر. وفي عقود <strong>الدفع عند الإتمام</strong> تصدر مسودة عند قبول المختبر وتصبح مستحقة عند إغلاق الطلب بمهلة ثلاثين يوماً. والسداد يُشعر المختبر فوراً.</p>
+  </div>
+  <div class="mcy">
+    <h4>المستند والأرشيف</h4>
+    <div class="flow"><span class="st">توليد</span><i class="arw">←</i><span class="st acc">إصدار جديد</span><i class="arw">←</i><span class="st ok">احتفاظ</span></div>
+    <p>كل مستند يُولَّد بالقالب الساري لحظة التوليد ويحتفظ بإصداره إلى الأبد. التعديل لا يكون إلا بإصدار جديد — <strong>لا حذف في الأرشيف</strong>. ولكل مستند بصمة وتصنيف سرية ومدة احتفاظ: عشر سنوات للنتائج والسجلات، وعشرون للعقود والشهادات.</p>
+  </div>
+</div>
+
+<div class="note ok">
+  <p><strong>الضابط المشترك بين الدورات:</strong> لا يقع انتقال بين حالتين إلا بإجراء صادر عن مستخدم محدَّد الدور والصفة، أو بانقضاء مهلة معلومة سلفاً. ويُقيَّد كل انتقال في سجل التدقيق باسم المنفّذ ودوره ووقت التنفيذ، بما في ذلك الانتقالات التي تنفّذها المنصة تلقائياً.</p>
+</div>
+
+<hr>
+
+<h2 id="ctrl">٣ · الرقابة والمؤشرات</h2>
+<p class="lede">لا تكتفي المنصة بتسجيل ما جرى، بل تُعمِل ضوابط رقابية مضمّنة في مسار العمل نفسه: مهل نظامية تُنفَّذ تلقائياً، ومقارنة بين المخطَّط والمنفَّذ، ومؤشرات إنجاز محسوبة من البيانات التشغيلية لا مُدخَلة يدوياً. ويعرض هذا القسم هذه الضوابط ومواضع إعمالها وأثرها.</p>
+
+<h3 id="ctrl-lab">٣.١ · مراقبة قرارات المختبر</h3>
+<p>يمثّل قرار المختبر على الطلب أول نقطة اختناق في الدورة؛ فتأخره يعطّل المشروع دون أن يظهر أثره في أي سجل ما لم يُقس. ولذلك أحاطت المنصة هذا القرار بمهلة نظامية تُنفَّذ تلقائياً ومؤشرات تتراكم على المنشأة.</p>
+
+<div class="scroll">
+<table>
+  <thead><tr><th>الضابط</th><th>آلية الإعمال</th><th>الأثر المترتب</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>المهلة النظامية للقرار</td>
+      <td>تُحتسب من لحظة استلام الطلب، وقيمتها الافتراضية <span class="num">12</span> ساعة، وتُجمَّد داخل الطلب عند إرساله فلا يغيّرها أي تعديل لاحق على الإعدادات.</td>
+      <td>موعد نهائي ثابت لا يخضع للتفسير، ويُحتسب عليه الالتزام.</td>
+    </tr>
+    <tr>
+      <td>العدّاد التنازلي</td>
+      <td>يظهر في قائمة الطلبات، وفي ترويسة تفاصيل الطلب، وفي قائمة «يحتاج إجراءً الآن» بلوحة المعلومات، وفي المواعيد القادمة.</td>
+      <td>إظهار المهلة للطرفين قبل انقضائها لا بعده.</td>
+    </tr>
+    <tr>
+      <td>الفحص الدوري التلقائي</td>
+      <td>تفحص المنصة عند كل دخول وكل دقيقة الطلبات القائمة في حالة «بانتظار قرار المختبر» التي انقضى موعدها النهائي.</td>
+      <td>إعمال المهلة دون تدخل بشري ودون اعتماد على متابعة يدوية.</td>
+    </tr>
+    <tr>
+      <td>أثر التجاوز</td>
+      <td>وفق السياسة المعتمدة من مدير النظام: إمّا إنهاء الطلب بحالة «منتهي المهلة» مع إشعار المقاول والمختبر وخصم من مؤشر الالتزام، أو الاكتفاء بإشعار المختبر وإشعار الجهة الإشرافية دون تغيير الحالة.</td>
+      <td>حالة مستقلة عن الإلغاء لأنها تُحتسب على المختبر لا على المقاول.</td>
+    </tr>
+    <tr>
+      <td>حصر صلاحية القرار</td>
+      <td>القبول والرفض من اختصاص المفوّض الرئيسي للمختبر حصراً (البند 20 من مصفوفة الصلاحيات)؛ ويظهر لموظف المختبر تنبيه صريح بأن الاطّلاع متاح دون القرار.</td>
+      <td>منع صدور قرار مُلزِم عن غير صاحب الصفة.</td>
+    </tr>
+    <tr>
+      <td>تسبيب الرفض</td>
+      <td>لا يُقبل الرفض دون سبب مكتوب، ويظهر السبب للمقاول ويُقيَّد في سجل عمليات الطلب.</td>
+      <td>قابلية مراجعة القرار ومساءلة صاحبه.</td>
+    </tr>
+    <tr>
+      <td>ضبط موعد التنفيذ</td>
+      <td>لا يُقبل تسجيل استلام العينة قبل بداية النطاق الزمني المعتمد. ويُسمح بالبدء بعد انقضائه مع احتساب مدة التأخر بالساعات وقيدها في سجل العمليات.</td>
+      <td>التزام المختبر بالموعد الذي اختاره بنفسه، وتوثيق التأخر بدل إغفاله.</td>
+    </tr>
+    <tr>
+      <td>تجاوز مدة الإنجاز</td>
+      <td>عند صدور قرار المكتب الاستشاري، تقارن المنصة زمن رفع المخرج بمدة الإنجاز المتفق عليها في العقد.</td>
+      <td>خصم من مؤشر الالتزام عند التجاوز.</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h4>المؤشرات المترتبة ومواضع ظهورها</h4>
+<div class="mini">
+  <div class="mcy">
+    <h4>مؤشر الالتزام بالمواعيد</h4>
+    <p>نسبة محسوبة على مستوى المنشأة، يُخصم منها عند انقضاء مهلة القرار دون ردّ، وعند البدء المتأخر عن النطاق المعتمد، وعند تجاوز مدة الإنجاز.</p>
+    <p><strong>مواضع الظهور:</strong> بطاقة المختبر في الدليل العام · ترويسة شاشة مراجعة النتيجة لدى المكتب الاستشاري · تقارير أداء المختبرات · قائمة «مختبرات تحتاج متابعة» في شاشة الحوكمة.</p>
+  </div>
+  <div class="mcy">
+    <h4>عدّاد الاعتمادات التلقائية</h4>
+    <p>يُزاد عند كل مخرج يُعتمد بانقضاء مهلة المكتب الاستشاري دون قرار، ويُحتسب مؤشراً على استجابة المكتب لا على أداء المختبر.</p>
+    <p><strong>مواضع الظهور:</strong> شاشة اعتماد النتائج · صفحة المنشأة في الدليل · لوحة الحوكمة · تبويب الجودة والامتثال في التقارير.</p>
+  </div>
+  <div class="mcy">
+    <h4>قائمة المتابعة الرقابية</h4>
+    <p>تُدرج المنصة تلقائياً في شاشة الحوكمة كل مختبر انخفض التزامه دون <span class="num">88%</span>، أو تجاوزت اعتماداته التلقائية اثنتين، أو قارب اعتماده لدى المركز السعودي للاعتماد على الانتهاء خلال <span class="num">120</span> يوماً.</p>
+  </div>
+</div>
+
+<h3 id="ctrl-plan">٣.٢ · مراقبة خطة التنفيذ</h3>
+<p>في الدراسة الجيوتقنية تتعدد نسخ الخطة، ومن هنا ينشأ الخطر الرقابي: إذا قِيس التنفيذ على خطة المختبر التشغيلية اختفى الانحراف عن خطة الاستشاري المعتمدة. ولذلك تفصل المنصة بين ثلاث طبقات وتقيس دائماً على الطبقة الأولى.</p>
+
+<div class="scroll">
+<table>
+  <thead><tr><th>الطبقة</th><th>الجهة المالكة</th><th>حدود التعديل</th></tr></thead>
+  <tbody>
+    <tr><td><strong>الخطة المعتمدة</strong></td><td>المكتب الاستشاري</td><td>تُجمَّد لحظة الاعتماد وتصبح المرجع الرسمي الثابت، ولا تُعدَّل بعده.</td></tr>
+    <tr><td><strong>الخطة التشغيلية</strong></td><td>المختبر</td><td>يجوز نقل جسة أو إضافة جسة بمبرر فني وإقرار بالمسؤولية؛ ولا يجوز حذف جسة ولا تعديل عمقها المعتمد.</td></tr>
+    <tr><td><strong>التنفيذ الفعلي</strong></td><td>الفريق الميداني</td><td>تُلتقط الإحداثيات من جهاز التنفيذ لحظة بدء الجسة ولا تُدخل يدوياً.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h4>احتساب الانحراف</h4>
+<p>تحسب المنصة المسافة بين الموقع المعتمد والموقع المنفَّذ فعلياً بالمتر، ثم تصنّف كل جسة وفق حد التسامح المعتمد في الإعدادات (القيمة الافتراضية <span class="num">2</span> متر):</p>
+<ul class="legend">
+  <li><span class="st ok">مطابق</span><span>انطباق تام على الموقع المعتمد</span></li>
+  <li><span class="st warn">ضمن النطاق</span><span>انحراف لا يتجاوز حد التسامح</span></li>
+  <li><span class="st bad">يحتاج مراجعة</span><span>انحراف يتجاوز حد التسامح</span></li>
+  <li><span class="st">لم يُنفَّذ</span><span>جسة معتمدة لم تُحفر</span></li>
+</ul>
+
+<div class="note">
+  <p><strong>نسبة الالتزام تُعرض بمقامين، لا بمقام واحد:</strong></p>
+  <ul>
+    <li><strong>النسبة من المنفَّذ</strong> = عدد الجسات المقبولة ÷ عدد الجسات المنفَّذة.</li>
+    <li><strong>النسبة من المعتمد</strong> = عدد الجسات المقبولة ÷ عدد الجسات التي اعتمدها المكتب الاستشاري، مع استبعاد ما أضافه المختبر من الحساب.</li>
+  </ul>
+  <p>والفارق بينهما جوهري: الجسة التي لم تُحفر أصلاً لا تظهر في المقام الأول فتبدو النسبة أعلى مما تستحق. ولذلك تعرض المنصة النسبتين معاً وتترك ترجيح إحداهما قراراً تنظيمياً لا حسابياً.</p>
+</div>
+
+<h4>ضوابط ميدانية مساندة</h4>
+<div class="spec two">
+  <section>
+    <h4>قبل التنفيذ وأثناءه</h4>
+    <ul>
+      <li>التحقق الجغرافي عند بدء الجسة وعند تسجيل استلام العينة ضمن النطاق المعتمد (<span class="num">3</span> أمتار افتراضياً).</li>
+      <li>الإدخال اليدوي خارج الموقع متاح بمبرر مكتوب، ويظهر في تفاصيل الجسة بعلامة «خارج الموقع».</li>
+      <li>الصور الميدانية تُقيَّد بوقتها وإحداثياتها وبصمة ملفها.</li>
+      <li>مؤشر خطة التنفيذ في مرحلة الأعمال الميدانية: يبدأ من <span class="num">100%</span> ويُخصم منه <span class="num">2%</span> لكل متر نقل و<span class="num">4%</span> لكل جسة مضافة — وهي سياسة منصة قابلة للتهيئة.</li>
+    </ul>
+  </section>
+  <section>
+    <h4>عند الإقفال</h4>
+    <ul>
+      <li>قصور العمق: يُحسب الفرق بين العمق المعتمد والمنفَّذ لكل جسة، ولا تُقفل الجسة دون سبب موثّق لعدم بلوغ العمق.</li>
+      <li>لا انتقال إلى المرحلة المعملية قبل اكتمال جميع الجسات.</li>
+      <li>تُدرج نتيجة المقارنة في قسم «الاستكشاف الحقلي» بتقرير الدراسة: نسبة الالتزام بمقاميها، وعدد الجسات التي تحتاج مراجعة، وعدد الجسات غير المنفَّذة.</li>
+    </ul>
+  </section>
+</div>
+
+<div class="note ok">
+  <p><strong>موضع الإظهار:</strong> لوحة «التحقق من التنفيذ» أسفل مرحلة الأعمال الميدانية تعرض خريطة تقابل فيها المواقع المعتمدة بالمواقع المنفَّذة وخطوط الانحراف بينها، وجدولاً بكل جسة ومسافة انحرافها وتصنيفها. وتظهر النسبة كذلك في ترويسة الدراسة، وفي تبويب الدراسات الجيوتقنية بالتقارير.</p>
+</div>
+
+<h3 id="ctrl-progress">٣.٣ · قياس نسب الإنجاز</h3>
+<p>جميع نسب الإنجاز في المنصة مشتقة من البيانات التشغيلية، ولا يوجد حقل إنجاز يُدخله مستخدم. والجدول الآتي يبيّن منهجية الاحتساب في كل مستوى وموضع ظهورها.</p>
+
+<div class="scroll">
+<table>
+  <thead><tr><th>المستوى</th><th>منهجية الاحتساب</th><th>موضع الظهور</th></tr></thead>
+  <tbody>
+    <tr><td><strong>الطلب</strong></td><td>عدد الاختبارات التي صدر عليها قرار (اعتماد أو رفض) ÷ إجمالي اختبارات الطلب.</td><td>عمود «التقدّم» في قائمة الطلبات · مؤشرات تفاصيل الطلب.</td></tr>
+    <tr><td><strong>الاختبار</strong></td><td>نسبة زمنية من مدة الإنجاز: المنقضي من تأكيد استلام العينة حتى الموعد النهائي، ويتغيّر لون المؤشر عند تجاوز <span class="num">80%</span> من المدة.</td><td>شريط «مهل التنفيذ والاعتماد» في تفاصيل الطلب.</td></tr>
+    <tr><td><strong>الدراسة الجيوتقنية</strong></td><td>المرحلة الحالية من ست مراحل · الجسات المكتملة ÷ إجماليها · العمق المنفَّذ ÷ العمق المعتمد · العينات المكتملة معملياً ÷ إجماليها · نتائج التحليل الكيميائي المكتملة.</td><td>مؤشرات ترويسة الدراسة · شريط المراحل.</td></tr>
+    <tr><td><strong>الجسة</strong></td><td>العمق المنفَّذ ÷ العمق المعتمد، مع عدد الطبقات والعينات المسجّلة.</td><td>شاشة الجسة · جدول الجسات.</td></tr>
+    <tr><td><strong>العقد</strong></td><td>الطلبات المكتملة ÷ الطلبات المنشأة على العقد · نسبة المخرجات المعتمدة بقرار صريح دون انقضاء مهلة.</td><td>جدول العقود · بطاقة تفاصيل العقد.</td></tr>
+    <tr><td><strong>المنشأة</strong></td><td>مؤشر الالتزام بالمواعيد · متوسط التقييم وعدد المراجعات · عدد الاعتمادات التلقائية.</td><td>الدليل العام · تقارير أداء المختبرات.</td></tr>
+    <tr><td><strong>المنصة</strong></td><td>نسبة الالتزام بالمهل شهرياً مقابل مستهدف <span class="num">90%</span> · معدل رفض المخرجات · متوسط زمن الدورة لكل مرحلة · حجم الطلبات والمكتمل منها.</td><td>لوحة التشغيل · تبويبا التشغيل والجودة في التقارير.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="ctrl-boards">٣.٤ · لوحات المتابعة والتقارير</h3>
+<div class="spec two">
+  <section>
+    <h4>قائمة «يحتاج إجراءً الآن»</h4>
+    <ul>
+      <li>تُبنى لكل مستخدم من نطاق صلاحيته وتفويضاته، ومرتّبة بأقرب مهلة انتهاءً لا بتاريخ الإنشاء.</li>
+      <li>تجمع: الطلبات المنتظرة للقرار، والمخرجات المنتظرة للاعتماد، وخطط الاستكشاف المعلّقة، والاختبارات المقتربة من تجاوز مدة الإنجاز، والمسودات غير المرسلة، والتفويضات المنتظرة للقبول، والفواتير المتأخرة، والتقييمات المستحقة.</li>
+      <li>تُصنَّف البنود إلى ثلاث درجات: حرج، يحتاج قراراً، معلومات.</li>
+    </ul>
+  </section>
+  <section>
+    <h4>الإشعارات وسجل التدقيق</h4>
+    <ul>
+      <li>يُوجَّه الإشعار إلى الدور والمنشأة المعنيين معاً، فلا يصل إشعار طلب إلى منشأة ليست طرفاً فيه.</li>
+      <li>يُقيَّد كل إجراء في سجل التدقيق بالمنفّذ ودوره ومنشأته والكيان المتأثر وعنوان الجهاز ودرجة الخطورة.</li>
+      <li>الأطراف تطّلع على سجل منشأتها، بينما تطّلع الجهة الإشرافية ومدير النظام والدعم التقني على سجل المنصة كاملاً.</li>
+      <li>تُتاح جدولة التقارير الدورية بصيغها ومستلميها، وتُرسل آلياً وفق دوريتها.</li>
+    </ul>
+  </section>
+</div>
+
+<hr>
+
+<h2 id="ai">٤ · حلول الذكاء الاصطناعي</h2>
+<p class="lede">يعمل المحرك الذكي في المنصة ضمن ثلاثة مواضع محددة: اقتراح خطة الاستكشاف، واشتقاق الحقول التحليلية والتوصيات في الدراسة، وتحليل التقارير الهندسية مقابل قواعد المعرفة المعتمدة. وهو في المواضع الثلاثة أداة إسناد للقرار لا بديل عنه.</p>
+
+<h3 id="ai-scope">٤.١ · الغرض والحدود</h3>
+<div class="spec two">
+  <section>
+    <h4>ما يقوم به</h4>
+    <ul>
+      <li>يقرأ المستند أو بيانات الدراسة ويقيسها على حزمة المعرفة المعتمدة ومتطلبات كود البناء السعودي.</li>
+      <li>يُظهر ما ينقص من بيانات، وما يتعارض من معطيات، وما لا يمكن الحكم عليه بالسند المتاح.</li>
+      <li>يصنّف كل مخرج بنوعه: بيانات مقاسة، أو بيانات محسوبة، أو استنتاج تحليلي، أو توصية — ولكل منها مرجعه.</li>
+      <li>يصدر حكماً لكل متطلب بإحدى الحالات: متوافق، غير متوافق، متوافق جزئياً، غير قابل للتقييم، غير منطبق.</li>
+    </ul>
+  </section>
+  <section>
+    <h4>ما لا يقوم به</h4>
+    <ul>
+      <li>لا يعتمد مخرجاً ولا يرفضه، ولا يوقّع تقريراً، ولا يُغلق طلباً.</li>
+      <li>لا يُنشأ له مستخدم مستقل في المنصة؛ تشغيله صلاحية ممنوحة لمستخدم قائم.</li>
+      <li>لا يستنتج قيمة لا يوجد لها سند في المرجع المعتمد، ويصرّح بعدم إمكانية التقييم بدل الافتراض.</li>
+      <li>لا يُنهي مسؤولية المفوّض الرئيسي النظامية عن القرار بأي حال.</li>
+    </ul>
+  </section>
+</div>
+
+<h3 id="ai-routes">٤.٢ · مسارات التشغيل والتكلفة</h3>
+<p>صُمم التشغيل على مسارين — سحابي ومحلي داخل بيئة الجهة — تحكمهما سياسة معتمدة من مدير النظام لا اختيار فردي عند كل تشغيل، مع تحوّل تلقائي عند تعذّر المسار المفضَّل وإعلان سبب التحوّل.</p>
+
+<div class="scroll">
+<table>
+  <thead><tr><th>السياسة</th><th>آلية العمل</th><th>دواعي الاختيار</th></tr></thead>
+  <tbody>
+    <tr><td><strong>فحص محلي ثم سحابي</strong></td><td>يفحص المسار المحلي المستند أولاً بلا تكلفة، ولا يُستدعى السحابي إلا إذا كان المستند مستوفياً وصالحاً للتحليل العميق.</td><td>الحد من الإنفاق مع الإبقاء على جودة التحليل العميق للمستندات المستحقة.</td></tr>
+    <tr><td><strong>محلي أولاً</strong></td><td>يُشغَّل المسار المحلي دائماً، ولا يُستدعى السحابي إلا عند تعذّر المحلي.</td><td>أدنى تكلفة وأعلى درجات سيادة البيانات.</td></tr>
+    <tr><td><strong>سحابي أولاً</strong></td><td>يُشغَّل المسار السحابي، ويتحوّل التشغيل تلقائياً إلى المحلي عند توقف الاشتراك أو تعذّر الوصول.</td><td>أولوية عمق التحليل مع ضمان الاستمرارية.</td></tr>
+    <tr><td><strong>مقارنة المسارين</strong></td><td>يُشغَّل المساران بالسياسة وحزمة المعرفة ومخطط المخرجات نفسها لقياس الفارق.</td><td>التحقق قبل اعتماد المسار المحلي بديلاً دائماً.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h4>بوابة مطابقة النطاق — قبل أي تكلفة</h4>
+<p>قبل استدعاء أي نموذج، تصنّف المنصة المستند وتقارنه بملف التقييم المختار. فإذا كان خارج النطاق أُوقف التشغيل وأُعلم المستخدم بالتصنيف المكتشف واقتُرح عليه ملف التقييم المناسب، دون أن تُصرف أي تكلفة. ولا يُصعَّد المستند من الفحص المحلي إلى التحليل السحابي المدفوع في ثلاث حالات: خروجه عن نطاق ملف التقييم، أو خلوه من البيانات اللازمة للتقييم أصلاً، أو كون حالة الاستخدام غير منطبقة عليه.</p>
+
+<div class="mini">
+  <div class="mcy">
+    <h4>التكلفة المرجعية</h4>
+    <p>تكلفة المستند على المسار السحابي <span class="num">1.67</span> ريال، بميزانية مرجعية قدرها <span class="num">15,000</span> ريال شهرياً تغطي نحو <span class="num">9,000</span> مستند. وتظهر في الشاشة جدولة الإنفاق مع نمو الحجم مقابل التكلفة الثابتة للمسار المحلي.</p>
+    <p>ويحوّل المسار المحلي الميزانية ذاتها إلى سعة حوسبة داخل بيئة الجهة — أي تكلفة سعة ثابتة بدل استهلاك متغيّر.</p>
+  </div>
+  <div class="mcy">
+    <h4>السيادة على البيانات</h4>
+    <p>على المسار المحلي لا يغادر المستند بيئة الجهة ولا تُستدعى أي خدمة خارجية. أما المسار السحابي فيستوجب اعتماد سياسة إقامة البيانات لأن المستند يغادر البيئة إلى واجهة نموذج خارجية.</p>
+  </div>
+  <div class="mcy">
+    <h4>استمرارية التشغيل</h4>
+    <p>انقطاع الاشتراك السحابي لتأخر السداد لا يوقف الدراسة؛ إذ يتحوّل التشغيل تلقائياً إلى المسار المحلي بالسياسة وحزمة المعرفة نفسها. وتتيح الشاشة إيقاف استخدام المسار السحابي بقرار من الجهة لضبط الإنفاق.</p>
+  </div>
+</div>
+
+<h3 id="ai-gov">٤.٣ · الحوكمة والضمانات</h3>
+<div class="scroll">
+<table>
+  <thead><tr><th>الضمانة</th><th>البيان</th></tr></thead>
+  <tbody>
+    <tr><td>إصدارات محكومة</td><td>تُعلن الشاشة إصدار السياسة وحزمة التحكّم وسجل البنود، وحالة «معتمد إنتاجياً» صراحةً، فلا يُشغَّل المحرك بمرجعية مجهولة الإصدار.</td></tr>
+    <tr><td>بوابة الإصدار الحاكم</td><td>ما دام إصدار كود البناء السعودي الحاكم للمشروع غير مثبَّت وسجل البنود غير معتمد من خبير جيوتقني، لا يُصدر المحرك حكم مطابقة نهائياً، ويُخفض الحكم إلى «غير قابل للتقييم».</td></tr>
+    <tr><td>وسم المراجعة البشرية</td><td>تُوسم المخرجات التي تستوجب حكماً هندسياً بعلامة «يتطلب مراجعة مهندس مختص».</td></tr>
+    <tr><td>تثبيت قاعدة المعرفة</td><td>تُثبَّت كل دراسة على إصدار قاعدة المعرفة الساري وقت تشغيل المحرك، ولا يتغيّر بعد إصدار التقرير النهائي.</td></tr>
+    <tr><td>إظهار الاختلاف</td><td>عند تشغيل المسارين للمقارنة، يُعرض اختلاف النتيجة صراحةً ولا يختار النظام أحدهما دون إعلام.</td></tr>
+    <tr><td>قيد الاستشارة</td><td>تُقيَّد كل استشارة للمحرك في سجل التدقيق باسم المستشير ودوره والكيان محل المراجعة ونتيجة الاستشارة.</td></tr>
+    <tr><td>استمرارية الإجراء النظامي</td><td>تعذّر المحرك لا يوقف سير المنصة؛ تستمر إجراءات الدراسة النظامية، ويُسجَّل تعذّر إنتاج نتيجة دون إسنادها إلى أي مرجع.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="ai-study">٤.٤ · المحرك داخل الدراسة الجيوتقنية</h3>
+<div class="spec two">
+  <section>
+    <h4>تخطيط الاستكشاف</h4>
+    <ul>
+      <li>يقترح عدد الجسات وأعماقها وتباعدها استناداً إلى المساحة المبنية وعدد الأدوار وفق جدول كود البناء السعودي، ويعرض أساس التوصية صفاً صفاً مع مرجعه.</li>
+      <li>إذا خلا صف الجدول من قيمة العمق في النسخة المتاحة، امتنع المحرك عن استنتاجها من صف مجاور، وأعلن ذلك، وترك تحديد العمق لقرار مبرَّر من المكتب الاستشاري.</li>
+      <li>يُصنّف المشروع بوصفه «دراسة خاصة» عند بلوغ خمسة أدوار فأكثر أو تجاوز المساحة المبنية خمسة آلاف متر مربع، ولا يقترح عندها عدداً افتراضياً.</li>
+      <li>أي خروج عن المقترح — عدداً أو موقعاً أو عمقاً — يستوجب مبرراً فنياً مكتوباً يُقيَّد في الدراسة.</li>
+    </ul>
+  </section>
+  <section>
+    <h4>محفّزات الاختبارات والتحليل</h4>
+    <ul>
+      <li>يوصي باختبار الانتفاخ عند بلوغ مؤشر اللدونة حدّاً معيناً أو ارتفاع نسبة المار من المنخل المحدد.</li>
+      <li>يوجب التحليل الكيميائي الكامل للتربة والمياه الجوفية عند ظهور مؤشر السبخة في قيم الاختراق القياسي.</li>
+      <li>يوصي بعينة التحليل الكيميائي من الطبقة الواقعة ضمن عمق التأسيس، وأي اختيار مخالف يستوجب سبباً.</li>
+      <li>يشتق الحقول التحليلية — ومنها التصنيف الزلزالي للموقع — من قيم الاختراق المسجّلة في الجسات ومراجع كود البناء، وتبقى هذه الحقول محمية من التعديل اليدوي.</li>
+      <li>ينتج حقول التوصيات (نوع الأساس وعمقه، وقدرة التحمل، والهبوط، ونوع الأسمنت، ومتطلبات العزل) من قاعدة المعرفة المعتمدة، مع إتاحة حقول يدوية محددة تستوجب حكماً هندسياً بطبيعتها.</li>
+    </ul>
+  </section>
+</div>
+
+<h3 id="ai-advisor">٤.٥ · الاستشارة قبل القرار</h3>
+<p>عالجت المنصة حالة تشغيلية متكررة: مراجِع مفوَّض يجد نفسه أمام مخرج لا يملك حسمه الفني كاملاً، بين أن يعتمده متجاوزاً، أو يؤخره حتى تنقضي المهلة فيُعتمد تلقائياً. وأتيحت له استشارة المحرك قبل القرار في موضعين: شاشة مراجعة نتيجة الاختبار، وشاشة معاينة التقرير الجيوتقني.</p>
+<div class="note">
+  <p>تعرض الاستشارة ثلاث إشارات موجزة قبل التفصيل: <strong>عدد المتطلبات غير المتوافقة</strong>، و<strong>عدد التعارضات</strong>، و<strong>عدد البيانات الناقصة</strong>، ومعها الحالة العامة للمستند. وتُصرّح الشاشة في صدرها بأن ما يُعرض <strong>استشارة لا قرار</strong>، وأن الاعتماد أو الرفض والمسؤولية النظامية عنهما تبقى على المراجِع وحده. وإذا كان المراجِع يعمل بموجب تفويض، أظهرت الشاشة نطاق تفويضه وقيّدت الاستشارة والقرار باسمه.</p>
+</div>
+
+<hr>
+
+<h2 id="order">٥ · ترتيب تشغيل الأدوار</h2>
+<p class="lede">ترتيب تشغيل الأدوار لا يخضع لأهمية الدور بل لتبعيته الفنية: أي دور لا يستطيع البدء قبل توافر ما يبني عليه. والمنصة في لحظة التشغيل الأولى خالية من أي عنصر مرجعي أو مهلة أو منشأة مفعّلة، ومن ثمّ يبدأ الترتيب من الجهة التي تُنشئ المرجعية لا من الجهة التي تُنشئ الطلب.</p>
+
+<p><strong>تبعية البدء:</strong> لا يُنشئ المقاول طلب اختبار إلا على <strong>عقد فعّال</strong>، ولا يقوم العقد إلا على عرض سعر، ولا يُطلب عرض السعر إلا من <strong>مختبر ظاهر في الدليل بقائمة اختبارات مكتملة</strong>. ولا يضيف المختبر إلى قائمته إلا من <strong>العناصر المرجعية</strong> التي يديرها مدير النظام حصراً دون إضافة حرّة (B.R.112). أما المكتب الاستشاري فدوره لاحق بطبيعته: يراجع بيانات أولية أرسلها المقاول، ويعتمد مخرجاً رفعه المختبر.</p>
+
+<div class="chain">
+  <div class="stage now">
+    <div class="n">٠</div>
+    <div class="b">
+      <h4><span class="chip c-admin">مدير النظام</span> تأسيس المرجعية</h4>
+      <p>العناصر المرجعية (أنواع الاختبارات وطرق التنفيذ والوحدات وحقول النتيجة)، قواعد الأعمال والمهل، قاعدة المعرفة والمعادلات، قوالب التقارير.</p>
+      <div class="gate"><b>بدونه:</b> قائمة المختبر فارغة، ولا مهل تحكم أي طلب، ولا قالب يُولَّد به تقرير.</div>
+    </div>
+  </div>
+  <div class="stage">
+    <div class="n">١</div>
+    <div class="b">
+      <h4><span class="chip c-admin">الدعم التقني</span> تفعيل المنشآت</h4>
+      <p>مراجعة طلبات التسجيل، التحقق من السجل التجاري والاعتماد، تفعيل الحساب وإنشاء المفوّض الرئيسي.</p>
+      <div class="gate"><b>بدونه:</b> لا مختبر ولا مقاول ولا مكتب استشاري يملك حساباً أصلاً.</div>
+    </div>
+  </div>
+  <div class="stage">
+    <div class="n">٢</div>
+    <div class="b">
+      <h4><span class="chip c-lab">المختبر</span> بناء القائمة والظهور في الدليل</h4>
+      <p>اختيار اختباراته من العناصر المرجعية، وضبط الوحدة وطرق التنفيذ والسعر و<span class="num">SLA</span>، واستكمال الملف التعريفي والمعدات والمعايرة.</p>
+      <div class="gate"><b>القاعدة:</b> لا يظهر المختبر في الدليل إلا وله اختبار واحد فعّال على الأقل، ولا يرد على عرض سعر وفي قائمته بيانات ناقصة (B.R.119).</div>
+    </div>
+  </div>
+  <div class="stage">
+    <div class="n">٣</div>
+    <div class="b">
+      <h4><span class="chip c-contractor">المقاول</span> التعاقد ثم الطلب</h4>
+      <p>يبحث في الدليل ← يطلب عرض سعر ← يقبل العرض ويوقّع العقد بـ <span class="num">OTP</span> ← ينشئ طلب اختبار على العقد الفعّال (قياسي أو دراسة جيوتقنية).</p>
+      <div class="gate"><b>القاعدة:</b> الطلبات على العقود الفعّالة فقط (B.R.132)، ولا تعديل بعد الإرسال (B.R.145).</div>
+    </div>
+  </div>
+  <div class="stage">
+    <div class="n">٤</div>
+    <div class="b">
+      <h4><span class="chip c-lab">المختبر</span> القرار والتنفيذ</h4>
+      <p>يقبل الطلب باختيار نطاق زمني خلال <span class="num">12</span> ساعة، يسجّل استلام العينة في الموقع بتحقق جغرافي، ينفّذ ويرفع المخرج. وفي الدراسة الجيوتقنية: الميداني ثم المعملي ثم التحليل.</p>
+      <div class="gate"><b>القاعدة:</b> تجاوز المهلة يُنهي الطلب تلقائياً بحالة «منتهي المهلة» ويُخصم من مؤشرات المختبر (B.R.147).</div>
+    </div>
+  </div>
+  <div class="stage">
+    <div class="n">٥</div>
+    <div class="b">
+      <h4><span class="chip c-consultant">المكتب الاستشاري</span> الاعتماد</h4>
+      <p>يعتمد أو يرفض كل مخرج خلال <span class="num">48</span> ساعة، ويعتمد خطة الاستكشاف وتقرير الدراسة الجيوتقنية النهائي.</p>
+      <div class="gate"><b>القاعدة:</b> السكوت اعتماد — يُعتمد المخرج تلقائياً بعد المهلة ويُسجَّل ذلك في مؤشرات المكتب (B.R.152).</div>
+    </div>
+  </div>
+  <div class="stage">
+    <div class="n">٦</div>
+    <div class="b">
+      <h4><span class="chip c-supervisor">الجهة الإشرافية</span> المتابعة</h4>
+      <p>اطّلاع كامل بلا دور تشغيلي: الطلبات، الدراسات، السياسات، سجل التدقيق، والتقارير على مستوى المنصة.</p>
+      <div class="gate"><b>القاعدة:</b> لا تملك أي إجراء تنفيذي (BRD 3.2.1) — دورها الرقابة والامتثال.</div>
+    </div>
+  </div>
+  <div class="stage">
+    <div class="n">٧</div>
+    <div class="b">
+      <h4><span class="chip c-visitor">الزائر</span> خارج الدورة</h4>
+      <p>يتصفّح الدليل العام وصفحات المنشآت دون تسجيل دخول (B.R.122)، ولا يرى أي طلب أو نتيجة.</p>
+    </div>
+  </div>
+</div>
+
+<h2 id="accounts">٦ · الأدوار والحسابات ونقاط الدخول</h2>
+<p>خُصص لكل دور لون ثابت داخل النظام يظهر في الشريط الجانبي والأزرار الأساسية والصورة الرمزية، بما يتيح تمييز الدور مباشرة في أي لقطة شاشة أو عرض توضيحي.</p>
+
+<div class="scroll">
+<table>
+  <thead><tr><th>الدور</th><th>الحساب</th><th>الصفة</th><th>المنشأة</th><th>دخول مباشر</th><th>الشاشة الأولى</th></tr></thead>
+  <tbody>
+    <tr><td><span class="chip c-admin">مدير النظام</span></td><td>ياسر علي</td><td>المفوّض الرئيسي</td><td>فريق تشغيل معيار</td><td class="ltr">?as=u-admin</td><td>لوحة التشغيل</td></tr>
+    <tr><td><span class="chip c-admin">الدعم التقني</span></td><td>رحاب مدخلي</td><td>المفوّض الرئيسي</td><td>فريق تشغيل معيار</td><td class="ltr">?as=u-support</td><td>لوحة الدعم</td></tr>
+    <tr><td><span class="chip c-lab">المختبر</span></td><td>محمد السبيعي</td><td>المفوّض الرئيسي</td><td>مختبر التربة والمواد</td><td class="ltr">?as=u-lab</td><td>لوحة المعلومات</td></tr>
+    <tr><td><span class="chip c-lab">المختبر</span></td><td>فيصل القحطاني</td><td>موظف</td><td>مختبر التربة والمواد</td><td class="ltr">?as=u-lab-emp</td><td>لوحة المعلومات</td></tr>
+    <tr><td><span class="chip c-contractor">المقاول</span></td><td>أحمد العتيبي</td><td>المفوّض الرئيسي</td><td>شركة الإنشاءات المتكاملة</td><td class="ltr">?as=u-cont</td><td>لوحة المعلومات</td></tr>
+    <tr><td><span class="chip c-contractor">المقاول</span></td><td>سارة الدوسري</td><td>موظف</td><td>شركة الإنشاءات المتكاملة</td><td class="ltr">?as=u-cont-emp</td><td>لوحة المعلومات</td></tr>
+    <tr><td><span class="chip c-consultant">المكتب الاستشاري</span></td><td>خالد العسيري</td><td>المفوّض الرئيسي</td><td>مكتب الاستشارات الهندسية المتكاملة</td><td class="ltr">?as=u-cons</td><td>لوحة المعلومات</td></tr>
+    <tr><td><span class="chip c-consultant">المكتب الاستشاري</span></td><td>ريم الحربي</td><td>موظف</td><td>مكتب الاستشارات الهندسية المتكاملة</td><td class="ltr">?as=u-cons-emp</td><td>لوحة المعلومات</td></tr>
+    <tr><td><span class="chip c-supervisor">الجهة الإشرافية</span></td><td>عبدالله الغامدي</td><td>المفوّض الرئيسي</td><td>الإدارة العامة لكود البناء السعودي</td><td class="ltr">?as=u-sup</td><td>لوحة المتابعة</td></tr>
+    <tr><td><span class="chip c-visitor">زائر</span></td><td>—</td><td>—</td><td>—</td><td class="ltr">/directory</td><td>الدليل العام</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="note">
+  <p><strong>فرق «المفوّض الرئيسي» عن «الموظف» ليس شكلياً.</strong> القرارات المُلزِمة محجوزة للمفوّض الرئيسي حصراً: قبول الطلب أو رفضه في المختبر (بند 20)، واعتماد المخرج أو رفضه في المكتب الاستشاري (بندا 24–25)، واعتماد تقرير الدراسة (بندا 34–35). الموظف يراجع ويكتب ملاحظات فقط، ويرى ما فُوِّض له وحده.</p>
+</div>
+
+<hr>
+
+<h2 id="admin">٧ · دليل الاستخدام — <span class="chip c-admin" style="font-size:14px; vertical-align:2px">مدير النظام</span></h2>
+<p class="lede">مدير النظام هو المفوّض الرئيسي لدى مشغّل المنصة. لا يباشر تنفيذ اختبار ولا اعتماد مخرج، غير أن كل قيمة ومهلة ومعادلة تعمل بها الأدوار الأخرى تصدر عن شاشاته. وما يضبطه هنا يُجمَّد داخل كل طلب لحظة إرساله، فلا يسري تعديله على ما هو قائم.</p>
+
+<h3 id="login">١ · الدخول — الشاشة التي يبدأ منها الجميع</h3>
+
+<figure>
+  <img src="img/00-login.png" alt="شاشة تسجيل الدخول في منصة معيار: لوحة هوية على اليسار وحقل رقم الجوال ولوحة الدخول السريع على اليمين" loading="lazy">
+  <figcaption>شاشة الدخول <code>/login</code> — اللوحة اليسرى تعرض أرقاماً حيّة محسوبة من بيانات المنصة نفسها لا أرقاماً ثابتة.</figcaption>
+</figure>
+
+<div class="screen">
+  <header><h3>تسجيل الدخول</h3><span class="route">/login</span><span class="guard">public</span></header>
+  <div class="body">
+    <div class="spec two">
+      <section>
+        <h4>ما الذي يراه</h4>
+        <ul>
+          <li>لوحة الهوية: شعار معيار وشعار وزارة البلديات والإسكان، وشارة التوافق مع كود البناء السعودي <span class="num">SBC 303</span> وكود المنصات.</li>
+          <li>ثلاثة مؤشرات حيّة: عدد المخرجات المعتمدة، نسبة الاعتماد ضمن المهلة، عدد الدراسات الجيوتقنية.</li>
+          <li>نموذج الدخول بخطوتين: رقم الجوال ثم رمز التحقق.</li>
+          <li>لوحة دخول سريع بالحسابات المتاحة مرتّبة حسب الدور.</li>
+        </ul>
+      </section>
+      <section>
+        <h4>القواعد التي تحكمها</h4>
+        <ul>
+          <li>رقم الجوال بصيغة سعودية <code>05xxxxxxxx</code> وإلا ظهر خطأ الحقل فوراً.</li>
+          <li>رمز التحقق أربعة أرقام؛ ورقم غير مسجّل يُردّ برسالة «رقم الجوال غير مسجّل في المنصة».</li>
+          <li>الجلسة تُحفظ في تخزين الجلسة وتنتهي بإغلاق المتصفح أو بتسجيل الخروج.</li>
+          <li>من سجّل دخوله ثم فتح <code>/login</code> يُعاد إلى لوحته مباشرة.</li>
+        </ul>
+      </section>
+    </div>
+    <h4>كل إجراء في الشاشة</h4>
+    <div class="scroll">
+      <table class="actions">
+        <thead><tr><th>الإجراء</th><th>ماذا يحدث</th></tr></thead>
+        <tbody>
+          <tr><td>إرسال رمز التحقق</td><td>يتحقق من صيغة الرقم ثم ينتقل لخطوة الرمز، ويعرض الرقم الذي أُرسل إليه.</td></tr>
+          <tr><td>تأكيد الدخول</td><td>يطابق الرقم بحساب مسجّل، يفتح الجلسة، وينتقل إلى لوحة الدور.</td></tr>
+          <tr><td>الدخول عبر نفاذ</td><td>مسار الهوية الوطنية الموحّدة — يدخل مباشرة دون رمز تحقق.</td></tr>
+          <tr><td>سجّل منشأتك</td><td>ينتقل إلى <code>/register</code>: استعلام السجل التجاري، بيانات المفوّض الرئيسي، تأكيد الجوال.</td></tr>
+          <tr><td>تصفّح الدليل كزائر</td><td>ينتقل إلى <code>/directory</code> دون جلسة — إطار عام بلا قائمة جانبية (B.R.122).</td></tr>
+          <tr><td>بطاقة حساب في الدخول السريع</td><td>يفتح الجلسة بذلك الحساب مباشرة — نفس أثر <code>?as=</code> في الرابط.</td></tr>
+          <tr><td>تغيير رقم الجوال</td><td>يعود إلى خطوة الرقم مع إبقاء ما أُدخل.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note ok"><p><strong>بعد الدخول بحساب مدير النظام:</strong> تُفتح لوحة التشغيل على المسار <code>/</code>، ويتلوّن الشريط الجانبي بلون الدور (رمادي أردوازي)، وتبدأ المنصة فوراً في تنفيذ القواعد الزمنية: إنهاء الطلبات التي تجاوزت مهلة المختبر، والاعتماد التلقائي للمخرجات التي تجاوزت مهلة الاستشاري — كل دقيقة.</p></div>
+  </div>
+</div>
+
+<h3 id="shell">٢ · الإطار العام — ما يظهر في كل شاشة</h3>
+
+<figure>
+  <img src="img/01-dashboard.png" alt="لوحة تشغيل مدير النظام: شريط علوي وشريط جانبي بثلاث مجموعات ومؤشرات وبطاقات صحة المنصة" loading="lazy">
+  <figcaption>لوحة التشغيل <code>/</code> — الشريط العلوي والجانبي وبطاقة المنشأة تظهر في كل شاشة داخل التطبيق.</figcaption>
+</figure>
+
+<div class="spec two">
+  <section>
+    <h4>الشريط العلوي</h4>
+    <ul>
+      <li><strong>الشعار</strong> يعود إلى لوحة التشغيل من أي مكان.</li>
+      <li><strong>طي القائمة الجانبية</strong> إلى أيقونات فقط — الحالة محفوظة أثناء الجلسة.</li>
+      <li><strong>البحث الشامل</strong> (<code>Ctrl+K</code>): برقم الطلب أو اسم المشروع أو رقم العقد، ويعرض حتى ستّ نتائج تنقل مباشرة إلى الطلب.</li>
+      <li><strong>شارة الدور</strong> «مدير النظام» بجانب الاسم.</li>
+      <li><strong>المساعدة</strong> تنقل إلى <code>/help</code>.</li>
+      <li><strong>الإشعارات</strong>: عدّاد غير المقروء، «تعليم الكل كمقروء»، وكل إشعار ينقل إلى الشاشة المعنية.</li>
+      <li><strong>قائمة المستخدم</strong>: الاسم والصفة والمنشأة والجوال، وروابط الملف التعريفي والتفويضات والإعدادات، وتسجيل الخروج.</li>
+    </ul>
+  </section>
+  <section>
+    <h4>الشريط الجانبي — ثلاث مجموعات لمدير النظام</h4>
+    <ul>
+      <li><strong>التشغيل:</strong> لوحة التشغيل · طلبات الاختبارات · المنشآت والحسابات · مراجعة التقييمات · الفواتير.</li>
+      <li><strong>إدارة المنتج:</strong> العناصر المرجعية · قواعد الأعمال · قاعدة المعرفة · المحرك الذكي · القوالب.</li>
+      <li><strong>التقارير والحوكمة:</strong> التقارير والتحليلات · العينات وسلسلة الحيازة · الأرشيف والمستندات · الحوكمة وسجل التدقيق · السياسات والإصدارات · دليل المنشآت · الإعدادات.</li>
+      <li><strong>بطاقة المنشأة</strong> أسفل القائمة: «فريق تشغيل معيار — مشغّل المنصة».</li>
+    </ul>
+  </section>
+</div>
+
+<div class="note">
+  <p><strong>المعالجات التلقائية الدورية:</strong> عند الدخول وكل دقيقة بعده، تفحص المنصة الطلبات التي انقضت فيها مهلة قرار المختبر فتحوّلها إلى حالة «منتهي المهلة»، وتُشعر المقاول والمختبر، وتخصم من مؤشر التزام المختبر؛ كما تفحص المخرجات التي انقضت مهلة اعتمادها فتعتمدها تلقائياً وتقيّدها على المكتب الاستشاري. وهذا السلوك قابل للتبديل من شاشة قواعد الأعمال.</p>
+</div>
+
+<h3 id="perms">٣ · صلاحياته في مصفوفة الملحق 7.1</h3>
+<p>مدير النظام يملك <strong>34 من 35</strong> صلاحية في المصفوفة. المصفوفة نفسها التي تُعرض في شاشة الحوكمة هي التي تحرس كل مسار في التطبيق — لا توجد نسخة ثانية منها.</p>
+
+<ul class="perm">
+  <li><span class="mk">✓</span> عرض قائمة الاختبارات <code>catalog.view</code></li>
+  <li><span class="mk">✓</span> إدارة قائمة الاختبارات <code>catalog.manage</code></li>
+  <li><span class="mk">✓</span> استعراض الدليل والمنشآت <code>directory.view</code></li>
+  <li><span class="mk">✓</span> إدارة الملف التعريفي <code>profile.manage</code></li>
+  <li class="no"><span class="mk">✕</span> تقييم المختبر <code>rating.create</code></li>
+  <li><span class="mk">✓</span> إخفاء / حذف تقييم <code>rating.moderate</code></li>
+  <li><span class="mk">✓</span> عرض الطلبات وتفاصيلها <code>request.view</code></li>
+  <li><span class="mk">✓</span> إنشاء طلب اختبار <code>request.create</code></li>
+  <li><span class="mk">✓</span> إرسال / إلغاء طلب <code>request.cancel</code></li>
+  <li><span class="mk">✓</span> إنشاء طلب إعادة اختبار <code>request.retest</code></li>
+  <li><span class="mk">✓</span> إعداد واعتماد خطة التنفيذ <code>request.plan</code></li>
+  <li><span class="mk">✓</span> مراجعة الطلب والرد عليه <code>request.decide</code></li>
+  <li><span class="mk">✓</span> تنفيذ الاختبار واستكمال المخرج <code>test.execute</code></li>
+  <li><span class="mk">✓</span> مراجعة مخرج الاختبار <code>output.review</code></li>
+  <li><span class="mk">✓</span> الموافقة على المخرج / رفضه <code>output.approve</code></li>
+  <li><span class="mk">✓</span> عرض الدراسة الجيوتقنية <code>study.view</code></li>
+  <li><span class="mk">✓</span> إدارة البيانات الأولية <code>study.prelim</code></li>
+  <li><span class="mk">✓</span> اعتماد خطة الاستكشاف <code>study.plan.approve</code></li>
+  <li><span class="mk">✓</span> مراجعة خطة التنفيذ الميداني <code>study.fieldplan</code></li>
+  <li><span class="mk">✓</span> الأعمال الميدانية والجسات <code>study.field</code></li>
+  <li><span class="mk">✓</span> إدارة البيانات المعملية <code>study.lab</code></li>
+  <li><span class="mk">✓</span> إدارة البيانات الحسابية <code>study.analysis</code></li>
+  <li><span class="mk">✓</span> معاينة تقرير الدراسة <code>study.report.preview</code></li>
+  <li><span class="mk">✓</span> اعتماد مخرج الدراسة / رفضه <code>study.report.approve</code></li>
+  <li><span class="mk">✓</span> عرض تقرير الدراسة <code>study.report.view</code></li>
+  <li><span class="mk">✓</span> عرض التفاويض <code>delegation.view</code></li>
+  <li><span class="mk">✓</span> إنشاء تفويض <code>delegation.create</code></li>
+  <li><span class="mk">✓</span> قبول / رفض تفويض <code>delegation.decide</code></li>
+  <li><span class="mk">✓</span> تعديل تفويض <code>delegation.edit</code></li>
+  <li><span class="mk">✓</span> تشغيل المحرك الذكي <code>engine.run</code></li>
+  <li><span class="mk">✓</span> قواعد الأعمال والقوالب <code>admin.settings</code></li>
+  <li><span class="mk">✓</span> العناصر المرجعية <code>admin.reference</code></li>
+  <li><span class="mk">✓</span> قاعدة المعرفة والمعادلات <code>admin.knowledge</code></li>
+  <li><span class="mk">✓</span> المنشآت والحسابات <code>admin.accounts</code></li>
+  <li><span class="mk">✓</span> سجل التدقيق الكامل والامتثال <code>monitor.view</code></li>
+</ul>
+
+<div class="note warn">
+  <p><strong>ملاحظة حوكمية مهمة:</strong> امتلاكه صلاحيات تشغيلية كاملة على الورق (تنفيذ اختبار، اعتماد مخرج، اعتماد تقرير دراسة) لا يعني ظهور أزرارها له. أزرار الإجراء في شاشات الطلب والدراسة مشروطة بـ <em>دور</em> المستخدم لا بصلاحيته، فلا يظهر لمدير النظام زر «قبول الطلب» ولا «اعتماد النتيجة». الضبط هنا سلوكي في الواجهة، وليس حاجزاً في المصفوفة — وهو ما يستحق حسماً صريحاً قبل الإطلاق.</p>
+</div>
+
+<h3 id="s-dashboard">٤ · لوحة التشغيل</h3>
+
+<div class="screen">
+  <header><h3>لوحة التشغيل</h3><span class="route">/</span><span class="guard">auth</span></header>
+  <div class="body">
+    <div class="spec two">
+      <section>
+        <h4>ستة مؤشرات علوية</h4>
+        <ul>
+          <li>إجمالي الطلبات على مستوى المنصة (مدير النظام يرى الجميع، ما عدا مسودات المقاولين).</li>
+          <li>بانتظار قرار — مختبر أو خطة استكشاف.</li>
+          <li>جارٍ التنفيذ مع عدد الاختبارات الجارية.</li>
+          <li>الالتزام بالمهل مقابل مستهدف <span class="num">90%</span>.</li>
+          <li>معدل الرفض وعدد الاعتمادات التلقائية.</li>
+          <li>قيمة الاختبارات على المنصة والفواتير المتأخرة.</li>
+        </ul>
+      </section>
+      <section>
+        <h4>صف خاص بمدير النظام وحده</h4>
+        <ul>
+          <li><strong>صحة المنصة:</strong> التوافر وزمن الاستجابة ونسبة أخطاء الخادم.</li>
+          <li><strong>التكاملات الحكومية:</strong> واثق · نفاذ · هيئة الزكاة والضريبة · بوابة الرسائل.</li>
+          <li><strong>المهام المجدولة:</strong> إنهاء الطلبات منتهية المهلة، الاعتماد التلقائي، الملخص اليومي، النسخ الاحتياطي.</li>
+          <li><strong>الأمن والامتثال:</strong> الأحداث الحرجة خلال سبعة أيام، محاولات الوصول المرفوضة، نسبة الامتثال، الجلسات النشطة — ورابط مباشر إلى سجل التدقيق.</li>
+        </ul>
+      </section>
+    </div>
+    <h4>بقية اللوحة</h4>
+    <ul>
+      <li><strong>حجم الطلبات والإنجاز</strong> — منحنى شهري يتبع مبدّل الفترة (٣ / ٦ / ١٢ شهراً) أعلى الصفحة.</li>
+      <li><strong>توزيع الطلبات حسب الحالة</strong> — حلقة تجمع الجاري والمقبول وبانتظار القرار والمكتمل والملغي.</li>
+      <li><strong>يحتاج إجراءً الآن</strong> — أهم سبعة بنود مرتّبة بأقرب مهلة، كل بند يحمل عدّاداً تنازلياً وينقل إلى مصدره.</li>
+      <li><strong>الالتزام بالمهل</strong> بخط مستهدف، و<strong>التزام المختبرات</strong> بترتيب تنازلي وخط مرجعي عند <span class="num">90%</span>.</li>
+      <li><strong>كثافة الطلبات: المدينة × التصنيف</strong> — خريطة حرارية تظهر لمدير النظام والجهة الإشرافية فقط.</li>
+      <li><strong>المواعيد القادمة</strong> و<strong>آخر النشاط</strong> — مدير النظام يرى سجل التدقيق كاملاً لا سجل منشأته فقط.</li>
+    </ul>
+  </div>
+</div>
+
+<h3 id="s-reference">٥ · العناصر المرجعية — أول ما يجب ضبطه</h3>
+
+<figure>
+  <img src="img/02-reference.png" alt="شاشة العناصر المرجعية: مؤشرات وتبويبات وجدول أنواع الاختبارات مع طرق التنفيذ والوحدات" loading="lazy">
+  <figcaption><code>/admin/reference</code> — المرجع المركزي الذي تختار منه المختبرات دون إمكانية الإضافة إليه.</figcaption>
+</figure>
+
+<div class="screen">
+  <header><h3>العناصر المرجعية</h3><span class="route">/admin/reference</span><span class="guard">admin.reference</span></header>
+  <div class="body">
+    <div class="spec two">
+      <section>
+        <h4>أربعة تبويبات</h4>
+        <ul>
+          <li><strong>أنواع الاختبارات:</strong> جدول كامل — الاسم بالعربي والإنجليزي، التصنيف، طرق التنفيذ، الوحدات، حقول النتيجة، عدد المختبرات التي تقدّمه، نموذج النتيجة، الحالة.</li>
+          <li><strong>طرق التنفيذ:</strong> كل معيار برمزه وجهته (<span class="num">ASTM</span> · <span class="num">AASHTO</span> · <span class="num">BS</span>) والاختبارات التي يُستخدم فيها.</li>
+          <li><strong>الوحدات:</strong> عدد · مجموعة · لكل اختبار، مع عدد الاختبارات التي تستخدم كلاً منها.</li>
+          <li><strong>التصنيفات:</strong> تربة · إسفلت · خرسانة · ركام، وقاعدة «طلب واحد = تصنيف واحد».</li>
+        </ul>
+      </section>
+      <section>
+        <h4>نافذة التعديل / الإضافة</h4>
+        <ul>
+          <li>الاسم بالعربي والإنجليزي والتصنيف والوحدات المسموحة.</li>
+          <li>مفتاح السماح برفع تقرير خارجي مع الحقول المهيكلة.</li>
+          <li>مفتاح إيقاف العنصر مرجعياً: الموقوف لا يُضاف إلى قوائم جديدة.</li>
+          <li><strong>نموذج النتيجة:</strong> حقول مهيكلة (مفتاح · تسمية · وحدة) بمعاينة فورية — هذه الحقول هي ما يملؤه فني المختبر في شاشة التنفيذ وما يُقارن بالحدود المرجعية.</li>
+          <li><strong>طرق التنفيذ:</strong> إضافة وحذف معايير بجهاتها.</li>
+        </ul>
+      </section>
+    </div>
+    <div class="note bad">
+      <p><strong>الإجراء الأبلغ أثراً في هذه الشاشة:</strong> حفظ تعديل على عنصر قائم ينعكس <em>تلقائياً</em> على قوائم كل المختبرات: أي طريقة تنفيذ لم تعد معتمدة تُحذف من قوائمها، وأي قائمة نقصت بعدها تتحول إلى «بيانات ناقصة» — فيتوقف ذلك المختبر عن الرد على عروض الأسعار حتى يستكمل. يُشعَر المختبرون، ويُسجَّل الحدث. أما العناصر <em>الجديدة</em> فلا تُضاف لأحد تلقائياً.</p>
+    </div>
+  </div>
+</div>
+
+<h3 id="s-rules">٦ · قواعد الأعمال — المهل التي تحكم الجميع</h3>
+
+<figure>
+  <img src="img/03-rules.png" alt="شاشة قواعد الأعمال: أقسام الطلبات والمهل والدراسة الجيوتقنية وسياسة المحرك وسجل التعديلات" loading="lazy">
+  <figcaption><code>/admin/rules</code> — كل رقم هنا يُجمَّد داخل الطلب لحظة إرساله، فلا يتأثر طلب قائم بتغيير لاحق.</figcaption>
+</figure>
+
+<div class="screen">
+  <header><h3>قواعد الأعمال</h3><span class="route">/admin/rules</span><span class="guard">admin.settings</span></header>
+  <div class="body">
+    <div class="scroll">
+      <table>
+        <thead><tr><th>القاعدة</th><th>القيمة الحالية</th><th>أين تظهر في التجربة</th></tr></thead>
+        <tbody>
+          <tr><td>الحد الأقصى للاختبارات في الطلب</td><td class="num">10</td><td>يُعطَّل زر «إضافة اختبار» عند المقاول ببلوغ الحد.</td></tr>
+          <tr><td>عدد المواعيد المقترحة</td><td class="num">3</td><td>عدد النطاقات الزمنية في نموذج الطلب وفي قرار المختبر.</td></tr>
+          <tr><td>الحد الأدنى لأول موعد</td><td class="num">48 ساعة</td><td>أقرب تاريخ مسموح في منتقي التاريخ، ورسالة الخطأ عند تجاوزه.</td></tr>
+          <tr><td>ضريبة القيمة المضافة</td><td class="num">15%</td><td>ملخص الطلب، الفاتورة، وتبويب المالية في تفاصيل الطلب.</td></tr>
+          <tr><td>مهلة قرار المختبر</td><td class="num">12 ساعة</td><td>العدّاد التنازلي على الطلب، والإشعارات، ومؤشر التزام المختبر.</td></tr>
+          <tr><td>عند تجاوز مهلة المختبر</td><td>إنهاء الطلب</td><td>إمّا تحويل الطلب إلى «منتهي المهلة» وخصم مؤشر، أو الاكتفاء بإشعار المختبر والجهة الإشرافية.</td></tr>
+          <tr><td>مهلة اعتماد المكتب الاستشاري</td><td class="num">48 ساعة</td><td>عدّاد الاعتماد، والاعتماد التلقائي عند انتهائها.</td></tr>
+          <tr><td>الحد الأدنى لعمق الجسة</td><td class="num">10 م</td><td>سياسة منصة لا نص في الكود — يستخدمها المحرك حين يترك الكود خانة العمق فارغة.</td></tr>
+          <tr><td>النطاق الجغرافي لتنفيذ الجسة</td><td class="num">3 م</td><td>دائرة التحقق الجغرافي في الخرائط، وشرط تسجيل استلام العينة وبدء الجسة.</td></tr>
+          <tr><td>سياسة توجيه المحرك الذكي</td><td>فحص محلي ثم سحابي</td><td>المسار الافتراضي في شاشة المحرك وفي نافذة الاستشارة قبل الاعتماد.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h4>الإجراءات</h4>
+    <ul>
+      <li><strong>حفظ القواعد</strong> — لا يُفعَّل إلا بوجود تغيير فعلي؛ يُسجَّل حدثاً <strong>حرجاً</strong> في سجل التدقيق باسم القواعد المعدَّلة، وتُطبَّق القيم على العمليات الجديدة فقط.</li>
+      <li><strong>استعادة</strong> — يعيد النموذج إلى القيم المحفوظة دون حفظ.</li>
+      <li><strong>سجل تعديلات القواعد</strong> — آخر ستة تعديلات بالمنفّذ ودوره والقاعدة والتاريخ، كلها بدرجة «حرج».</li>
+    </ul>
+  </div>
+</div>
+
+<h3 id="s-knowledge">٧ · قاعدة المعرفة والمعادلات</h3>
+
+<figure>
+  <img src="img/04-knowledge.png" alt="شاشة قاعدة المعرفة: جدول عدد وعمق الجسات مع التبويبات والإصدارات" loading="lazy">
+  <figcaption><code>/admin/knowledge</code> — القواعد الفنية التي يشغّلها المحرك الذكي، بإصدارات مثبَّتة لكل دراسة.</figcaption>
+</figure>
+
+<div class="screen">
+  <header><h3>قاعدة المعرفة والمعادلات</h3><span class="route">/admin/knowledge</span><span class="guard">admin.knowledge</span></header>
+  <div class="body">
+    <div class="spec two">
+      <section>
+        <h4>ستة تبويبات</h4>
+        <ul>
+          <li><strong>عدد وعمق الجسات</strong> — جدول <span class="num">SBC 303 Table 2.1</span> بصفوفه السبعة: عدد الأدوار × المساحة المبنية ← الحد الأدنى للجسات والأعماق. الصف الذي خانتا عمقه فارغتان في النسخة المتاحة معلَّم صراحة.</li>
+          <li><strong>الاختبارات الإلزامية والمحفّزات</strong> — الإلزامي لكل نوع عينة، وأربع قواعد تُفعّل توصيات تلقائية (مؤشر انتفاخ، مؤشر سبخة، انهيارية، اختيار عينة التحليل الكيميائي).</li>
+          <li><strong>الحدود الكيميائية</strong> — الحد المرجعي لكل اختبار ومصدره وأثر تجاوزه (مثل التوصية بأسمنت مقاوم للكبريتات).</li>
+          <li><strong>المعاملات الزلزالية</strong> — تصنيف الموقع ومصادر القيم من <span class="num">SBC 301</span>.</li>
+          <li><strong>المعادلات</strong> — قدرة التحمل، الهبوط، معامل رد الفعل، معاملات الضغط الجانبي: نص المعادلة ومدخلاتها وإصدارها ومرجعها.</li>
+          <li><strong>الإصدارات</strong> — كل إصدار بتاريخه وتغييراته وعدد الدراسات المثبَّتة عليه وحالته.</li>
+        </ul>
+      </section>
+      <section>
+        <h4>الإجراءات</h4>
+        <ul>
+          <li><strong>إصدار جديد (مسودة)</strong> — رقم بصيغة <code>v1.4</code> ووصف للتغييرات. المسودة <em>لا تُطبَّق على أي دراسة</em>.</li>
+          <li><strong>اعتماد ونشر</strong> — يُحوّل المسودة إلى إصدار سارٍ، ويؤرشف السابق، ويُسجَّل حدثاً <strong>حرجاً</strong>، ويُشعِر المختبرات بأن الإصدار ينطبق على الدراسات التي لم يصدر تقريرها النهائي بعد.</li>
+        </ul>
+        <h4>ما يلي ذلك في الشاشة</h4>
+        <ul>
+          <li>أثر القاعدة على الدراسات — توزيع الصفوف المطبَّقة.</li>
+          <li>تجاوزات الاستشاري للتوصية مع مبرر كل تجاوز.</li>
+          <li>حوكمة الإصدارات: كل دراسة مثبَّتة على الإصدار الساري لحظة تشغيل المحرك.</li>
+        </ul>
+      </section>
+    </div>
+    <div class="note warn"><p>الشاشة نفسها تُعلن حدود مصدرها: قيم الجدول من طبعتي <span class="num">2007/2018</span>، وطبعة <span class="num">2024</span> بانتظار النص الرسمي — والحدود الكيميائية تُدار كسياسة منصة مرجعها <span class="num">SBC 304</span>. هذا الإعلان جزء من الحوكمة لا ملاحظة جانبية.</p></div>
+  </div>
+</div>
+
+<h3 id="s-templates">٨ · القوالب والنماذج</h3>
+
+<figure>
+  <img src="img/05-templates.png" alt="شاشة القوالب: جدول القوالب ومعاينة أقسام القالب وسجل إصداراته" loading="lazy">
+  <figcaption><code>/admin/templates</code> — قوالب التقارير والشهادات بإصدارات، والمستند الصادر يحتفظ بإصداره إلى الأبد.</figcaption>
+</figure>
+
+<div class="screen">
+  <header><h3>القوالب والنماذج</h3><span class="route">/admin/templates</span><span class="guard">admin.settings</span></header>
+  <div class="body">
+    <div class="spec two">
+      <section>
+        <h4>ما الذي يراه</h4>
+        <ul>
+          <li>مؤشرات: عدد القوالب، السارية، المسودات، والمستندات المولّدة هذا الشهر.</li>
+          <li>جدول القوالب: الاسم، الإصدار الساري، المرجع النظامي، عدد الحقول، آخر تحديث، عدد المستندات المولّدة به، الحالة.</li>
+          <li>اختيار أي صف يفتح على اليمين معاينة أقسام القالب مرقّمة، وسجل إصداراته.</li>
+          <li>مخطط التوليد الشهري حسب نوع المستند: نتيجة اختبار · سجل جسة · تقرير جيوتقني.</li>
+        </ul>
+      </section>
+      <section>
+        <h4>الإجراءات</h4>
+        <ul>
+          <li><strong>قالب جديد</strong> — الاسم والمرجع النظامي وأقسامه سطراً لكل قسم؛ يُنشأ مسودة <code>v0.1</code> لا تُطبَّق قبل الاعتماد.</li>
+          <li><strong>إصدار جديد</strong> — رقم الإصدار وملخص التغييرات، ومفتاح «نشر فوراً كإصدار سارٍ». النشر يؤرشف الإصدار السابق ويُسجَّل حدثاً حرجاً؛ بدون نشر تُحفظ مسودة.</li>
+          <li><strong>PDF تجريبي</strong> — توليد نموذج من القالب ببيانات وهمية للمراجعة الشكلية.</li>
+        </ul>
+      </section>
+    </div>
+    <div class="note ok"><p><strong>القاعدة الحاكمة:</strong> يُطبَّق الإصدار الساري لحظة التوليد فقط، ويبقى كل مستند صادر مرتبطاً بإصداره — فتغيير القالب اليوم لا يغيّر تقريراً صدر أمس.</p></div>
+  </div>
+</div>
+
+<h3 id="s-accounts">٩ · المنشآت والحسابات</h3>
+
+<figure>
+  <img src="img/06-accounts.png" alt="شاشة المنشآت والحسابات: طلبات التسجيل المعلقة مع أزرار التفعيل وطلب المستندات والرفض" loading="lazy">
+  <figcaption><code>/admin/accounts</code> — نفس الشاشة يستخدمها الدعم التقني، وهي بوابة دخول كل منشأة إلى المنصة.</figcaption>
+</figure>
+
+<div class="screen">
+  <header><h3>المنشآت والحسابات</h3><span class="route">/admin/accounts</span><span class="guard">admin.accounts</span></header>
+  <div class="body">
+    <h4>أربعة تبويبات</h4>
+    <div class="scroll">
+      <table class="actions">
+        <thead><tr><th>التبويب</th><th>المحتوى والإجراءات</th></tr></thead>
+        <tbody>
+          <tr><td>طلبات التسجيل</td><td>رقم الطلب، المنشأة ومدينتها، النوع، السجل التجاري مع نتيجة الاستعلام من واثق، المفوّض الرئيسي، اعتماد المركز السعودي للاعتماد، التاريخ. الإجراءات: <strong>تفعيل</strong> · <strong>طلب مستندات</strong> · <strong>رفض</strong>.</td></tr>
+          <tr><td>المنشآت</td><td>جدول كامل بالبحث والتصفية والتصدير: الاسم، النوع، السجل التجاري، عدد المستخدمين، اعتماد <span class="num">SAAC</span> وتاريخ انتهائه، الظهور في الدليل، ومفتاح <strong>تفعيل/إيقاف الحساب</strong> الذي يُخفي المنشأة من الدليل فوراً.</td></tr>
+          <tr><td>المستخدمون</td><td>كل مستخدمي المنصة: الاسم، المنشأة، الدور، الصفة، الجوال، صلاحية التفويض الأصلية، آخر دخول.</td></tr>
+          <tr><td>نقل الصلاحيات</td><td>طلب نقل صلاحية المفوّض الرئيسي بين شخصين مع المستند الموثّق، وإجراءات <strong>اعتماد</strong> · <strong>طلب توضيح</strong> · <strong>رفض</strong> — يتطلب تحقق <span class="num">OTP</span> للطرفين ويُسجَّل حدثاً حرجاً.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h4>إضافة منشأة يدوياً</h4>
+    <p>للحالات التي يتعذّر فيها التسجيل الذاتي: النوع والاسم والسجل التجاري (عشرة أرقام) والمدينة وبيانات التواصل واسم المفوّض الرئيسي وجواله. الحفظ <strong>ينشئ المنشأة ويفعّلها وينشئ حساب المفوّض الرئيسي</strong> ويرسل له رمز التفعيل، ويُسجَّل الحدث.</p>
+    <p><strong>أسفل الشاشة:</strong> اعتمادات <span class="num">SAAC</span> التي تنتهي خلال <span class="num">120</span> يوماً، آخر قرارات الحسابات من سجل التدقيق، وتوزيع المنشآت حسب النوع والموقوفة منها.</p>
+  </div>
+</div>
+
+<h3 id="s-ratings">١٠ · مراجعة التقييمات</h3>
+
+<figure>
+  <img src="img/07-ratings.png" alt="شاشة مراجعة التقييمات: توزيع التقييمات ومتوسط كل مختبر وجدول التقييمات مع أزرار الإخفاء والحذف" loading="lazy">
+  <figcaption><code>/admin/ratings</code> — إخفاء تقييم أو حذفه يعيد حساب متوسط المختبر وترتيبه في الدليل فوراً.</figcaption>
+</figure>
+
+<div class="screen">
+  <header><h3>مراجعة التقييمات</h3><span class="route">/admin/ratings</span><span class="guard">rating.moderate</span></header>
+  <div class="body">
+    <div class="spec two">
+      <section>
+        <h4>ما الذي يراه</h4>
+        <ul>
+          <li>مؤشرات: الإجمالي، المعتمدة، المخفية أو المحذوفة، والتقييمات المنخفضة (نجمتان فأقل) التي تحتاج مراجعة.</li>
+          <li>توزيع التقييمات حسب المتوسط، ومتوسط كل مختبر مرتّباً.</li>
+          <li>جدول: المختبر، المقاول المقيِّم، العقد، التقييم بالنجوم ومتوسطه، التعليق، التاريخ، الحالة.</li>
+          <li>سياسة الإشراف مكتوبة في الشاشة: تقييم واحد لكل عقد منتهٍ، والترتيب بالمتوسط ثم عدد المراجعات.</li>
+        </ul>
+      </section>
+      <section>
+        <h4>الإجراءات وأثرها</h4>
+        <ul>
+          <li><strong>إخفاء</strong> — يخرج التقييم من الحساب ويعاد احتساب متوسط المختبر وعدد مراجعاته فوراً؛ حدث بدرجة «تنبيه».</li>
+          <li><strong>إظهار</strong> — يعيده إلى الحساب.</li>
+          <li><strong>حذف</strong> — <strong>لمدير النظام وحده</strong>؛ الدعم التقني يملك الإخفاء فقط.</li>
+        </ul>
+        <h4>ما لا يستطيعه</h4>
+        <ul>
+          <li>لا يستطيع <strong>إنشاء</strong> تقييم — التقييم حق المقاول المفوّض الرئيسي وحده بعد انتهاء العقد.</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+
+<h3 id="s-engine">١١ · المحرك الذكي</h3>
+
+<figure>
+  <img src="img/09-engine.png" alt="شاشة المحرك الذكي: سياسة التوجيه والمسار المنفَّذ وحالة المحرك والتكلفة والسيادة" loading="lazy">
+  <figcaption><code>/engine</code> — اللقطة مأخوذة وخدمة التحليل غير مشغّلة، فتظهر الشاشة في حالتها المتدهورة: المنصة تستمر والمحرك وحده متوقف (B.R.230).</figcaption>
+</figure>
+
+<div class="screen">
+  <header><h3>المحرك الذكي — التحليل السحابي والمحلي</h3><span class="route">/engine</span><span class="guard">engine.run</span></header>
+  <div class="body">
+    <div class="spec two">
+      <section>
+        <h4>عمود التشغيل</h4>
+        <ul>
+          <li><strong>ملف التقييم</strong> — يحدّد حزمة المعرفة وقواعد النطاق التي يُقاس عليها المستند.</li>
+          <li><strong>سياسة التوجيه</strong> — أربعة خيارات: فحص محلي ثم سحابي · سحابي · محلي · مقارنة. الافتراضي هو سياسة المنصة، وأي تغيير هنا <strong>تجاوز لهذا التشغيل وحده</strong> تقوله الشاشة صراحة.</li>
+          <li><strong>المسار المُنفَّذ</strong> — بطاقة تقول أي مسار اختير ولماذا، وتُعلِم إذا كان تحوّلاً تلقائياً لتعذّر المسار المفضَّل.</li>
+          <li><strong>اختيار ملف PDF</strong> ثم <strong>بدء التحليل</strong> (مع إمكانية الإيقاف أثناء التنفيذ).</li>
+          <li><strong>مراحل التنفيذ</strong> — بوابة النطاق ثم الفحص المحلي ثم السحابي، وما لم يُستدعَ منها وكم وُفِّر.</li>
+        </ul>
+      </section>
+      <section>
+        <h4>عمود الحوكمة والتكلفة</h4>
+        <ul>
+          <li><strong>حالة المحرك</strong> تُقرأ كل <span class="num">15</span> ثانية: المسار السحابي والمحلي، إصدار السياسة، حزمة التحكّم، سجل البنود، و«معتمد إنتاجياً» نعم/لا.</li>
+          <li><strong>بوابة الإصدار</strong> — ما دام الإصدار الحاكم من كود البناء غير مثبَّت، لا يُصدر المحرك حكم مطابقة نهائياً.</li>
+          <li><strong>استمرارية التشغيل</strong> — مفتاح «إيقاف استخدام المسار السحابي» يوقف استهلاك الاشتراك ويحوّل التحليل للمسار المحلي دون توقف الدراسة.</li>
+          <li><strong>التكلفة والسيادة</strong> — تكلفة المستند سحابياً، الميزانية المرجعية وما تغطيه، وجدول الإنفاق الشهري بنمو الحجم مقابل سعة المسار المحلي الثابتة.</li>
+        </ul>
+      </section>
+    </div>
+    <div class="note"><p><strong>ثلاث ضمانات يعلنها التطبيق:</strong> بوابة مطابقة النطاق تعمل قبل أي مسار وبلا تكلفة فتوقف المستند خارج التخصص قبل استدعاء أي نموذج؛ واختلاف نتيجة المسارين يُعرض صراحة ولا يُختار أحدهما بصمت؛ والحكم النهائي يبقى للمهندس المختص في الحالتين.</p></div>
+  </div>
+</div>
+
+<h3 id="s-requests">١٢ · طلبات الاختبارات</h3>
+
+<figure>
+  <img src="img/08-requests.png" alt="شاشة طلبات الاختبارات: مؤشرات وشرائح تصفية وجدول الطلبات بالحالات والعدادات" loading="lazy">
+  <figcaption><code>/requests</code> — مدير النظام يرى كل طلبات المنصة، ما عدا مسودات المقاولين التي لا تغادر منشئها.</figcaption>
+</figure>
+
+<div class="screen">
+  <header><h3>طلبات الاختبارات</h3><span class="route">/requests</span><span class="guard">request.view</span></header>
+  <div class="body">
+    <div class="spec two">
+      <section>
+        <h4>الأعمدة والتصفية</h4>
+        <ul>
+          <li>رقم الطلب (ومعه ارتباط الإعادة والأولوية)، المشروع والعقد والمدينة، الخدمة والاختبارات، المختبر، <strong>المقاول والاستشاري ظاهران افتراضياً لمدير النظام</strong>، التقدّم، تاريخ الإنشاء، الموعد، القيمة، الحالة مع عدّاد تنازلي.</li>
+          <li>مرشّحات: الخدمة · التصنيف · المدينة · العقد · الأولوية، مع بحث حر وتصدير وطباعة وتحديد متعدد.</li>
+          <li>شرائح سريعة: الكل · جارٍ · بانتظار قرار · مكتمل · ملغي ومرفوض ومنتهي المهلة. <strong>شريحة «تحتاج إجراء» لا تظهر لمدير النظام</strong> لأنه ليس طرفاً في القرار.</li>
+        </ul>
+      </section>
+      <section>
+        <h4>مؤشرات أعلى الشاشة</h4>
+        <ul>
+          <li>إجمالي الطلبات · تحتاج إجراءً · جارٍ أو مقبول · بانتظار قرار · مكتمل.</li>
+          <li><strong>اختبارات على وشك تجاوز <span class="num">SLA</span></strong> خلال <span class="num">24</span> ساعة — مؤشر الإنذار المبكر الأهم في الشاشة.</li>
+          <li>كل مؤشر قابل للنقر ويطبّق التصفية المقابلة له.</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+
+<h3 id="s-detail">١٣ · تفاصيل الطلب</h3>
+
+<figure>
+  <img src="img/20-requestdetail.png" alt="شاشة تفاصيل الطلب: مسار الطلب بست خطوات ومؤشرات وتبويبات الاختبارات والسجل والمستندات والمالية والحوكمة" loading="lazy">
+  <figcaption><code>/requests/:id</code> — الشاشة المحورية في المنصة: كل ما جرى على الطلب في مكان واحد.</figcaption>
+</figure>
+
+<div class="screen">
+  <header><h3>تفاصيل الطلب</h3><span class="route">/requests/:id</span><span class="guard">request.view</span></header>
+  <div class="body">
+    <h4>مسار الطلب — ست خطوات</h4>
+    <p>إنشاء الطلب ← قرار المختبر (أو اعتماد الخطة ثم قرار المختبر في الدراسة الجيوتقنية) ← أخذ العينات ← التنفيذ ورفع المخرجات ← اعتماد الاستشاري ← الإغلاق والشهادة. الخطوة المتعثرة تُعلَّم صراحة عند الرفض أو انتهاء المهلة أو الإلغاء.</p>
+    <div class="spec two">
+      <section>
+        <h4>خمسة تبويبات</h4>
+        <ul>
+          <li><strong>الاختبارات</strong> — لكل اختبار: الحالة، الطريقة، السعر، المدة، بيانات العينة، شارة «اعتُمد تلقائياً» إن وُجدت، قيم النتيجة، سبب الرفض، وعدّاد المهلة. وتحته شريطا «مهل التنفيذ والاعتماد» و«حقول النتائج والمرجعيات».</li>
+          <li><strong>سجل العمليات</strong> — كل إجراء بالمنفّذ ودوره ووقته وتفصيله.</li>
+          <li><strong>المستندات</strong> — مرفقات المقاول والمستندات المولّدة بنوعها وحجمها وإصدارها وتصنيف سريتها.</li>
+          <li><strong>المالية</strong> — بنود التسعير والضريبة والإجمالي وحالة الفاتورة وآلية الدفع.</li>
+          <li><strong>الحوكمة</strong> — قواعد الأعمال المجمَّدة على الطلب، أساس الطلب (العقد وحالته)، عدد الاعتمادات التلقائية والتفويضات، الطلبات المرتبطة، والأثر على التقييم.</li>
+        </ul>
+      </section>
+      <section>
+        <h4>العمود الجانبي واللوحة المنبثقة</h4>
+        <ul>
+          <li>بيانات الطلب: العقد والأطراف والموعد المعتمد والمواعيد المقترحة والأولوية والمدينة.</li>
+          <li>موقع التنفيذ على خريطة مع دائرة النطاق الجغرافي ومواقع العينات.</li>
+          <li>ملاحظات المقاول وآخر الإجراءات.</li>
+          <li>النقر على اسم اختبار يفتح لوحة جانبية فيها <strong>ورقة الاختبار</strong> كاملة: طريقة القياس والمعدات ومعايرتها، الصور بالوقت والإحداثيات، وسلسلة حيازة العينة.</li>
+        </ul>
+      </section>
+    </div>
+    <div class="note warn"><p><strong>لمدير النظام هنا اطّلاع بلا إجراء:</strong> أزرار القرار (قبول/رفض الطلب، تأكيد استلام العينة، تنفيذ الاختبار، مراجعة واعتماد، طلب إعادة، تفويض موظف) كلها مشروطة بدور المستخدم — المختبر أو المقاول أو الاستشاري — فلا تظهر له أي منها.</p></div>
+  </div>
+</div>
+
+<h3 id="s-governance">١٤ · الحوكمة وسجل التدقيق</h3>
+
+<figure>
+  <img src="img/10-governance.png" alt="شاشة الحوكمة: مؤشرات التدقيق وجدول الأحداث بالمنفذ والإجراء والكيان والخطورة" loading="lazy">
+  <figcaption><code>/governance</code> — مدير النظام يرى سجل المنصة كاملاً؛ بقية الأطراف يرون سجل منشأتهم فقط.</figcaption>
+</figure>
+
+<div class="screen">
+  <header><h3>الحوكمة وسجل التدقيق</h3><span class="route">/governance</span><span class="guard">auth · monitor.view يوسّع النطاق</span></header>
+  <div class="body">
+    <h4>أربعة تبويبات</h4>
+    <ul>
+      <li><strong>سجل التدقيق</strong> — كل حدث برقمه ووقته والمنفّذ ودوره ومنشأته والإجراء والكيان المتأثر وعنوان الجهاز ودرجة الخطورة (معلومة · إشعار · تنبيه · حرج). مرشّحات بالخطورة والدور والكيان، مع بحث وتصدير. الأحداث الحرجة مُبرزة بخلفية مميزة.</li>
+      <li><strong>الامتثال</strong> — الضوابط الأساسية للأمن السيبراني بأربعة نطاقات ونسبة تحقق كل نطاق، والامتثال التشغيلي لكود البناء (اعتماد الاستشاري لكل مخرج، الاعتماد التلقائي، الجسات وفق الجدول، حماية الحقول الفنية، التحقق الجغرافي، تجميد القواعد)، وقائمة المختبرات التي تحتاج متابعة لانخفاض التزامها أو كثرة الاعتمادات التلقائية أو قرب انتهاء اعتمادها.</li>
+      <li><strong>السياسات والإصدارات</strong> — انظر الشاشة التالية.</li>
+      <li><strong>مصفوفة الصلاحيات</strong> — الملحق 7.1 كاملاً: <span class="num">35</span> صلاحية × <span class="num">10</span> أعمدة أدوار وصفات، مع حاشية تشرح التصحيحات الموثّقة على المصفوفة الأصلية.</li>
+    </ul>
+    <div class="note"><p><strong>ما يصنع سجل التدقيق:</strong> كل إجراء في المنصة — تعديل قاعدة، نشر إصدار معرفة، قبول طلب، اعتماد مخرج، تفويض، سداد فاتورة، استشارة المحرك الذكي، و<strong>كل محاولة وصول مرفوضة</strong> إلى شاشة خارج صلاحيات المستخدم.</p></div>
+  </div>
+</div>
+
+<h3 id="s-policies">١٥ · السياسات والإصدارات</h3>
+
+<figure>
+  <img src="img/11-policies.png" alt="شاشة السياسات: جدول السياسات بالإصدار وتاريخ السريان والمالك والنطاق والمرجع والحالة" loading="lazy">
+  <figcaption><code>/governance/policies</code> — السياسات المُصدَّرة، وهي التبويب الوحيد في الحوكمة الذي له رابط مستقل.</figcaption>
+</figure>
+
+<div class="screen">
+  <header><h3>السياسات والإصدارات</h3><span class="route">/governance/policies</span><span class="guard">auth</span></header>
+  <div class="body">
+    <ul>
+      <li>جدول: رقم السياسة، العنوان، الإصدار، تاريخ السريان، المالك، النطاق، المرجع النظامي، الحالة (ساري · مسودة · منتهٍ).</li>
+      <li><strong>سياسة جديدة</strong> و<strong>تعديل</strong> — متاحان لمدير النظام والجهة الإشرافية فقط؛ وكل حفظ يُسجَّل حدثاً <strong>حرجاً</strong>.</li>
+      <li><strong>عرض</strong> — متاح للجميع ويُظهر ملخص السياسة ومرجعها ومالكها.</li>
+    </ul>
+  </div>
+</div>
+
+<h3 id="s-reports">١٦ · التقارير والتحليلات</h3>
+
+<figure>
+  <img src="img/12-reports.png" alt="شاشة التقارير: مؤشرات وتبويبات التشغيل والجودة وأداء المختبرات والدراسات والمالية والتقارير المجدولة" loading="lazy">
+  <figcaption><code>/reports</code> — ستة تبويبات تغطي التشغيل والجودة وأداء المختبرات والدراسات والمالية والجدولة.</figcaption>
+</figure>
+
+<div class="screen">
+  <header><h3>التقارير والتحليلات</h3><span class="route">/reports</span><span class="guard">auth · النطاق حسب الدور</span></header>
+  <div class="body">
+    <div class="spec two">
+      <section>
+        <h4>التبويبات</h4>
+        <ul>
+          <li><strong>التشغيل</strong> — الواردة والمكتملة والمرفوضة شهرياً، الاختبارات الأكثر طلباً، التوزيع حسب التصنيف والجغرافيا، وزمن الدورة مرحلةً مرحلة.</li>
+          <li><strong>الجودة والامتثال</strong> — الالتزام بالمهل مقابل المستهدف، الاعتمادات التلقائية كمؤشر على استجابة الاستشاريين، أسباب رفض المخرجات، ومؤشرات الحوكمة.</li>
+          <li><strong>أداء المختبرات</strong> — ترتيب بالالتزام وبطاقة أداء لكل مختبر: الطلبات والاختبارات والمرفوض والاعتماد التلقائي والتقييم والقيمة.</li>
+          <li><strong>الدراسات الجيوتقنية</strong> — متوسط الجسات والأعماق والالتزام بالخطة، والجسات التي لم تبلغ عمقها، والسبخة والانتفاخية، وتوزيع التصنيف الزلزالي وتصنيف التربة السائد.</li>
+          <li><strong>المالية</strong> — الإيراد الشهري وملخص القيمة والضريبة.</li>
+          <li><strong>التقارير المجدولة</strong> — التقرير ودوريته ومستلمه وصيغته، مع «تشغيل الآن» و«تعديل» وجدولة تقرير جديد.</li>
+        </ul>
+      </section>
+      <section>
+        <h4>الإجراءات الثابتة</h4>
+        <ul>
+          <li>مبدّل الفترة: <span class="num">6</span> أو <span class="num">12</span> شهراً — يعيد حساب كل المؤشرات والرسوم.</li>
+          <li>طباعة وتصدير التقرير.</li>
+          <li>تذييل الشاشة يعلن صراحة أن التقارير مبنية على الطلبات الداخلة في نطاق صلاحية المستخدم.</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+
+<h3 id="s-archive">١٧ · الأرشيف والعينات</h3>
+
+<figure>
+  <img src="img/13-archive.png" alt="شاشة الأرشيف: جدول المستندات ببصمة الملف والإصدار والتصنيف ومدة الاحتفاظ" loading="lazy">
+  <figcaption><code>/archive</code> — لا حذف في الأرشيف، إصدارات فقط، ولكل مستند بصمة وتصنيف ومدة احتفاظ.</figcaption>
+</figure>
+
+<div class="screen">
+  <header><h3>الأرشيف والمستندات</h3><span class="route">/archive</span><span class="guard">auth · النطاق حسب الدور</span></header>
+  <div class="body">
+    <ul>
+      <li>مؤشرات: عدد المستندات وحجمها، والسرية منها، ونتائج الاختبارات، وسجلات الجسات والصور، والعقود والشهادات.</li>
+      <li>جدول: اسم المستند وبصمته، نوعه، الطلب أو العقد المرتبط، المنشأة، الإصدار، الحجم، التاريخ، تصنيف السرية، وتاريخ انتهاء الاحتفاظ. إجراءات: عرض · تنزيل · تنزيل المحدد كحزمة · تصدير كشف الأرشيف.</li>
+      <li>سياسة الاحتفاظ معلنة في الشاشة: النتائج والسجلات <span class="num">10</span> سنوات، العقود والشهادات <span class="num">20</span> سنة، القرار المساحي سرّي، والتعديل بإصدار جديد فقط.</li>
+    </ul>
+  </div>
+</div>
+
+<figure>
+  <img src="img/15-samples.png" alt="شاشة العينات وسلسلة الحيازة: خريطة مواقع الجمع ودورة حياة العينة وجدول العينات" loading="lazy">
+  <figcaption><code>/samples</code> — كل عينة بوسم فريد وختم وصور بالوقت والإحداثيات وسلسلة حيازة لا تُعدَّل.</figcaption>
+</figure>
+
+<div class="screen">
+  <header><h3>العينات وسلسلة الحيازة</h3><span class="route">/samples</span><span class="guard">request.view</span></header>
+  <div class="body">
+    <ul>
+      <li>مؤشرات: الإجمالي، قيد الاختبار أو التجهيز، المختبرة، المؤرشفة، <strong>ما يستحق الإتلاف خلال <span class="num">30</span> يوماً</strong>، ونسبة إشغال الأرشيف.</li>
+      <li>خريطة مواقع الجمع، ودورة حياة العينة بخطواتها الثماني مع عدد العينات في كل خطوة، وسياسة الحيازة والاحتفاظ.</li>
+      <li>جدول العينات بصورها وأبعادها وكتلتها وحالتها الفيزيائية وموقع تخزينها ومدة احتفاظها. فتح أي عينة يعرض ملصقها ورمزها وسلسلة حيازتها الكاملة وصورها وموقعها.</li>
+      <li><strong>تسجيل عينة</strong> و<strong>إضافة حدث حيازة</strong> و<strong>إتلاف</strong> — إجراءات المختبر؛ مدير النظام يطّلع ويطبع الملصقات.</li>
+    </ul>
+  </div>
+</div>
+
+<h3 id="s-finance">١٨ · الفواتير والعقود وعروض الأسعار</h3>
+
+<figure>
+  <img src="img/14-invoices.png" alt="شاشة الفواتير: مؤشرات السداد وأعمار الذمم وجدول الفواتير" loading="lazy">
+  <figcaption><code>/invoices</code> — الفاتورة تصدر تلقائياً عند قبول المختبر للطلب وفق آلية الدفع في العقد.</figcaption>
+</figure>
+
+<div class="screen">
+  <header><h3>الفواتير · العقود · عروض الأسعار</h3><span class="route">/invoices · /contracts · /quotes</span><span class="guard">auth · directory.view للعروض</span></header>
+  <div class="body">
+    <div class="spec two">
+      <section>
+        <h4>الفواتير</h4>
+        <ul>
+          <li>مؤشرات: الإجمالي، المسدَّد، المستحق، المتأخر، ومتوسط أيام السداد.</li>
+          <li>الإيراد الشهري، <strong>أعمار الذمم</strong> بأربع شرائح تأخر، وبطاقة الفوترة والسداد (آلية الإصدار، الضريبة، مدة السداد، القنوات، الفوترة الإلكترونية).</li>
+          <li>الجدول بالمبالغ قبل الضريبة وبعدها وتاريخي الإصدار والاستحقاق والحالة. <strong>زر السداد للمقاول وحده</strong>؛ مدير النظام يطّلع ويطبع ويصدّر كشف حساب.</li>
+        </ul>
+      </section>
+      <section>
+        <h4>العقود وعروض الأسعار</h4>
+        <ul>
+          <li><strong>العقود</strong> — كل عقد بأطرافه وخدماته وآلية دفعه وعدد طلباته وقيمتها ونسبة الاعتماد بلا مهلة وحالته. فتح العقد يعرض الأطراف والشروط والطلبات والفواتير والمستندات والتقييم.</li>
+          <li><strong>عروض الأسعار</strong> — دورة ما قبل العقد كاملة: طلب العرض ← رد المختبر ← قرار المقاول ← العقد الإلكتروني. مدير النظام يرى جميع العروض في المنصة دون التدخل فيها.</li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+
+<h3 id="s-rest">١٩ · الدليل والإعدادات والدعم</h3>
+
+<figure>
+  <img src="img/16-directory.png" alt="شاشة دليل المنشآت: بطاقات المختبرات والمقاولين والمكاتب الاستشارية مع التقييم والتخصصات" loading="lazy">
+  <figcaption><code>/directory</code> — الواجهة العامة للمنصة، والمكان الذي يبدأ منه المقاول رحلته.</figcaption>
+</figure>
+
+<div class="screen">
+  <header><h3>دليل المنشآت وصفحة المنشأة</h3><span class="route">/directory · /directory/:id</span><span class="guard">directory.view</span></header>
+  <div class="body">
+    <ul>
+      <li>بحث بالاسم أو التخصص، وتصفية بالنوع والمدينة والتخصص والحد الأدنى للتقييم، وترتيب بالأعلى تقييماً أو الأكثر مراجعات أو الأعلى التزاماً، وعرض بالبطاقات أو بالجدول.</li>
+      <li>لا يظهر المختبر في الدليل إلا وحسابه فعّال وله اختبار واحد فعّال على الأقل في قائمته.</li>
+      <li>صفحة المنشأة: النبذة والتخصصات، وقائمة الاختبارات والأسعار الأساسية مجمّعة بالتصنيف، والتقييمات وتوزيعها، وبيانات التواصل والموقع، والاعتماد ومؤشرات الأداء.</li>
+      <li>زرّا <strong>طلب عرض سعر</strong> و<strong>تقييم المختبر</strong> يظهران للمقاول وحده — لا لمدير النظام.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="screen">
+  <header><h3>الإعدادات</h3><span class="route">/settings</span><span class="guard">auth</span></header>
+  <div class="body">
+    <ul>
+      <li><strong>الحساب</strong> — الاسم والدور والصفة والمنشأة والجوال وصلاحية التفويض وآخر دخول، وزر تغيير رقم الجوال بـ <span class="num">OTP</span>.</li>
+      <li><strong>الإشعارات</strong> — رسائل نصية للإجراءات الحرجة، بريد لكل إجراء رئيسي، إشعارات المتصفح، والملخص اليومي.</li>
+      <li><strong>القواعد السارية</strong> — عرض فقط لنفس القيم التي يديرها في شاشة قواعد الأعمال.</li>
+      <li><strong>الجلسات والأجهزة النشطة</strong> — إنهاء جلسة بعينها أو إنهاء الجلسات الأخرى كلها.</li>
+      <li><strong>الأمان</strong> — طريقة الدخول، ربط نفاذ، آخر تغيير للجوال، المحاولات المرفوضة، مدة انتهاء الجلسة بالخمول، ومرجع الامتثال.</li>
+      <li><strong>التفضيلات</strong> — التقويم (ميلادي/هجري)، كثافة العرض، الصفحة الرئيسية، واللغة.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="screen">
+  <header><h3>المساعدة والدعم</h3><span class="route">/help</span><span class="guard">auth</span></header>
+  <div class="body">
+    <ul>
+      <li>أدلة سريعة موجّهة لكل دور مع زمن كل دليل، أسئلة شائعة تُبنى نصوصها من القيم السارية للقواعد، وحالة التكاملات، وتذاكر المستخدم، وروابط مرجعية.</li>
+      <li><strong>فتح تذكرة</strong> — الموضوع والتصنيف والوصف؛ يُشترط حد أدنى للطول قبل تفعيل الإرسال.</li>
+    </ul>
+  </div>
+</div>
+
+<h3 id="ripple">أثر قرارات مدير النظام على بقية الأدوار</h3>
+<div class="scroll">
+<table>
+  <thead><tr><th>القرار</th><th>من يتأثر فوراً</th><th>كيف يظهر الأثر</th></tr></thead>
+  <tbody>
+    <tr><td>تعديل عنصر مرجعي</td><td><span class="chip c-lab">المختبر</span></td><td>تُحذف الطرق التي لم تعد معتمدة من قائمته، وقد تتحول قائمته إلى «بيانات ناقصة» فيُمنع من الرد على عروض الأسعار حتى يستكملها — مع إشعار.</td></tr>
+    <tr><td>إيقاف عنصر مرجعي</td><td><span class="chip c-lab">المختبر</span></td><td>لا يعود متاحاً للإضافة في قوائم جديدة، دون المساس بالقوائم القائمة.</td></tr>
+    <tr><td>تعديل مهلة قرار المختبر</td><td><span class="chip c-lab">المختبر</span> <span class="chip c-contractor">المقاول</span></td><td>تتغير العدادات في الطلبات <strong>الجديدة</strong> فقط؛ الطلبات القائمة تحتفظ بالمهلة التي أُرسلت بها.</td></tr>
+    <tr><td>تبديل أثر تجاوز المهلة</td><td><span class="chip c-lab">المختبر</span> <span class="chip c-supervisor">الجهة الإشرافية</span></td><td>إما إنهاء الطلب وخصم مؤشر الالتزام، أو الاكتفاء بإشعار المختبر وإشعار الجهة الإشرافية بالتجاوز.</td></tr>
+    <tr><td>تعديل مهلة الاعتماد</td><td><span class="chip c-consultant">المكتب الاستشاري</span></td><td>يتغير توقيت الاعتماد التلقائي، وهو مؤشر يُحتسب على المكتب في تقاريره.</td></tr>
+    <tr><td>تغيير النطاق الجغرافي</td><td><span class="chip c-lab">المختبر</span></td><td>تتغير دائرة التحقق في الخرائط وشرط تسجيل استلام العينة وبدء الجسة في الموقع.</td></tr>
+    <tr><td>نشر إصدار قاعدة معرفة</td><td><span class="chip c-lab">المختبر</span> <span class="chip c-consultant">المكتب الاستشاري</span></td><td>ينطبق على الدراسات التي لم يصدر تقريرها النهائي، ويغيّر مقترح المحرك للجسات والتوصيات والمعادلات.</td></tr>
+    <tr><td>نشر إصدار قالب</td><td>الجميع</td><td>يُولَّد به كل مستند جديد؛ المستندات الصادرة تحتفظ بإصدارها.</td></tr>
+    <tr><td>إيقاف حساب منشأة</td><td>المنشأة وشركاؤها</td><td>تختفي من الدليل ومن قوائم الاختيار في العقود والعروض الجديدة.</td></tr>
+    <tr><td>إخفاء أو حذف تقييم</td><td><span class="chip c-lab">المختبر</span></td><td>يُعاد حساب متوسطه وعدد مراجعاته، فيتغيّر ترتيبه في الدليل.</td></tr>
+    <tr><td>تغيير سياسة توجيه المحرك</td><td><span class="chip c-lab">المختبر</span> <span class="chip c-consultant">المكتب الاستشاري</span></td><td>يتغير المسار الافتراضي في شاشة المحرك وفي نافذة الاستشارة قبل الاعتماد، وتتغير تكلفة التشغيل.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="day">نموذج ليوم تشغيلي</h3>
+<ol class="day">
+  <li><span class="t">08:00</span><span><b>لوحة التشغيل</b>يفتح صحة المنصة والتكاملات والمهام المجدولة، ويقرأ «الأحداث الحرجة خلال سبعة أيام» ومحاولات الوصول المرفوضة.</span></li>
+  <li><span class="t">08:20</span><span><b>الحوكمة ← سجل التدقيق</b>يصفّي على الخطورة «حرج» ليرى ما جرى ليلاً: تعديلات قواعد، نشر إصدارات، وصول مرفوض.</span></li>
+  <li><span class="t">09:00</span><span><b>المنشآت والحسابات</b>يراجع طلبات التسجيل المعلّقة، ويتحقق من السجل التجاري والاعتماد، ويفعّل أو يطلب مستندات.</span></li>
+  <li><span class="t">10:00</span><span><b>العناصر المرجعية</b>يضيف اختباراً مرجعياً طلبته المختبرات، ويضبط نموذج نتيجته وطرق تنفيذه — ثم يتابع أثر ذلك على القوائم.</span></li>
+  <li><span class="t">11:30</span><span><b>مراجعة التقييمات</b>يفتح التقييمات المنخفضة المحوّلة من الدعم التقني، ويخفي المخالف منها أو يحذفه.</span></li>
+  <li><span class="t">13:00</span><span><b>قاعدة المعرفة</b>ينشئ مسودة إصدار بتحديث الحدود الكيميائية، ويتركها للمراجعة الفنية قبل النشر.</span></li>
+  <li><span class="t">14:00</span><span><b>التقارير</b>يراجع تبويب الجودة: الالتزام بالمهل، الاعتمادات التلقائية، وأسباب رفض المخرجات.</span></li>
+  <li><span class="t">15:00</span><span><b>قواعد الأعمال</b>يعدّل مهلة قرار المختبر بناءً على ما رآه، ويعلم أن التغيير يسري على الطلبات الجديدة وحدها.</span></li>
+  <li><span class="t">15:30</span><span><b>المحرك الذكي</b>يتحقق من حالة المسارين وإصدار السياسة، ويقرأ الإنفاق مقابل الميزانية المرجعية.</span></li>
+</ol>
+
+<h3 id="findings">ملاحظات مرصودة أثناء التوثيق</h3>
+<p class="lede">تُثبت أدناه الفوارق التي ظهرت عند تتبّع كل شاشة وإجراء، مرتّبة بحسب أثرها التشغيلي، بوصفها بنوداً مقترحة للمعالجة قبل الإطلاق.</p>
+
+<div class="finding">
+  <h4><span class="sev high">عالٍ</span> زر «الدخول عبر نفاذ» يتجاهل الرقم المُدخل</h4>
+  <p>يفتح الزر الجلسة دائماً بحساب المقاول <code>u-cont</code> أياً كان الرقم المُدخل. ولا أثر لذلك في بيئة العرض، غير أنه يعطي انطباعاً غير صحيح عن اكتمال الربط مع الهوية الوطنية الموحّدة عند العرض على الجهة.</p>
+</div>
+<div class="finding">
+  <h4><span class="sev high">عالٍ</span> لغة «العرض التجريبي» ظاهرة في شاشات المستخدم</h4>
+  <p>عبارات مثل «دخول سريع — بيئة العرض» و«للعرض التجريبي: أي رمز من 4 أرقام» تظهر في شاشة الدخول وشاشة التسجيل ونافذة توقيع العقد. القاعدة المتفق عليها ألّا تظهر أي لغة عرض أو تطوير في المتصفح.</p>
+</div>
+<div class="finding">
+  <h4><span class="sev med">متوسط</span> تفعيل طلب التسجيل لا يُنشئ منشأة ولا يُسجَّل</h4>
+  <p>في تبويب «طلبات التسجيل»، زر <strong>تفعيل</strong> يزيل الصف ويعرض رسالة نجاح فقط — بلا إنشاء منشأة ولا حساب ولا حدث تدقيق، بخلاف «إضافة منشأة» التي تُنشئ فعلاً. وزرّا «طلب مستندات» و«رفض» بلا أثر. وكذلك بطاقة «نقل الصلاحيات» أزرارها الثلاثة بلا منطق.</p>
+</div>
+<div class="finding">
+  <h4><span class="sev med">متوسط</span> شاشتان تفتحان فارغتين لمدير النظام</h4>
+  <p>مساراً <code>/catalog</code> و<code>/results</code> مسموحان له في المصفوفة، لكنهما يُفلتران على منشأته (فريق تشغيل معيار) التي ليست مختبراً ولا مقاولاً — فتظهر الجداول فارغة. المساران ليسا في قائمته الجانبية، لكنهما يُفتحان بالرابط المباشر.</p>
+</div>
+<div class="finding">
+  <h4><span class="sev med">متوسط</span> صلاحيات تشغيلية زائدة على مقتضى الدور</h4>
+  <p>يملك مدير النظام في مصفوفة الصلاحيات تنفيذ الاختبار واعتماد المخرج واعتماد تقرير الدراسة. ولا تُظهر له الواجهة هذه الأزرار لأنها مشروطة بالدور، فالضبط سلوكي في الواجهة لا حاجز في المصفوفة. ويُوصى بحسم هذا الأمر صراحةً قبل الإطلاق.</p>
+</div>
+<div class="finding">
+  <h4><span class="sev low">منخفض</span> تبويب مصفوفة الصلاحيات بلا رابط مباشر</h4>
+  <p>من تبويبات الحوكمة الأربعة، «السياسات» وحده له رابط مستقل. تبويبا «الامتثال» و«مصفوفة الصلاحيات» لا يمكن مشاركتهما برابط ولا فتحهما مباشرة — وهما أكثر ما يُطلب في العروض الرسمية.</p>
+</div>
+
+<h3 id="next">خارطة الإصدارات القادمة</h3>
+<p>يُبنى كل فصل لاحق على البنية ذاتها: الدخول، ثم الإطار العام، ثم الصلاحيات، ثم كل شاشة بإجراءاتها وأثرها، ثم أثر الدور على بقية الأدوار، ثم نموذج ليوم تشغيلي، ثم الملاحظات المرصودة.</p>
+<div class="scroll">
+<table>
+  <thead><tr><th>الفصل</th><th>الدور</th><th>أهم ما سيغطيه</th></tr></thead>
+  <tbody>
+    <tr><td class="num">2</td><td><span class="chip c-admin">الدعم التقني</span></td><td>لوحة الدعم والتذاكر، مراجعة التسجيل والتفعيل، إخفاء التقييمات، وحدود صلاحياته مقابل مدير النظام.</td></tr>
+    <tr><td class="num">3</td><td><span class="chip c-lab">المختبر — المفوّض الرئيسي</span></td><td>بناء قائمة الاختبارات، الملف التعريفي، المعدات والمعايرة، الرد على عروض الأسعار، قرار الطلب، تسجيل العينة والتنفيذ، الدراسة الجيوتقنية بمراحلها الست، والتفويض.</td></tr>
+    <tr><td class="num">4</td><td><span class="chip c-lab">المختبر — الموظف</span></td><td>ما يراه المفوَّض إليه فقط، وما يُمنع منه: قبول الطلب ورفضه وإدارة القائمة.</td></tr>
+    <tr><td class="num">5</td><td><span class="chip c-contractor">المقاول</span></td><td>الدليل وطلب عرض السعر وتوقيع العقد، إنشاء الطلب القياسي والجيوتقني، تأكيد استلام العينة، طلب الإعادة، التقييم وشهادة الإتمام، والفواتير.</td></tr>
+    <tr><td class="num">6</td><td><span class="chip c-consultant">المكتب الاستشاري</span></td><td>طابور الاعتماد ومراجعة النتيجة، استشارة المحرك قبل القرار، مراجعة البيانات الأولية واعتماد خطة الاستكشاف، واعتماد التقرير النهائي.</td></tr>
+    <tr><td class="num">7</td><td><span class="chip c-supervisor">الجهة الإشرافية</span></td><td>لوحة المتابعة، الاطّلاع بلا إجراء، السياسات، الامتثال، والتقارير المجدولة.</td></tr>
+    <tr><td class="num">8</td><td><span class="chip c-visitor">الزائر</span></td><td>الدليل العام وصفحة المنشأة ومسار التسجيل.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<footer class="end">
+  <p><strong>دليل تشغيل منصة معيار — الإصدار 1.0.</strong> يغطي هذا الإصدار دورات العمل وضوابط الرقابة والمؤشرات وحوكمة المحرك الذكي، ودليل الاستخدام التفصيلي لدور مدير النظام. لقطات الشاشة مأخوذة من النظام بدقة عرض <span class="num">1440×900</span>، والسلوك الموصوف مستخلص من التطبيق الفعلي.</p>
+  <p style="margin-top:8px">المنصة الوطنية لاختبارات التربة والطرق · الإدارة العامة لكود البناء السعودي — وزارة البلديات والإسكان. تصنيف الوثيقة: داخلي — للجهة المستفيدة.</p>
+</footer>
+
+</main>
+</div>
+</div>

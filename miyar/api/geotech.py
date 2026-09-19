@@ -5,7 +5,7 @@ import json
 
 import frappe
 
-from miyar.api.common import require_login
+from miyar.api.common import require_capability, require_login
 
 
 def _parse(value):
@@ -19,7 +19,7 @@ def _parse(value):
 
 @frappe.whitelist()
 def get_study(test_request=None, name=None):
-	require_login()
+	require_capability("study.view")
 	if not name:
 		name = frappe.db.get_value("Geotechnical Study", {"test_request": test_request}, "name")
 	if not name:
@@ -36,7 +36,7 @@ def get_study(test_request=None, name=None):
 
 @frappe.whitelist()
 def save_prelim(name, values=None):
-	require_login()
+	require_capability("study.prelim")
 	doc = frappe.get_doc("Geotechnical Study", name)
 	for key, val in (_parse(values) or {}).items():
 		if doc.meta.has_field(key) and key not in ("phase", "name"):
@@ -47,7 +47,7 @@ def save_prelim(name, values=None):
 
 @frappe.whitelist()
 def approve_prelim(name):
-	require_login()
+	require_capability("study.prelim", "study.plan.approve")
 	doc = frappe.get_doc("Geotechnical Study", name)
 	doc.approve_prelim()
 	return doc.as_dict()
@@ -56,7 +56,7 @@ def approve_prelim(name):
 @frappe.whitelist()
 def client_study(name):
 	"""The study exactly as the web client's store keeps it."""
-	require_login()
+	require_capability("study.view")
 	from miyar.api.collections import study_payload
 
 	return study_payload(name)
@@ -64,14 +64,14 @@ def client_study(name):
 
 @frappe.whitelist()
 def run_plan_engine(name):
-	require_login()
+	require_capability("engine.run", "study.plan.approve")
 	doc = frappe.get_doc("Geotechnical Study", name)
 	return doc.run_plan_engine()
 
 
 @frappe.whitelist()
 def approve_plan(name, justification=None):
-	require_login()
+	require_capability("study.plan.approve")
 	doc = frappe.get_doc("Geotechnical Study", name)
 	doc.approve_plan(justification=justification)
 	return doc.as_dict()
@@ -79,7 +79,17 @@ def approve_plan(name, justification=None):
 
 @frappe.whitelist()
 def approve_report(name, approve=1, reason=None):
-	require_login()
+	require_capability("study.report.approve")
 	doc = frappe.get_doc("Geotechnical Study", name)
 	doc.approve_report(approve=bool(int(approve)), reason=reason)
 	return doc.as_dict()
+
+
+@frappe.whitelist()
+def generate_report(name):
+	"""Manual re-generate / preview of final geotech report (B.R.223)."""
+	require_capability("study.report.approve", "study.view")
+	from miyar.utils.documents import generate_study_report
+
+	url = generate_study_report(name)
+	return {"ok": True, "file": url}

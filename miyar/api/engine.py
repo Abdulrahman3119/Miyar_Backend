@@ -13,7 +13,7 @@ import frappe
 from frappe.utils import now_datetime
 from frappe.utils.file_manager import get_file_path
 
-from miyar.api.common import require_login
+from miyar.api.common import require_capability, require_login
 from miyar.engine.service import analyze_pdf_bytes, engine_health, list_profiles, load_engine_config
 from miyar.utils.audit import log_event
 
@@ -101,8 +101,11 @@ def _persist_run(
 				"source_file": source_file,
 			}
 		)
-		doc.flags.ignore_permissions = True
-		doc.insert(ignore_permissions=True)
+		try:
+			doc.insert()
+		except frappe.PermissionError:
+			doc.flags.ignore_permissions = True
+			doc.insert(ignore_permissions=True)
 		try:
 			log_event(
 				"تشغيل المحرك الذكي",
@@ -206,7 +209,7 @@ def diagnose():
 @frappe.whitelist()
 def analyze(profile=None, mode="cloud", file_url=None, test_request=None, study=None):
 	"""Run the embedded dual AI engine on an uploaded PDF or existing file_url."""
-	require_login()
+	require_capability("engine.run")
 	profile = profile or frappe.form_dict.get("profile")
 	mode = mode or frappe.form_dict.get("mode") or "cloud"
 	file_url = file_url or frappe.form_dict.get("file_url")

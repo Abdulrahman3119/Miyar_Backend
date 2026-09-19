@@ -179,8 +179,17 @@ def desk_session():
 def logout():
 	"""End the Frappe session the same way Desk does (`frappe.handler.logout`).
 
-	Clears the ``sid`` cookie so the portal cannot silently re-auth via desk_session.
+	Also rotates the user's API secret so a stored SPA token cannot silently
+	re-auth after the cookie session is cleared.
 	"""
+	user = frappe.session.user if frappe.session.user != "Guest" else None
+	if user:
+		try:
+			doc = frappe.get_doc("User", user)
+			doc.api_secret = frappe.generate_hash(length=15)
+			doc.save(ignore_permissions=True)
+		except Exception:
+			frappe.log_error(title="Miyar logout API key rotate failed")
 	try:
 		if getattr(frappe.local, "login_manager", None):
 			frappe.local.login_manager.logout()

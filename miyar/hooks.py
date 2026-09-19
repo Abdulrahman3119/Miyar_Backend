@@ -124,6 +124,7 @@ scheduler_events = {
 		"miyar.scheduler.mark_overdue_invoices",
 		"miyar.scheduler.warn_saac_expiry",
 		"miyar.scheduler.run_scheduled_reports",
+		"miyar.scheduler.recalc_all_lab_on_time",
 	],
 }
 

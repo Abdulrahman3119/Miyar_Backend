@@ -22,6 +22,30 @@ class GeotechnicalStudy(Document):
 			if not self.knowledge_version:
 				current = frappe.db.get_value("Knowledge Version", {"status": "ساري"}, "name")
 				self.knowledge_version = current
+		self._protect_system_analysis_fields()
+
+	def _protect_system_analysis_fields(self):
+		"""B.R.218 — block Desk/API edits that alter system/engine analysis outputs."""
+		if self.is_new() or getattr(frappe.flags, "miyar_allow_system_analysis", False):
+			return
+		before = self.get_doc_before_save()
+		if not before:
+			return
+		prev_c = {r.field_key: r for r in (before.computed_fields or [])}
+		for row in self.computed_fields or []:
+			old = prev_c.get(row.field_key)
+			if old and old.formula and row.formula and str(old.formula) != str(row.formula):
+				frappe.throw(_("لا يُعدَّل الصيغة الحسابية الناتجة عن النظام (B.R.218)."))
+		for fieldname in ("analytical_fields", "recommendations"):
+			prev = {(r.label_ar or r.field_key): r for r in (before.get(fieldname) or [])}
+			for row in self.get(fieldname) or []:
+				key = row.label_ar or row.field_key
+				old = prev.get(key)
+				if not old:
+					continue
+				src = (old.source or "").lower()
+				if src in ("engine", "knowledge") and str(old.value or "") != str(row.value or ""):
+					frappe.throw(_("لا يُعدَّل الحقل «{0}» الناتج عن النظام/المحرك (B.R.218).").format(key))
 
 	def run_plan_engine(self):
 		# B.R.175 — no engine after plan_approved
@@ -131,11 +155,33 @@ class GeotechnicalStudy(Document):
 		self.report_approved_at = now_datetime()
 		self.phase = 6
 		self.save(ignore_permissions=True)
+		# B.R.223 — auto-generate report from active template after consultant approval
+		try:
+			from miyar.utils.documents import generate_study_report
+
+			generate_study_report(self.name)
+		except Exception:
+			frappe.log_error(title="Miyar generate_study_report failed")
 		req = frappe.get_doc("Test Request", self.test_request)
 		from miyar.utils.lifecycle import save_lifecycle
+		from miyar.utils.notify import notify_org_principals
 
 		req.status = STS15
 		save_lifecycle(req)
 		for name in frappe.get_all("Test Line", filters={"test_request": req.name}, pluck="name"):
 			frappe.db.set_value("Test Line", name, "status", STS20)
 		log_event("اعتماد تقرير جيوتقني", entity=self, organization=req.consultant, severity="notice")
+		notify_org_principals(
+			req.contractor,
+			subject=f"تقرير الدراسة جاهز — {req.name}",
+			body="اعتُمد التقرير الجيوتقني ووُلِّد الملف الرسمي.",
+			document_type="Geotechnical Study",
+			document_name=self.name,
+		)
+		notify_org_principals(
+			req.lab,
+			subject=f"اعتماد تقرير — {req.name}",
+			body="اعتُمد تقرير الدراسة الجيوتقنية.",
+			document_type="Geotechnical Study",
+			document_name=self.name,
+		)

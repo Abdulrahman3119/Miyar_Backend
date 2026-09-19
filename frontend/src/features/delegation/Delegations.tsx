@@ -24,7 +24,12 @@ export default function Delegations() {
   const [newTo, setNewTo] = useState('')
   const [cancelling, setCancelling] = useState<Delegation | null>(null)
   // B.R.236 — cancellation keeps the record (STS25) and is audited; the employee loses access immediately (B.R.238)
-  const cancelDelegation = (d: Delegation) => { useStore.setState(s => ({ delegations: s.delegations.map(x => x.id === d.id ? { ...x, status: 'STS25' as const, decidedAt: new Date().toISOString() } : x), audit: [{ id: `A-${Date.now()}`, at: new Date().toISOString(), actor: user.name, role: user.role, org: user.orgName, action: 'إلغاء تفويض', entity: 'delegation', entityId: d.requestId, ip: '10.20.4.17', severity: 'notice' as const }, ...s.audit] })); useStore.getState().toast({ title: 'أُلغي التفويض', body: `${name(d.toUserId)} لم يعد يصل إلى ${d.requestId} — احتُفظ بالسجل.`, tone: 'info' }) }
+  const cancelDelegation = async (d: Delegation) => {
+    try {
+      await edit(d.id, '') // revoke only — store.editDelegation with empty toUser → revoke API
+      useStore.getState().toast({ title: 'أُلغي التفويض', body: `${name(d.toUserId)} لم يعد يصل إلى ${d.requestId} — احتُفظ بالسجل.`, tone: 'info' })
+    } catch { /* toast from store */ }
+  }
   const [reqForNew, setReqForNew] = useState('')
   const name = (id: string) => users.find(u => u.id === id)?.name ?? id
   const pending = all.filter(d => d.toUserId === user.id && d.status === 'STS22')
@@ -60,7 +65,7 @@ export default function Delegations() {
       </div>
       {create && <Modal open onClose={() => setCreate(false)} title="اختر الطلب" width="sm" footer={<Button onClick={() => { setCreate(false); setEditing('new') }} disabled={!reqForNew}>متابعة</Button>}><Field label="الطلب" hint={user.position === 'employee' ? 'يظهر لك ما فُوِّض لك فقط — التفويض غير المباشر ضمن نطاقك (B.R.233)' : 'الطلبات الجارية لمنشأتك'}><Select value={reqForNew} onChange={e => setReqForNew(e.target.value)}><option value="">اختر…</option>{mine.map(r => <option key={r.id} value={r.id}>{r.id} — {r.project}</option>)}</Select></Field></Modal>}
       {editing === 'new' && <DelegationModal open onClose={() => setEditing(null)} requestId={reqForNew} />}
-      <Modal open={!!cancelling} onClose={() => setCancelling(null)} title="إلغاء التفويض" width="sm" footer={<><Button variant="secondary" onClick={() => setCancelling(null)}>تراجع</Button><Button variant="danger" onClick={() => { cancelDelegation(cancelling!); setCancelling(null) }}>نعم، ألغِ التفويض</Button></>}><p className="text-[13px]">سيفقد {cancelling && name(cancelling.toUserId)} الوصول إلى {cancelling?.requestId} فوراً، ويبقى التفويض في السجل بحالة «ملغي» (B.R.236).</p></Modal>
+      <Modal open={!!cancelling} onClose={() => setCancelling(null)} title="إلغاء التفويض" width="sm" footer={<><Button variant="secondary" onClick={() => setCancelling(null)}>تراجع</Button><Button variant="danger" onClick={async () => { await cancelDelegation(cancelling!); setCancelling(null) }}>نعم، ألغِ التفويض</Button></>}><p className="text-[13px]">سيفقد {cancelling && name(cancelling.toUserId)} الوصول إلى {cancelling?.requestId} فوراً، ويبقى التفويض في السجل بحالة «ملغي» (B.R.236).</p></Modal>
       <Modal open={!!editing && editing !== 'new'} onClose={() => setEditing(null)} title="تعديل الموظف المفوَّض" width="sm" footer={<><Button variant="secondary" onClick={() => setEditing(null)}>إلغاء</Button><Button onClick={() => { edit(editing!, newTo); setEditing(null); useStore.getState().toast({ title: 'عُدّل التفويض', body: 'أُلغي التفويض السابق وفُعّل الجديد وأُشعر الموظف.', tone: 'ok' }) }}>حفظ التعديلات</Button></>}><Callout tone="info" compact className="mb-3">سيُلغى التفويض الحالي (مع الاحتفاظ به في السجل) ويُنشأ تفويض جديد فعّال للموظف المختار.</Callout><Field label="الموظف الجديد"><Select value={newTo} onChange={e => setNewTo(e.target.value)}>{orgUsers.filter(u => u.id !== user.id).map(u => <option key={u.id} value={u.id}>{u.name}</option>)}</Select></Field></Modal>
     </>
   )

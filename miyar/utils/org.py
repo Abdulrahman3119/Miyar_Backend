@@ -82,21 +82,33 @@ def party_on_request(doc, organization: str | None) -> bool:
 
 
 def has_active_delegation(user: str, test_request: str, test_line: str | None = None) -> bool:
-	filters = {
-		"to_user": user,
-		"test_request": test_request,
-		"status": "STS23",
-	}
-	if frappe.db.exists("Delegation", filters):
+	"""B.R.238 — only STS23 grants access; pending/rejected/cancelled do not."""
+	# Request-scope covers every test on the request
+	if frappe.db.exists(
+		"Delegation",
+		{"to_user": user, "test_request": test_request, "status": "STS23", "scope": "Request"},
+	):
 		return True
 	if test_line:
 		return bool(
 			frappe.db.exists(
 				"Delegation",
-				{**filters, "scope": "Test", "test_line": test_line},
+				{
+					"to_user": user,
+					"test_request": test_request,
+					"status": "STS23",
+					"scope": "Test",
+					"test_line": test_line,
+				},
 			)
 		)
-	return False
+	# Any active test-scope on the request still grants request visibility
+	return bool(
+		frappe.db.exists(
+			"Delegation",
+			{"to_user": user, "test_request": test_request, "status": "STS23"},
+		)
+	)
 
 
 def require_principal(msg: str | None = None):

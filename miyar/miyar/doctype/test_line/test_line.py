@@ -93,7 +93,33 @@ class TestLine(Document):
 		self.consultant_deadline_at = add_to_date_hours(self.submitted_at, hours)
 		self._fill_limits()
 		save_lifecycle(self)
-		log_event("رفع مخرج اختبار", entity=self, organization=req.lab)
+		# B.R.155/156 — SLA outcome feeds lab on_time KPI
+		from miyar.utils.sla import record_execution_outcome
+		from miyar.utils.notify import notify_org_principals
+
+		on_time = record_execution_outcome(self)
+		log_event(
+			"رفع مخرج اختبار",
+			entity=self,
+			organization=req.lab,
+			detail=None if on_time else "تجاوز مدة التنفيذ المعتمدة",
+			severity="info" if on_time else "warning",
+		)
+		notify_org_principals(
+			req.consultant,
+			subject=f"مخرج بانتظار الاعتماد — {self.test_request}",
+			body=f"رُفع مخرج الاختبار {self.name} وهو بانتظار قرارك.",
+			document_type="Test Line",
+			document_name=self.name,
+		)
+		if not on_time:
+			notify_org_principals(
+				req.lab,
+				subject=f"تجاوز مدة التنفيذ — {self.test_request}",
+				body="سُجِّل تجاوز مدة التنفيذ المعتمدة وينعكس على مؤشر الالتزام بالموعد (B.R.155).",
+				document_type="Test Line",
+				document_name=self.name,
+			)
 
 	def review(self, approve: bool, reason: str | None = None):
 		require_principal(_("اعتماد المخرج للمفوّض الرئيسي للاستشاري."))
@@ -110,6 +136,23 @@ class TestLine(Document):
 		save_lifecycle(self)
 		maybe_complete_request(self.test_request)
 		log_event("قرار الاستشاري على المخرج", entity=self)
+		req = frappe.get_doc("Test Request", self.test_request)
+		from miyar.utils.notify import notify_org_principals
+
+		notify_org_principals(
+			req.lab,
+			subject=f"{'اعتُمد' if approve else 'رُفض'} المخرج — {self.test_request}",
+			body=(reason or "تم اعتماد المخرج.") if not approve else "تم اعتماد المخرج من الاستشاري.",
+			document_type="Test Line",
+			document_name=self.name,
+		)
+		notify_org_principals(
+			req.contractor,
+			subject=f"تحديث مخرج — {self.test_request}",
+			body=f"حالة المخرج: {'معتمد' if approve else 'مرفوض'}.",
+			document_type="Test Line",
+			document_name=self.name,
+		)
 
 	def _seed_result_fields(self):
 		if self.result_values:

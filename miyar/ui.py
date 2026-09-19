@@ -165,7 +165,7 @@ _CONSULTANT_EMPLOYEE = (
 # The supervising authority has no operational role (BRD 3.2.1) but does watch governance.
 _SUPERVISOR = (
 	"catalog.view", "directory.view", "request.view",
-	"study.view", "study.report.view", "monitor.view", "engine.run",
+	"study.view", "study.report.view", "monitor.view",
 )
 _ADMIN = (
 	"catalog.view", "catalog.manage", "directory.view", "profile.manage",

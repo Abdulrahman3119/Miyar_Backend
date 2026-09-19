@@ -9,9 +9,9 @@ import json
 import frappe
 from frappe.utils import add_days, getdate, nowdate, now_datetime
 
-from miyar.api.common import require_login
+from miyar.api.common import require_capability, require_login
 from miyar.api.payload import request_payload
-from miyar.constants import ADMIN_ROLES, ORG_TYPE_TO_ROLES, ROLES, STS01, STS02, STS06
+from miyar.constants import ADMIN_ROLES, ORG_TYPE_TO_ROLES, ROLES, STS01, STS02, STS06, STS07, STS08
 from miyar.utils.org import get_user_org, is_principal
 
 
@@ -133,9 +133,23 @@ def _user_email(user_id: str | None) -> str | None:
 
 
 def _require_admin():
-	require_login()
-	if not set(frappe.get_roles()).intersection(ADMIN_ROLES | {ROLES["support"]}):
-		frappe.throw("صلاحية إدارة غير متوفرة.")
+	require_capability("admin.settings", "admin.accounts", "admin.reference", "admin.knowledge")
+
+
+def _geofence_limit_m() -> float:
+	try:
+		return float(frappe.db.get_single_value("Miyar Settings", "geofence_meters") or 3)
+	except Exception:
+		return 3.0
+
+
+def _distance_m(n1, e1, n2, e2) -> float | None:
+	try:
+		if None in (n1, e1, n2, e2):
+			return None
+		return ((float(n1) - float(n2)) ** 2 + (float(e1) - float(e2)) ** 2) ** 0.5
+	except (TypeError, ValueError):
+		return None
 
 
 def _sync_test_lines(request_name: str, tests: list):
@@ -190,7 +204,7 @@ def _ensure_study(request_name: str):
 
 @frappe.whitelist()
 def save_draft(payload=None):
-	require_login()
+	require_capability("request.create")
 	data = _parse(payload) or {}
 	name = data.get("id") or data.get("name")
 	contract = data.get("contractId") or data.get("service_contract")
@@ -265,6 +279,7 @@ def save_draft(payload=None):
 
 @frappe.whitelist()
 def submit_request(name):
+	require_capability("request.submit", "request.cancel")
 	from miyar.api.requests import submit_request as _submit
 
 	res = _submit(name)
@@ -274,6 +289,7 @@ def submit_request(name):
 
 @frappe.whitelist()
 def cancel_request(name, reason=None):
+	require_capability("request.cancel")
 	from miyar.api.requests import cancel_request as _cancel
 
 	return _cancel(name, reason)
@@ -281,6 +297,7 @@ def cancel_request(name, reason=None):
 
 @frappe.whitelist()
 def lab_decide(name, accept, slot=None, reason=None):
+	require_capability("request.decide")
 	from miyar.api.requests import lab_decide as _decide
 
 	parsed = _parse(slot)
@@ -290,6 +307,7 @@ def lab_decide(name, accept, slot=None, reason=None):
 
 @frappe.whitelist()
 def start_test(name, sample=None):
+	require_capability("test.execute")
 	from miyar.api.tests import start
 
 	return start(name, sample=sample)
@@ -297,6 +315,7 @@ def start_test(name, sample=None):
 
 @frappe.whitelist()
 def confirm_sample(name, confirmed=1, reason=None):
+	require_capability("test.execute")
 	from miyar.api.tests import confirm_sample as _confirm
 
 	ok = _as_int(confirmed, 1)
@@ -309,7 +328,7 @@ def confirm_sample(name, confirmed=1, reason=None):
 
 @frappe.whitelist()
 def save_result(name, result=None, report=None, notes=None, specimen=None, equipment=None):
-	require_login()
+	require_capability("test.execute")
 	doc = frappe.get_doc("Test Line", name)
 	vals = _parse(result) or {}
 	if isinstance(vals, dict):
@@ -348,6 +367,7 @@ def save_result(name, result=None, report=None, notes=None, specimen=None, equip
 
 @frappe.whitelist()
 def submit_output(name, result_values=None, report_file=None, notes=None):
+	require_capability("test.execute", "test.submit")
 	from miyar.api.tests import submit_output as _submit
 
 	return _submit(name, result_values=result_values, report_file=report_file, notes=notes)
@@ -355,6 +375,7 @@ def submit_output(name, result_values=None, report_file=None, notes=None):
 
 @frappe.whitelist()
 def review_test(name, approve, reason=None):
+	require_capability("output.approve", "output.review")
 	from miyar.api.tests import review
 
 	return review(name, approve, reason=reason)
@@ -362,6 +383,7 @@ def review_test(name, approve, reason=None):
 
 @frappe.whitelist()
 def create_retest(test_line, slots=None, notes=None):
+	require_capability("request.retest")
 	from miyar.api.tests import retest
 	from miyar.api.requests import submit_request as _submit
 
@@ -377,6 +399,7 @@ def create_retest(test_line, slots=None, notes=None):
 
 @frappe.whitelist()
 def create_quote(payload=None):
+	require_capability("request.create")
 	from miyar.api.quotes import create_quote as _create
 
 	data = _parse(payload) or {}
@@ -405,6 +428,7 @@ def create_quote(payload=None):
 
 @frappe.whitelist()
 def respond_quote(name, items=None, lab_notes=None):
+	require_capability("request.decide", "catalog.manage")
 	from miyar.api.quotes import respond
 
 	parsed = []
@@ -422,6 +446,7 @@ def respond_quote(name, items=None, lab_notes=None):
 
 @frappe.whitelist()
 def decide_quote(name, accept, reason=None):
+	require_capability("request.create")
 	from miyar.api.quotes import accept as _accept, reject as _reject
 
 	if _as_bool(accept):
@@ -431,6 +456,7 @@ def decide_quote(name, accept, reason=None):
 
 @frappe.whitelist()
 def upsert_catalog(payload=None):
+	require_capability("catalog.manage")
 	from miyar.api.catalog import upsert_item
 
 	data = _parse(payload) or {}
@@ -452,7 +478,7 @@ def upsert_catalog(payload=None):
 
 @frappe.whitelist()
 def toggle_catalog(name):
-	require_login()
+	require_capability("catalog.manage")
 	doc = frappe.get_doc("Lab Catalog Item", name)
 	doc.status = STS01 if doc.status == STS02 else STS02
 	doc.save()
@@ -461,6 +487,7 @@ def toggle_catalog(name):
 
 @frappe.whitelist()
 def update_ref_test(payload=None):
+	require_capability("admin.reference")
 	_require_admin()
 	data = _parse(payload) or {}
 	code = data.get("id") or data.get("code")
@@ -510,7 +537,7 @@ def update_ref_test(payload=None):
 
 @frappe.whitelist()
 def update_org(name, patch=None):
-	require_login()
+	require_capability("profile.manage", "admin.accounts")
 	data = _parse(patch) or {}
 	doc = frappe.get_doc("Organization", name)
 	org = get_user_org()
@@ -553,6 +580,7 @@ def update_org(name, patch=None):
 
 @frappe.whitelist()
 def set_org_active(name, active):
+	require_capability("admin.accounts")
 	_require_admin()
 	frappe.db.set_value("Organization", name, "active", _as_int(active))
 	return {"ok": True}
@@ -560,7 +588,7 @@ def set_org_active(name, active):
 
 @frappe.whitelist()
 def add_rating(payload=None):
-	require_login()
+	require_capability("rating.create")
 	data = _parse(payload) or {}
 	doc = frappe.get_doc(
 		{
@@ -581,8 +609,16 @@ def add_rating(payload=None):
 
 @frappe.whitelist()
 def moderate_rating(name, status):
-	require_login()
+	require_capability("rating.moderate")
 	doc = frappe.get_doc("Lab Rating", name)
+	# B.R.128 — support may hide; only admin may soft-delete
+	status = (status or "").strip()
+	if status == STS08:
+		roles = set(frappe.get_roles())
+		if not (frappe.session.user == "Administrator" or roles & ADMIN_ROLES or ROLES["admin"] in roles):
+			frappe.throw("حذف التقييم صلاحية مدير النظام فقط.", frappe.PermissionError)
+	elif status not in (STS06, STS07, STS08):
+		frappe.throw("حالة تقييم غير صالحة.")
 	doc.status = status
 	doc.save()
 	return doc.as_dict()
@@ -590,6 +626,7 @@ def moderate_rating(name, status):
 
 @frappe.whitelist()
 def create_delegation(payload=None):
+	require_capability("delegation.create")
 	from miyar.api.delegations import create as _create
 
 	data = _parse(payload) or {}
@@ -606,6 +643,7 @@ def create_delegation(payload=None):
 
 @frappe.whitelist()
 def decide_delegation(name, accept):
+	require_capability("delegation.decide")
 	from miyar.api.delegations import decide
 
 	return decide(name, accept)
@@ -613,23 +651,18 @@ def decide_delegation(name, accept):
 
 @frappe.whitelist()
 def revoke_delegation(name, to_user=None):
-	from miyar.api.delegations import revoke, create as _create
+	"""Cancel (STS25) or modify assignee (B.R.235/236)."""
+	require_capability("delegation.edit", "delegation.create")
+	from miyar.api.delegations import modify as _modify, revoke
 
-	old = frappe.get_doc("Delegation", name)
-	revoke(name)
 	if to_user:
-		return _create(
-			test_request=old.test_request,
-			to_user=_user_email(to_user),
-			delegation_type=old.delegation_type,
-			scope=old.scope,
-			test_line=old.test_line,
-		)
-	return {"ok": True}
+		return _modify(name, _user_email(to_user))
+	return revoke(name)
 
 
 @frappe.whitelist()
 def set_rules(payload=None):
+	require_capability("admin.settings")
 	_require_admin()
 	data = _parse(payload) or {}
 	doc = frappe.get_single("Miyar Settings")
@@ -664,7 +697,7 @@ def set_rules(payload=None):
 
 @frappe.whitelist()
 def add_employee(name, mobile, can_delegate=0):
-	require_login()
+	require_capability("profile.manage", "admin.accounts")
 	if not is_principal():
 		frappe.throw("إضافة موظف للمفوّض الرئيسي.")
 	org = get_user_org()
@@ -703,7 +736,7 @@ def add_employee(name, mobile, can_delegate=0):
 
 @frappe.whitelist()
 def set_employee_delegate(user, can_delegate=0):
-	require_login()
+	require_capability("profile.manage", "admin.accounts")
 	org = get_user_org()
 	name = frappe.db.get_value("Organization User", {"organization": org, "user": _user_email(user)}, "name")
 	if not name:
@@ -714,6 +747,7 @@ def set_employee_delegate(user, can_delegate=0):
 
 @frappe.whitelist()
 def add_organization(payload=None):
+	require_capability("admin.accounts")
 	_require_admin()
 	data = _parse(payload) or {}
 	org_type = _link("Organization Type", data.get("type")) or data.get("type")
@@ -771,7 +805,7 @@ def add_organization(payload=None):
 
 @frappe.whitelist()
 def upsert_equipment(payload=None):
-	require_login()
+	require_capability("catalog.manage", "test.execute", "admin.accounts")
 	data = _parse(payload) or {}
 	lab = data.get("labId") or get_user_org()
 	name = data.get("id")
@@ -810,7 +844,7 @@ def upsert_equipment(payload=None):
 
 @frappe.whitelist()
 def record_calibration(name, certificate, calibrated_at, provider=None):
-	require_login()
+	require_capability("catalog.manage", "test.execute", "admin.accounts")
 	due = add_days(getdate(calibrated_at), 365)
 	if frappe.db.exists("DocType", "Calibration Record"):
 		frappe.get_doc(
@@ -838,14 +872,14 @@ def record_calibration(name, certificate, calibrated_at, provider=None):
 
 @frappe.whitelist()
 def retire_equipment(name):
-	require_login()
+	require_capability("catalog.manage", "admin.accounts")
 	frappe.db.set_value("Asset", name, "miyar_status", "خارج الخدمة")
 	return {"ok": True}
 
 
 @frappe.whitelist()
 def register_sample(payload=None):
-	require_login()
+	require_capability("study.lab", "test.execute")
 	data = _parse(payload) or {}
 	first = frappe.get_all("Custody Step", fields=["name", "label_ar", "sample_status"], order_by="sort_order asc", limit=1)
 	step = first[0] if first else {}
@@ -887,7 +921,7 @@ def register_sample(payload=None):
 
 @frappe.whitelist()
 def add_custody_event(name, step=None, by=None, where=None, note=None, temp_c=None):
-	require_login()
+	require_capability("study.lab", "test.execute")
 	doc = frappe.get_doc("Archived Sample", name)
 	step_name = _link("Custody Step", step) or step
 	status = frappe.db.get_value("Custody Step", step_name, "sample_status") if step_name else None
@@ -910,7 +944,7 @@ def add_custody_event(name, step=None, by=None, where=None, note=None, temp_c=No
 
 @frappe.whitelist()
 def dispose_sample(name, reason=None):
-	require_login()
+	require_capability("study.lab", "test.execute")
 	steps = frappe.get_all("Custody Step", fields=["name", "label_ar"], order_by="sort_order desc", limit=1)
 	last = steps[0]["label_ar"] if steps else "إتلاف"
 	return add_custody_event(name, step=last, by=frappe.session.user, where="محضر إتلاف موقّع", note=reason)
@@ -918,6 +952,7 @@ def dispose_sample(name, reason=None):
 
 @frappe.whitelist()
 def upsert_template(payload=None):
+	require_capability("admin.settings")
 	_require_admin()
 	data = _parse(payload) or {}
 	key = data.get("id")
@@ -949,6 +984,7 @@ def upsert_template(payload=None):
 
 @frappe.whitelist()
 def add_template_version(name, ver, note=None, publish=0):
+	require_capability("admin.settings")
 	_require_admin()
 	key = name
 	doc_name = frappe.db.get_value("Report Template", {"template_key": key}, "name") or name
@@ -971,6 +1007,7 @@ def add_template_version(name, ver, note=None, publish=0):
 
 @frappe.whitelist()
 def add_knowledge_version(ver, changes):
+	require_capability("admin.knowledge")
 	_require_admin()
 	doc = frappe.get_doc({"doctype": "Knowledge Version", "version_code": ver, "changes": changes, "status": "مسودة"})
 	doc.insert()
@@ -979,6 +1016,7 @@ def add_knowledge_version(ver, changes):
 
 @frappe.whitelist()
 def publish_knowledge_version(ver):
+	require_capability("admin.knowledge")
 	_require_admin()
 	name = frappe.db.get_value("Knowledge Version", {"version_code": ver}, "name") or ver
 	for row in frappe.get_all("Knowledge Version", filters={"status": "ساري"}, pluck="name"):
@@ -989,6 +1027,7 @@ def publish_knowledge_version(ver):
 
 @frappe.whitelist()
 def upsert_policy(payload=None):
+	require_capability("admin.settings")
 	_require_admin()
 	data = _parse(payload) or {}
 	name = data.get("id")
@@ -1008,6 +1047,7 @@ def upsert_policy(payload=None):
 
 @frappe.whitelist()
 def pay_invoice(name, channel=None):
+	require_capability("request.create", "admin.accounts")
 	from miyar.api.invoices import pay
 
 	return pay(name, channel=channel)
@@ -1015,6 +1055,7 @@ def pay_invoice(name, channel=None):
 
 @frappe.whitelist()
 def create_ticket(subject, description, category=None, related_request=None):
+	require_login()
 	from miyar.api.help import create_ticket as _create
 
 	return _create(subject, description, category=category, related_request=related_request)
@@ -1023,7 +1064,9 @@ def create_ticket(subject, description, category=None, related_request=None):
 @frappe.whitelist()
 def mark_notification_read(name):
 	require_login()
-	if frappe.db.exists("Platform Notification", name):
+	if frappe.db.exists("Notification Log", name):
+		frappe.db.set_value("Notification Log", name, "read", 1)
+	elif frappe.db.exists("Platform Notification", name):
 		frappe.db.set_value("Platform Notification", name, "is_read", 1)
 	return {"ok": True}
 
@@ -1031,10 +1074,12 @@ def mark_notification_read(name):
 @frappe.whitelist()
 def mark_all_notifications_read():
 	require_login()
-	frappe.db.sql(
-		"update `tabPlatform Notification` set is_read = 1 where for_user = %s or for_org = %s",
-		(frappe.session.user, get_user_org()),
-	)
+	frappe.db.set_value("Notification Log", {"for_user": frappe.session.user, "read": 0}, "read", 1)
+	if frappe.db.exists("DocType", "Platform Notification"):
+		frappe.db.sql(
+			"update `tabPlatform Notification` set is_read = 1 where for_user = %s or for_org = %s",
+			(frappe.session.user, get_user_org()),
+		)
 	return {"ok": True}
 
 
@@ -1121,6 +1166,17 @@ def _apply_boreholes(study_name: str, boreholes: list):
 		if actual:
 			doc.actual_n = actual.get("n")
 			doc.actual_e = actual.get("e")
+			# B.R.183 — reject execution coordinates outside the configured geofence
+			limit = _geofence_limit_m()
+			dist = _distance_m(doc.approved_n, doc.approved_e, doc.actual_n, doc.actual_e)
+			if dist is not None:
+				doc.geo_distance_m = dist
+				if dist > limit:
+					frappe.throw(
+						f"موقع الجسة {doc.code or ''} خارج النطاق الجغرافي المعتمد "
+						f"({dist:.1f} م > {limit:g} م) — B.R.183.",
+						frappe.ValidationError,
+					)
 		if b.get("approvedDepth") is not None:
 			doc.approved_depth = b["approvedDepth"]
 		if b.get("executedDepth") is not None:
@@ -1167,7 +1223,7 @@ def _apply_boreholes(study_name: str, boreholes: list):
 
 @frappe.whitelist()
 def save_study(name=None, test_request=None, payload=None):
-	require_login()
+	require_capability("study.prelim", "study.field", "study.lab", "study.analysis", "study.plan.approve")
 	data = _parse(payload) or {}
 	if not name:
 		name = data.get("id") or frappe.db.get_value("Geotechnical Study", {"test_request": test_request or data.get("requestId")}, "name")
@@ -1213,13 +1269,15 @@ def save_study(name=None, test_request=None, payload=None):
 	if report.get("previewed"):
 		doc.report_previewed = 1
 	if report.get("approved"):
-		doc.report_approved = 1
-		doc.report_approved_at = report.get("approvedAt") or now_datetime()
+		# B.R.223 — approval must go through approve_report (generates file)
+		pass
 	if report.get("rejectReason"):
 		doc.report_reject_reason = report["rejectReason"]
 		doc.report_approved = 0
-	if report.get("generatedFile"):
+	if report.get("generatedFile") and not doc.report_file:
 		doc.report_file = report["generatedFile"]
+	if data.get("analysis") is not None:
+		_apply_analysis(doc, data["analysis"])
 	doc.save(ignore_permissions=True)
 	if data.get("boreholes") is not None:
 		_apply_boreholes(doc.name, data["boreholes"])
@@ -1228,8 +1286,87 @@ def save_study(name=None, test_request=None, payload=None):
 	return study_payload(doc.name)
 
 
+def _apply_analysis(doc, analysis):
+	"""Persist analysis tables with B.R.218 locks on system-produced fields."""
+	if not isinstance(analysis, dict):
+		return
+	# ── computed (formula locked; inputs + recalculated value allowed) ──
+	incoming_c = analysis.get("computed") or {}
+	by_key = {r.field_key: r for r in (doc.computed_fields or [])}
+	for key, f in incoming_c.items():
+		if not isinstance(f, dict):
+			continue
+		row = by_key.get(key)
+		if row:
+			if f.get("formula") is not None and row.formula and str(f.get("formula")) != str(row.formula):
+				frappe.throw("لا يُعدَّل الصيغة الحسابية الناتجة عن النظام (B.R.218).")
+			if f.get("inputs") is not None:
+				val = f["inputs"]
+				row.inputs = json.dumps(val, ensure_ascii=False) if isinstance(val, dict) else val
+			# Allow recalculation / clear; formula itself stays locked (B.R.218)
+			if "value" in f:
+				row.value = f.get("value")
+			if f.get("unit") is not None and not row.unit:
+				row.unit = f["unit"]
+		else:
+			val = f.get("inputs")
+			doc.append(
+				"computed_fields",
+				{
+					"field_key": key,
+					"label_ar": f.get("label") or key,
+					"formula": f.get("formula") or "",
+					"unit": f.get("unit") or "",
+					"inputs": json.dumps(val, ensure_ascii=False) if isinstance(val, dict) else (val or ""),
+					"value": f.get("value"),
+				},
+			)
+
+	def _apply_kv(table_field: str, incoming: dict | None, *, default_source: str, lock_sources: set[str]):
+		if incoming is None:
+			return
+		existing = { (r.label_ar or r.field_key): r for r in (doc.get(table_field) or []) }
+		for label, value in (incoming or {}).items():
+			row = existing.get(label)
+			if row:
+				src = (row.source or default_source).lower()
+				if src in lock_sources and str(row.value or "") != str(value or ""):
+					frappe.throw(f"لا يُعدَّل الحقل «{label}» الناتج عن النظام/المحرك (B.R.218).")
+				if src not in lock_sources:
+					row.value = value
+			else:
+				doc.append(
+					table_field,
+					{
+						"field_key": label[:140],
+						"label_ar": label,
+						"value": value,
+						"source": default_source,
+					},
+				)
+
+	_apply_kv("analytical_fields", analysis.get("analytical"), default_source="knowledge", lock_sources={"engine", "knowledge"})
+	_apply_kv("recommendations", analysis.get("recommendations"), default_source="knowledge", lock_sources={"engine", "knowledge"})
+	_apply_kv("manual_fields", analysis.get("manual"), default_source="manual", lock_sources=set())
+
+	if analysis.get("done"):
+		doc.analysis_done = 1
+		if int(doc.phase or 1) < 6:
+			doc.phase = 6
+
+
+@frappe.whitelist()
+def download_completion_certificate(contract):
+	"""B.R.127 — gated by rating + unpaid blocks."""
+	require_capability("results.view", "rating.create")
+	from miyar.utils.documents import issue_completion_certificate
+
+	return issue_completion_certificate(contract)
+
+
 @frappe.whitelist()
 def save_preferences(calendar=None, density=None, home=None, sms=None, email=None, push=None, digest=None):
+	require_login()
 	from miyar.api.session import save_preferences as _save
 
 	return _save(calendar=calendar, density=density, home=home, sms=sms, email=email, push=push, digest=digest)
@@ -1237,6 +1374,7 @@ def save_preferences(calendar=None, density=None, home=None, sms=None, email=Non
 
 @frappe.whitelist()
 def activate_registration(name):
+	require_capability("admin.accounts")
 	from miyar.api.admin import activate
 
 	return activate(name)
@@ -1244,6 +1382,7 @@ def activate_registration(name):
 
 @frappe.whitelist()
 def reject_registration(name, reason=None):
+	require_capability("admin.accounts")
 	from miyar.api.admin import reject_registration as _reject
 
 	return _reject(name, reason or "مرفوض")
